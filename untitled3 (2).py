@@ -17,8 +17,8 @@ st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide"
 )
-
 st.title("Monte Carlo Portfolio Simulator")
+st.write("This is meant as a simulation only, take projected values and portfolios with caution. Simulation results may not accurately reflect reality.")
 
 @st.cache_data
 def load_market_data():
@@ -585,6 +585,6 @@ if run:
     ) * 100
 
     c1.metric(
-    "Capital Preserved",
+    "Success Rate",
     f"{success_rate:.1f}%"
     )

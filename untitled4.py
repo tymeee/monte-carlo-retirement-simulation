@@ -72,6 +72,20 @@ target = st.sidebar.number_input(
     5_000_000
 )
 
+acum_years = st.sidebar.number_input(
+    "Years Until Retirement",
+    0,
+    25,
+    1
+)
+
+retirement_years = st.sidebar.number_input(
+    "Years in Retirement:,
+    0,
+    30,
+    1
+)
+
 def run_index_model():
   @st.cache_data
   def load_market_data():
@@ -110,6 +124,7 @@ def run_index_model():
           bull_cov.values,
           bear_cov.values
       )
+  time_period = acum_years + retirement_years
   st.sidebar.subheader("Portfolio")
 
   us_weight = st.sidebar.slider(
@@ -260,7 +275,7 @@ def run_index_model():
 
           savings_account *= saving_daily_return
 
-          if day < 2520:
+          if day < acum_years * 252:
 
               if (not thai_default_events) and np.random.random() < daily_hazard_rate:
                   thai_default_events = True
@@ -287,7 +302,7 @@ def run_index_model():
 
           if day % 21 == 0:
 
-              if day < 2520:
+              if day < acum_years * 252:
                   pure_cash_amt += inserted_funds*pure_cash_weight
                   assets += inserted_funds * contribution_weights
                   savings_account += inserted_funds * savings_account_weight
@@ -404,12 +419,11 @@ def run_index_model():
         hybrid_mutualfund_aggresive_allocation = agg_weight
         hybrid_mutualfund_moderate_allocation = mod_weight
         hybrid_mutualfund_conservative_allocation = cons_weight
-        duration = 7560
+        duration = (acum_years + retirement_years) * 252
         portfolio_simulations = np.zeros(
           (duration, num_simulations),
           dtype=np.float32
         )
-        duration = 7560
         trials_failed = 0
         saving_returns = 0.0175
         drawdowns = []
@@ -794,7 +808,7 @@ def run_company_model():
           kfa_amt = kfa_amt * (kfa_returns[day])
           rostrum_amt = rostrum_amt * (rostrum_returns[day])
           savings_amt = savings_amt
-          if day < 2520 and day % 21 ==0:
+          if day < acum_years*252 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc
             kkpcash_amt += inserted_funds*kkpcash_alloc
             kfa_amt += inserted_funds*kfa_alloc
@@ -805,7 +819,7 @@ def run_company_model():
             ktp_amt += inserted_funds * ktprecious_alloc
             savings_amt += inserted_funds * savings_alloc
             rostrum_amt += inserted_funds * rostrum_alloc
-          if day > 2520 and day %21 ==0:
+          if day > acum_years*252 and day %21 ==0:
             withdrawal_amount = yearly_withdrawals/12
             if savings_amt - withdrawal_amount > 0:
               savings_amt = savings_amt-withdrawal_amount
@@ -845,7 +859,7 @@ def run_company_model():
               )
 
         return portfolio_paths,failed
-      days = 7560
+      days = (acum_years + retirement_years) * 252
       df = 10
 
       portfolio_simulations = np.zeros(

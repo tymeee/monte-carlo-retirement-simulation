@@ -215,6 +215,7 @@ def run_index_model():
   )
   @njit(cache=True)
   def run_path(
+      acum_years,
       bull_mult,
       bear_mult,
       duration,
@@ -519,6 +520,7 @@ def run_index_model():
 
 
           portfolio_path, failed = run_path(
+            acum_years,
             bull_daily_stock_multipliers,
             bear_daily_stock_multipliers,
             duration,
@@ -759,6 +761,7 @@ def run_company_model():
 
       @njit(cache=True)
       def sim_path(
+        acum_years,
         kfa_returns,
         ugi_returns,
         gqg_returns,
@@ -963,6 +966,7 @@ def run_company_model():
         rostrum_truerate = rostrum_rate + rostrum_dailyrate
 
         portfolio_path,failed = sim_path(
+            acum_years,
             kfa_truerate,
             ugi_truerate,
             gqg_truerate,

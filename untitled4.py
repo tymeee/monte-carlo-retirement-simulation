@@ -645,8 +645,9 @@ def run_company_model():
     bond_vol = combined_data["bond"].std()
     equity_vol = combined_data["equity"].std()
     cmod_vol = combined_data["cmod"].std()
-    return bond_vol, equity_vol, cmod_vol
-  bond_vol, equity_vol, cmod_vol = build_matrices()
+    fof_vol = combined_data["fof"].std()
+    return bond_vol, equity_vol, cmod_vol, fof_vol
+  bond_vol, equity_vol, cmod_vol, fof_vol = build_matrices()
   kkpplus_alloc = st.sidebar.slider(
       "KKP Plus",
       0.0,
@@ -710,6 +711,14 @@ def run_company_model():
       0.10,
       0.01
   )
+
+  rostrum_alloc = st.sidebar.slider(
+      "Rostrum Grand Wisdom Fund of Funds",
+      0.0,
+      1.0,
+      0.1,
+      0.01
+    )
   total_alloc = (
     kkpplus_alloc +
     kkpcash_alloc +
@@ -718,11 +727,15 @@ def run_company_model():
     gqg_alloc +
     gtech_alloc +
     eae_alloc +
-    ktprecious_alloc
+    ktprecious_alloc +
+    rostrum_alloc
   )
 
   if total_alloc > 1:
     st.error("Allocations exceed 100%")
+    st.stop()
+  if initial_amount * rostrum_alloc < 3000000:
+    st.error("Minimum investment for Rostrum Grand Fund of Funds is 3 million THB")
     st.stop()
   run = st.button(
     "Run Simulation"
@@ -741,6 +754,7 @@ def run_company_model():
         gtech_returns,
         eae_returns,
         ktp_returns,
+        rostrum_returns,
         duration,
         inserted_funds,
         yearly_withdrawals,
@@ -754,6 +768,7 @@ def run_company_model():
         eae_amt,
         ktp_amt,
         savings_amt,
+        rostrum_amt,
 
         kkpplus_alloc,
         kkpcash_alloc,
@@ -763,7 +778,8 @@ def run_company_model():
         gtech_alloc,
         eae_alloc,
         ktprecious_alloc,
-        savings_alloc
+        savings_alloc,
+        rostrum_alloc
       ):
         portfolio_paths = np.zeros(duration)
         failed = 0 # Initialize failed variable
@@ -776,6 +792,7 @@ def run_company_model():
           kkpplus_amt = kkpplus_amt * (kkpplus_returns[day])
           kkpcash_amt = kkpcash_amt * (kkpcash_returns[day])
           kfa_amt = kfa_amt * (kfa_returns[day])
+          rostrum_amt = rostrum_amt * (rostrum_returns[day])
           savings_amt = savings_amt
           if day < 2520 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc
@@ -787,6 +804,7 @@ def run_company_model():
             eae_amt += inserted_funds * eae_alloc
             ktp_amt += inserted_funds * ktprecious_alloc
             savings_amt += inserted_funds * savings_alloc
+            rostrum_amt += inserted_funds * rostrum_alloc
           if day > 2520 and day %21 ==0:
             withdrawal_amount = yearly_withdrawals/12
             if savings_amt - withdrawal_amount > 0:
@@ -807,6 +825,8 @@ def run_company_model():
               eae_amt = eae_amt - withdrawal_amount
             elif ktp_amt - withdrawal_amount > 0:
               ktp_amt = ktp_amt - withdrawal_amount
+            elif rostrum_amt - withdrawal_amount > 0:
+              rostrum_amt = rostrum_amt - withdrawal_amount
             else:
               failed = 1
               break
@@ -819,8 +839,9 @@ def run_company_model():
             gtech_amt = gtech_amt * (1-esgtech_managementfee)
             eae_amt = eae_amt * (1-eseae_managementfee)
             ktp_amt = ktp_amt * (1-ktprecious_managementfee)
+            rostrum_amt = rostrum_amt * (1-rostrum_managementfee)
           portfolio_paths[day] = (
-              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt
+              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt
               )
 
         return portfolio_paths,failed
@@ -863,6 +884,10 @@ def run_company_model():
       ktprecious_dailyrate = (1+ktprecious_3yr)**(1/756)
       ktprecious_managementfee = 0.0134
 
+      rostrum_yr = 0.25
+      rostrum_dailyrate = (1+rostrum_yr) ** (1/252)
+      rostrum_managementfee = 0.015
+
       savings_alloc = (
         1 -
           (
@@ -873,7 +898,8 @@ def run_company_model():
             gqg_alloc +
             gtech_alloc +
             eae_alloc +
-            ktprecious_alloc
+            ktprecious_alloc + 
+            rostrum_alloc
           )
       )
       trials_failed = 0
@@ -891,6 +917,7 @@ def run_company_model():
         eae_amt = eae_alloc * total_funds
         ktp_amt = ktprecious_alloc * total_funds
         savings_amt = savings_alloc * total_funds
+        rostrum_amt = rostrum_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
         gqg_rate    = 1.0 * equity_factor
@@ -908,6 +935,10 @@ def run_company_model():
 
         ktp_rate = 1.5 * commodity_factor
 
+        fof_factor = t.rvs(df,loc=0,scale=fof_vol,size=days)
+
+        rostrum_rate = 1.35 * fof_factor
+
         kkpplus_truerate = kkpplus_rate + kkpsplus_dailyrate
         kkpcash_truerate = kkpcash_rate + kkpcash_dailyrate
         kfa_truerate = kfa_rate + kfafix_dailyrate
@@ -916,6 +947,7 @@ def run_company_model():
         gtech_truerate = gtech_rate + esgtech_dailyrate
         eae_truerate = eae_rate + eseae_dailyrate
         ktp_truerate = ktp_rate + ktprecious_dailyrate
+        rostrum_truerate = rostrum_rate + rostrum_dailyrate
 
         portfolio_path,failed = sim_path(
             kfa_truerate,
@@ -926,6 +958,7 @@ def run_company_model():
             gtech_truerate,
             eae_truerate,
             ktp_truerate,
+            rostrum_truerate,
             days,
             inserted_funds,
             yearly_withdrawals,
@@ -938,6 +971,7 @@ def run_company_model():
             eae_amt,
             ktp_amt,
             savings_amt,
+            rostrum_amt,
             kkpplus_alloc,
             kkpcash_alloc,
             kfa_alloc,
@@ -946,7 +980,8 @@ def run_company_model():
             gtech_alloc,
             eae_alloc,
             ktprecious_alloc,
-            savings_alloc
+            savings_alloc,
+            rostrum_alloc
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
@@ -979,7 +1014,7 @@ def run_company_model():
       )
 
       ax.set_xlabel(
-          "Days"
+          "Years"
       )
 
       ax.set_ylabel(

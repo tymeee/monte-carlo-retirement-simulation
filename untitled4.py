@@ -940,9 +940,9 @@ def run_company_model():
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 
-        kkpcash_rate = 0.05 * bond_factor
-        kkpplus_rate = 0.15 * bond_factor
-        kfa_rate     = 0.2 * bond_factor
+        kkpcash_rate = 0.1 * bond_factor
+        kkpplus_rate = 0.2 * bond_factor
+        kfa_rate     = 0.25 * bond_factor
         ugi_rate     = 1.00 * bond_factor
 
         commodity_factor = t.rvs(df, loc=0, scale=cmod_vol, size=days)

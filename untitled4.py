@@ -988,7 +988,7 @@ model_type = st.sidebar.radio(
     "Model Type",
     [
         "Market Index Model",
-        "Company Fund Model"
+        "Bluebell Offered Mutual Funds Model"
     ]
 )
 

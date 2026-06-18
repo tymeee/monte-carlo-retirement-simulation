@@ -561,6 +561,14 @@ def run_index_model():
           "THB"
       )
 
+      from matplotlib.ticker import FuncFormatter
+
+      ax.yaxis.set_major_formatter(
+        FuncFormatter(lambda x, pos: f"฿{x/1_000_000:.1f}M")
+        )
+
+      ax.set_ylabel("Portfolio Value (Million THB)")
+
       ax.grid(True)
 
       st.pyplot(fig)
@@ -941,6 +949,13 @@ def run_company_model():
       ax.set_ylabel(
           "THB"
       )
+      from matplotlib.ticker import FuncFormatter
+
+      ax.yaxis.set_major_formatter(
+        FuncFormatter(lambda x, pos: f"฿{x/1_000_000:.1f}M")
+      )
+
+      ax.set_ylabel("Portfolio Value (Million THB)")
 
       ax.grid(True)
 

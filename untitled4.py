@@ -884,8 +884,8 @@ def run_company_model():
       ktprecious_dailyrate = (1+ktprecious_3yr)**(1/756)
       ktprecious_managementfee = 0.0134
 
-      rostrum_yr = 0.14
-      rostrum_dailyrate = (1+rostrum_yr) ** (1/252)
+      rostrum_yr = 2.697
+      rostrum_dailyrate = (1+rostrum_yr) ** (1/1827)
       rostrum_managementfee = 0.015
 
       savings_alloc = (

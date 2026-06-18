@@ -934,9 +934,9 @@ def run_company_model():
         rostrum_amt = rostrum_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
-        gqg_rate    = 1.0 * equity_factor
-        gtech_rate  = 1.5 * equity_factor
-        eae_rate    = 1.25 * equity_factor
+        gqg_rate    = 1.1 * equity_factor
+        gtech_rate  = 1.75 * equity_factor
+        eae_rate    = 1.4 * equity_factor
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 

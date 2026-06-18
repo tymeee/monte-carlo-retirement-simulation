@@ -992,7 +992,7 @@ model_type = st.sidebar.radio(
     ]
 )
 
-if model_type == "Market Index Model":
+if model_type == "Market Index Based Portfolio Model":
     run_index_model()
 
 else:

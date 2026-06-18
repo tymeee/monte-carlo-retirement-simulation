@@ -80,7 +80,7 @@ acum_years = st.sidebar.number_input(
 )
 
 retirement_years = st.sidebar.number_input(
-    "Years in Retirement:,
+    "Years in Retirement",
     0,
     30,
     1

@@ -540,12 +540,13 @@ def run_index_model():
       fig, ax = plt.subplots(
           figsize=(12,7)
       )
+      years = np.arange(duration) / 252
 
-      ax.plot(percentiles[0], label="10th")
-      ax.plot(percentiles[1], label="25th")
-      ax.plot(percentiles[2], label="50th")
-      ax.plot(percentiles[3], label="75th")
-      ax.plot(percentiles[4], label="90th")
+      ax.plot(years,percentiles[0], label="10th")
+      ax.plot(years,percentiles[1], label="25th")
+      ax.plot(years,percentiles[2], label="50th")
+      ax.plot(years,percentiles[3], label="75th")
+      ax.plot(years,percentiles[4], label="90th")
 
       ax.legend()
 
@@ -554,7 +555,7 @@ def run_index_model():
       )
 
       ax.set_xlabel(
-          "Days"
+          "Years"
       )
 
       ax.set_ylabel(
@@ -929,12 +930,13 @@ def run_company_model():
       fig, ax = plt.subplots(
           figsize=(12,7)
       )
+      years = np.arange(duration) / 252
 
-      ax.plot(percentiles[0], label="10th")
-      ax.plot(percentiles[1], label="25th")
-      ax.plot(percentiles[2], label="50th")
-      ax.plot(percentiles[3], label="75th")
-      ax.plot(percentiles[4], label="90th")
+      ax.plot(years,percentiles[0], label="10th")
+      ax.plot(years,percentiles[1], label="25th")
+      ax.plot(years,percentiles[2], label="50th")
+      ax.plot(years,percentiles[3], label="75th")
+      ax.plot(years,percentiles[4], label="90th")
 
       ax.legend()
 

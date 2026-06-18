@@ -935,8 +935,8 @@ def run_company_model():
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
         gqg_rate    = 1.0 * equity_factor
-        gtech_rate  = 1.25 * equity_factor
-        eae_rate    = 1.15 * equity_factor
+        gtech_rate  = 1.5 * equity_factor
+        eae_rate    = 1.25 * equity_factor
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 

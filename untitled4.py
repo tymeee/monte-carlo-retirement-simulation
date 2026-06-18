@@ -637,7 +637,7 @@ def run_company_model():
   @st.cache_data
   def get_data():
           return pd.read_parquet(
-          "2.parquet"
+          "3.parquet"
       )
   @st.cache_data
   def build_matrices():

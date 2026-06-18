@@ -16,6 +16,16 @@ import random
 from scipy.stats import multivariate_t
 from scipy.stats import t
 from numba import njit
+
+st.set_page_config(
+    page_title="Monte Carlo Retirement Simulator",
+    layout="wide"
+)
+
+st.title("Monte Carlo Portfolio Simulator")
+
+st.write("This simulator is meant to help gague model effectiveness and may not always be reliable, hence, model outputs is not financial advice. 
+        Please interpret results with caution as model outputs may not reflect reality.")
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,

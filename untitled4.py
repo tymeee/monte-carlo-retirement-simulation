@@ -540,7 +540,6 @@ def run_index_model():
       fig, ax = plt.subplots(
           figsize=(12,7)
       )
-      duration = days
       years = np.arange(duration) / 252
 
       ax.plot(years,percentiles[0], label="10th")
@@ -931,7 +930,7 @@ def run_company_model():
       fig, ax = plt.subplots(
           figsize=(12,7)
       )
-      years = np.arange(duration) / 252
+      years = np.arange(days) / 252
 
       ax.plot(years,percentiles[0], label="10th")
       ax.plot(years,percentiles[1], label="25th")

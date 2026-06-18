@@ -647,7 +647,6 @@ def run_index_model():
         f"{median_dd:.1%}"
         )
 def run_company_model():
-  days = 7560
   @st.cache_data
   def get_data():
           return pd.read_parquet(

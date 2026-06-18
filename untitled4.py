@@ -24,8 +24,8 @@ st.set_page_config(
 
 st.title("Monte Carlo Portfolio Simulator")
 
-st.write("This simulator is meant to help gague model effectiveness and may not always be reliable, hence, model outputs is not financial advice. 
-        Please interpret results with caution as model outputs may not reflect reality.")
+st.write("This simulator is meant to help gague model effectiveness and may not always be reliable, hence, model outputs is not financial advice. "
+            " Please interpret results with caution as model outputs may not reflect reality.")
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,

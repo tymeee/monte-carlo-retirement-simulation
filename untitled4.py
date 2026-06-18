@@ -625,7 +625,7 @@ def run_index_model():
       )
       c2.metric(
       "Probabiltiy of reaching retirement goal",
-      f"{probability:.1f}%
+      f"{probability:.1f}%"
       )
 
       c3.metric(
@@ -1037,7 +1037,7 @@ def run_company_model():
       )
       c2.metric(
       "Probabiltiy of reaching retirement goal",
-      f"{probability:.1f}%
+      f"{probability:.1f}%"
       )
 
       c3.metric(

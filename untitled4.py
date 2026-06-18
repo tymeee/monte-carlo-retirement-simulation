@@ -65,6 +65,13 @@ avg_inflation_rate = st.sidebar.slider(
     0.01
 )
 
+target = st.sidebar.number_input(
+    "Target Retirement Wealth",
+    0,
+    100_000_000,
+    5_000_000
+)
+
 def run_index_model():
   @st.cache_data
   def load_market_data():
@@ -405,6 +412,7 @@ def run_index_model():
         duration = 7560
         trials_failed = 0
         saving_returns = 0.0175
+        drawdowns = []
         saving_daily_return = (1 + saving_returns) ** (1/252)
         withdrawal_percentage = withdrawal
         contribution_weights = np.array([
@@ -530,6 +538,12 @@ def run_index_model():
           portfolio_simulations[:, sim] = portfolio_path
 
           trials_failed += failed
+          path = portfolio_simulations[:, sim]
+          running_max = np.maximum.accumulate(path)
+          dd = np.min(path / running_max - 1)
+          drawdowns.append(dd)
+
+      median_dd = np.median(drawdowns)
 
 
       percentiles = np.percentile(
@@ -574,7 +588,7 @@ def run_index_model():
 
       st.pyplot(fig)
 
-      c1,c2,c3 = st.columns(3)
+      c1,c2,c3= st.columns(3)
       ending_values = portfolio_simulations[-1, :]
 
       median = np.percentile(
@@ -583,7 +597,7 @@ def run_index_model():
       )
 
       c2.metric(
-          "Median",
+          "Median (Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
       )
 
@@ -602,9 +616,22 @@ def run_index_model():
       ) * 100
 
       c1.metric(
-      "Capital Preserved",
+      "Success Rate",
       f"{success_rate:.1f}%"
       )
+      probability = (
+         np.mean(ending_values >= target)
+        * 100
+      )
+      c2.metric(
+      "Probabiltiy of reaching retirement goal",
+      f"{probability:.1f}%
+      )
+
+      c3.metric(
+        "Median Maximum Drawdown",
+        f"{median_dd:.1%}"
+        )
 def run_company_model():
   days = 7560
   @st.cache_data
@@ -850,6 +877,7 @@ def run_company_model():
           )
       )
       trials_failed = 0
+      drawdowns = []
       total_funds = initial_amount
       inserted_funds = monthly_contribution
       yearly_withdrawals = withdrawal
@@ -922,6 +950,12 @@ def run_company_model():
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
+        path = portfolio_simulations[:, sim]
+        running_max = np.maximum.accumulate(path)
+        dd = np.min(path / running_max - 1)
+        drawdowns.append(dd)
+
+      median_dd = np.median(drawdowns)
       percentiles = np.percentile(
         portfolio_simulations,
         [10,25,50,75,90],
@@ -974,7 +1008,7 @@ def run_company_model():
       )
 
       c2.metric(
-          "Median",
+          "Median (Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
       )
 
@@ -993,11 +1027,23 @@ def run_company_model():
       ) * 100
 
       c1.metric(
-      "Capital Preserved",
+      "Success Rate",
       f"{success_rate:.1f}%"
       )
 
+      probability = (
+         np.mean(ending_values >= target)
+        * 100
+      )
+      c2.metric(
+      "Probabiltiy of reaching retirement goal",
+      f"{probability:.1f}%
+      )
 
+      c3.metric(
+        "Median Maximum Drawdown",
+        f"{median_dd:.1%}"
+        )
 
 st.sidebar.title("Retirement Simulator")
 

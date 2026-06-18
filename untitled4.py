@@ -606,7 +606,7 @@ def run_index_model():
           num_simulations
       ) * 100
 
-      st.metric(
+      c1.metric(
           "Portfolio Failure Rate",
           f"{failure_rate:.2f}%"
       )
@@ -1017,7 +1017,7 @@ def run_company_model():
           num_simulations
       ) * 100
 
-      st.metric(
+      c1.metric(
           "Portfolio Failure Rate",
           f"{failure_rate:.2f}%"
       )

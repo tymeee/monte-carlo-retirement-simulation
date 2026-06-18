@@ -987,7 +987,7 @@ st.sidebar.title("Retirement Simulator")
 model_type = st.sidebar.radio(
     "Model Type",
     [
-        "Market Index Model",
+        "Market Index Based Portfolio Model",
         "Bluebell Offered Mutual Funds Model"
     ]
 )

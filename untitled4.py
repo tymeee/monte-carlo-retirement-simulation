@@ -272,7 +272,13 @@ def run_index_model():
       us_spec_bond_daily_return,
       thai_gov_bond_daily_return,
       thai_inv_bond_daily_return,
-      thai_spec_bond_daily_return
+      thai_spec_bond_daily_return,
+
+      stock_allocations,
+      bond_mutualfund_allocation,
+      hybrid_mutualfund_aggresive_allocation,
+      hybrid_mutualfund_moderate_allocation,
+      hybrid_mutualfund_conservative_allocation
   ):
 
       portfolio_path = np.zeros(duration, dtype=np.float32)
@@ -401,6 +407,20 @@ def run_index_model():
               thai_inv_bond = 0.0
               thai_spec_bond = 0.0
               us_spec_bond = 0.0
+          if day% 63 == 0:
+              cur_amount = pure_cash_amt + savings_account + assets.sum()
+              pure_cash_amt = cur_amount * pure_cash_weight
+              savings_account = cur_amount * savings_account_weight
+              assets = np.array(
+                    cur_amount * stock_allocations[0],
+                    cur_amount * stock_allocations[1],
+                    cur_amount * stock_allocations[2],
+                    cur_amount * bond_mutualfund_allocation,
+                    cur_amount * hybrid_mutualfund_aggresive_allocation,
+                    cur_amount * hybrid_mutualfund_moderate_allocation,
+                    cur_amount * hybrid_mutualfund_conservative_allocation
+          ], dtype=np.float64)
+                  
 
           portfolio_path[day] = (
               assets[0]
@@ -413,7 +433,7 @@ def run_index_model():
               + savings_account
               + pure_cash_amt
           )
-
+              
       return portfolio_path,failed
   us_gov_bond_weight = 0.0
   us_inv_bond_weight = 0.0
@@ -577,7 +597,13 @@ def run_index_model():
             us_spec_bond_daily_return,
             thai_gov_bond_daily_return,
             thai_inv_bond_daily_return,
-            thai_spec_bond_daily_return
+            thai_spec_bond_daily_return,
+
+            stock_allocations,
+            bond_mutualfund_allocation,
+            hybrid_mutualfund_aggresive_allocation,
+            hybrid_mutualfund_moderate_allocation,
+            hybrid_mutualfund_conservative_allocation
           )
 
           portfolio_simulations[:, sim] = portfolio_path
@@ -1154,6 +1180,50 @@ def run_company_model():
             healthcarea_amt = healthcarea_amt * (1-healthcarea_managementfee)
             propa_amt = propa_amt * (1-propa_managementfee)
             sp500a_amt = sp500a_amt * (1-sp500a_managementfee)
+          if day % 63 == 0:
+              curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt
+              kkpplus_amt = curnt_amt * kkpplus_alloc
+              kkpcash_amt = curnt_amt * kkpcash_alloc
+              kfa_amt = curnt_amt * kfa_alloc
+              ugi_amt = curnt_amt * ugi_alloc
+              gqg_amt = curnt_amt * gqg_alloc
+              gtech_amt = curnt_amt * gtech_alloc
+              eae_amt = curnt_amt * eae_alloc
+              ktp_amt = curnt_amt * ktprecious_alloc
+              savings_amt = curnt_amt * savings_alloc
+              rostrum_amt = curnt_amt * rostrum_alloc
+              if rostrum_amt < 3000000 and rostrum_amt != 0:
+                  if savings_amt - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = rostrum_amt + savings_amt
+                  elif kkpplus_amt - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      kkpplus_amt = kkpplus_amt - (3000000-rostrum_amt)
+                  elif kkpcash_amt - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      kkpcash_amt = kkpcash_amt - (3000000-rostrum_amt)
+                  elif (kkpcash_amt + kkpplus_amt) - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      pool = (kkpcash_amt + kkpplus_amt) - (3000000-rostrum_amt)
+                      kkpcash_amt = 0.5*pool
+                      kkpplus_amt = 0.5*pool
+                  elif kfa_amt - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      kfa_amt = kfa_amt - (3000000-rostrum_amt)
+                  elif ugi_amt - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      ugi_amt = ugi_amt - (3000000-rostrum_amt)
+                  elif (kfa_amt + ugi_amt) - (3000000-rostrum_amt) > 0:
+                      rostrum_amt = 3000000
+                      pool = (kfa_amt + ugi_amt) - (3000000-rostrum_amt)
+                      kfa_amt = 0.5*pool
+                      ugi_amt = 0.5*pool
+                  else:
+                      savings_amt = savings_amt + rostrum_amt
+                      rostrum_amt = 0
+              gnph_amt = curnt_amt * gnph_alloc
+              healthcarea_amt = curnt_amt * healthcarea_alloc
+              propa_amt = curnt_amt * propa_alloc
+              sp500a_amt = curnt_amt * sp500a_alloc
           portfolio_paths[day] = (
               kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt
               )

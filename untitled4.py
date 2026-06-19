@@ -411,7 +411,7 @@ def run_index_model():
               cur_amount = pure_cash_amt + savings_account + assets.sum()
               pure_cash_amt = cur_amount * pure_cash_weight
               savings_account = cur_amount * savings_account_weight
-              assets = np.array(
+              assets = np.array([
                     cur_amount * stock_allocations[0],
                     cur_amount * stock_allocations[1],
                     cur_amount * stock_allocations[2],

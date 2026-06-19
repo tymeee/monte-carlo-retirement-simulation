@@ -631,7 +631,7 @@ def run_index_model():
         xaxis_title="Years",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified",
-        height = 1000
+        height = 700
       )
 
       fig.add_vline(
@@ -1112,7 +1112,7 @@ def run_company_model():
         xaxis_title="Years",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified",
-        height = 1000
+        height = 700
       )
       fig.add_vline(
         x=acum_years,

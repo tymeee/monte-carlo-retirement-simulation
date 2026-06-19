@@ -1013,41 +1013,72 @@ def run_company_model():
         [10,25,50,75,90],
         axis=1
         )
-      fig, ax = plt.subplots(
-          figsize=(12,7)
-      )
       years = np.arange(days) / 252
 
-      ax.plot(years,percentiles[0], label="10th")
-      ax.plot(years,percentiles[1], label="25th")
-      ax.plot(years,percentiles[2], label="50th")
-      ax.plot(years,percentiles[3], label="75th")
-      ax.plot(years,percentiles[4], label="90th")
-
-      ax.legend()
-
-      ax.set_title(
-          "Portfolio Projection"
+      import plotly.graph_objects as go
+    
+      fig = go.Figure()
+    
+      fig.add_trace(go.Scatter(
+        x=years,
+        y=percentiles[0]/1000000,
+        mode='lines',
+        name='10th Percentile',
+        hovertemplate=
+        'Year: %{x:.1f}<br>' +
+        'Value: ฿%{y:,.2f}M<extra></extra>'
+      ))
+    
+      fig.add_trace(go.Scatter(
+        x=years,
+        y=percentiles[1]/1000000,
+        mode='lines',
+        name='25th Percentile',
+        hovertemplate=
+        'Year: %{x:.1f}<br>' +
+        'Value: ฿%{y:,.2f}M<extra></extra>'
+      ))
+    
+      fig.add_trace(go.Scatter(
+        x=years,
+        y=percentiles[2]/1000000,
+        mode='lines',
+        name='50th Percentile',
+        hovertemplate=
+        'Year: %{x:.1f}<br>' +
+        'Value: ฿%{y:,.2f}M<extra></extra>'
+      ))
+    
+      fig.add_trace(go.Scatter(
+        x=years,
+        y=percentiles[3]/1000000,
+        mode='lines',
+        name='75th Percentile',
+        hovertemplate=
+        'Year: %{x:.1f}<br>' +
+        'Value: ฿%{y:,.2f}M<extra></extra>'
+      ))
+    
+      fig.add_trace(go.Scatter(
+        x=years,
+        y=percentiles[4]/1000000,
+        mode='lines',
+        name='90th Percentile',
+        hovertemplate=
+        'Year: %{x:.1f}<br>' +
+        'Value: ฿%{y:,.2f}M<extra></extra>'
+      ))
+    
+      fig.update_layout(
+        title="Portfolio Projection",
+        xaxis_title="Years",
+        yaxis_title="Portfolio Value (Million THB)",
+        hovermode="x unified"
       )
+    
+      st.plotly_chart(fig, use_container_width=True)
 
-      ax.set_xlabel(
-          "Years"
-      )
 
-      ax.set_ylabel(
-          "THB"
-      )
-      from matplotlib.ticker import FuncFormatter
-
-      ax.yaxis.set_major_formatter(
-        FuncFormatter(lambda x, pos: f"฿{x/1_000_000:.1f}M")
-      )
-
-      ax.set_ylabel("Portfolio Value (Million THB)")
-
-      ax.grid(True)
-
-      st.pyplot(fig)
 
       duration = days
 

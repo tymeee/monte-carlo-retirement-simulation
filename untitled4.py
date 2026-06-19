@@ -686,7 +686,6 @@ def run_index_model():
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
 
-      import numpy as np
       import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
       capped_values = np.minimum(ending_values_m, 120)
@@ -1261,8 +1260,6 @@ def run_company_model():
 
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
-
-      import numpy as np
       import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
       capped_values = np.minimum(ending_values_m, 120)

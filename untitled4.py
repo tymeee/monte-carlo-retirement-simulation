@@ -210,6 +210,35 @@ def run_index_model():
           "Weights exceed 100%"
       )
       st.stop()
+  import pandas as pd
+  import plotly.express as px
+
+  allocation_data = pd.DataFrame({
+    "Asset": [
+        "US Equity",
+        "Thai Equity",
+        "China Equity",
+        "Bond Mutual Fund",
+        "Aggresive Hybrid Mutual Fund",
+        "Moderate Hybrid Mutual Fund",
+        "Conservative Hybrid Mutual Fund",
+        "Savings Account"
+    ],
+    "Allocation": [
+        us_weight,
+        thai_weight,
+        china_weight,
+        bond_weight,
+        agg_weight,
+        mod_weight,
+        cons_weight,
+        savings_weight,
+        ]
+    })
+
+allocation_data = allocation_data[
+    allocation_data["Allocation"] > 0
+]
   run = st.button(
       "Run Simulation"
   )
@@ -642,6 +671,18 @@ def run_index_model():
     
       st.plotly_chart(fig, use_container_width=True)
 
+      pie_fig = px.pie(
+        allocation_data,
+        names="Asset",
+        values="Allocation",
+        title="Portfolio Allocation"
+      )
+
+      st.plotly_chart(
+        pie_fig,
+        use_container_width=True
+      )
+
       c1,c2,c3= st.columns(3)
       ending_values = portfolio_simulations[-1, :]
 
@@ -793,6 +834,40 @@ def run_company_model():
   run = st.button(
     "Run Simulation"
   )
+
+  import pandas as pd
+  import plotly.express as px
+
+  allocation_data = pd.DataFrame({
+    "Asset": [
+        "KKP Plus",
+        "KKP Cash",
+        "KFAFIX",
+        "UGISFX",
+        "ESGQG",
+        "ESGTECH",
+        "ESEAE",
+        "KTPRECIOUS",
+        "Savings",
+        "Rostrum"
+    ],
+  "Allocation": [
+        kkpplus_alloc,
+        kkpcash_alloc,
+        kfa_alloc,
+        ugi_alloc,
+        gqg_alloc,
+        gtech_alloc,
+        eae_alloc,
+        ktprecious_alloc,
+        savings_alloc,
+        rostrum_alloc
+    ]
+  })
+
+  allocation_data = allocation_data[
+    allocation_data["Allocation"] > 0
+  ]
   if run:
 
     with st.spinner("Running simulation..."):
@@ -1122,7 +1197,17 @@ def run_company_model():
     
       st.plotly_chart(fig, use_container_width=True)
 
+      pie_fig = px.pie(
+        allocation_data,
+        names="Asset",
+        values="Allocation",
+        title="Portfolio Allocation"
+      )
 
+      st.plotly_chart(
+        pie_fig,
+        use_container_width=True
+      )
 
       duration = days
 

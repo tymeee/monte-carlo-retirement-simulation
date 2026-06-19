@@ -788,7 +788,11 @@ def run_company_model():
     "ESGTECH",
     "ESEAE",
     "KTPRECIOUS",
-    "Rostrum Wisdom Fund of Funds"
+    "Rostrum Wisdom Fund of Funds",
+    "KKPGNPH",
+    "KTHEALTHCAREA",
+    "KFGPROPA",
+    "SCBS&P500A"
   ]
 
   selected_funds = st.sidebar.multiselect(
@@ -893,6 +897,46 @@ def run_company_model():
       ) 
   else:
       rostrum_alloc = 0
+  if "KKPGNPH" in selected_funds:
+      gnph_alloc = st.sidebar.slider(
+          "KKPGNPH",
+          0.0,
+          1.0,
+          0.1,
+          0.01
+      ) 
+  else:
+      gnph_alloc = 0 
+  if "KTHEALTHCAREA" in selected_funds:
+      healthcarea_alloc = st.sidebar.slider(
+          "KTHEALTHCAREA",
+          0.0,
+          1.0,
+          0.1,
+          0.01
+      )
+  else:
+      healthcarea_alloc = 0
+  if "KFGPROPA" in selected_funds:
+      propa_alloc = st.sidebar.slider(
+          "KFGPROPA",
+          0.0,
+          1.0,
+          0.1,
+          0.01
+      )
+  else: 
+      propa_alloc = 0
+  if "SCBS&P500A" in selected_funds:
+      sp500a_alloc = st.sidebar.slider(
+          "SCBS&P500A",
+          0.0,
+          1.0,
+          0.1,
+          0.01
+      ) 
+  else:
+      sp500a_alloc = 0
   total_alloc = (
     kkpplus_alloc +
     kkpcash_alloc +
@@ -902,7 +946,11 @@ def run_company_model():
     gtech_alloc +
     eae_alloc +
     ktprecious_alloc +
-    rostrum_alloc
+    rostrum_alloc + 
+    gnph_alloc + 
+    healthcarea_alloc + 
+    propa_alloc + 
+    sp500a_alloc
   )
 
   if total_alloc > 1:
@@ -925,7 +973,11 @@ def run_company_model():
             gtech_alloc +
             eae_alloc +
             ktprecious_alloc + 
-            rostrum_alloc
+            rostrum_alloc + 
+            gnph_alloc +
+            healthcarea_alloc + 
+            propa_alloc + 
+            sp500a_alloc
           )
   )
   import pandas as pd
@@ -942,7 +994,11 @@ def run_company_model():
         "ESEAE",
         "KTPRECIOUS",
         "Savings",
-        "Rostrum"
+        "Rostrum",
+        "KKPGNPH",
+        "KTHEALTHCAREA",
+        "KFGPROPA",
+        "SCBS&P500A"
     ],
   "Allocation": [
         kkpplus_alloc,
@@ -954,7 +1010,11 @@ def run_company_model():
         eae_alloc,
         ktprecious_alloc,
         savings_alloc,
-        rostrum_alloc
+        rostrum_alloc,
+        gnph_alloc,
+        healthcarea_alloc,
+        propa_alloc,
+        sp500a_alloc
     ]
   })
 
@@ -977,6 +1037,10 @@ def run_company_model():
         eae_returns,
         ktp_returns,
         rostrum_returns,
+        gnph_returns,
+        healthcarea_returns,
+        propa_returns,
+        sp500a_returns,
         duration,
         inserted_funds,
         yearly_withdrawals,
@@ -991,6 +1055,10 @@ def run_company_model():
         ktp_amt,
         savings_amt,
         rostrum_amt,
+        gnph_amt,
+        healthcarea_amt,
+        propa_amt,
+        sp500a_amt,
 
         kkpplus_alloc,
         kkpcash_alloc,
@@ -1001,7 +1069,11 @@ def run_company_model():
         eae_alloc,
         ktprecious_alloc,
         savings_alloc,
-        rostrum_alloc
+        rostrum_alloc,
+        gnph_alloc,
+        healthcarea_alloc,
+        propa_alloc,
+        sp500a_alloc
       ):
         portfolio_paths = np.zeros(duration)
         failed = 0 # Initialize failed variable
@@ -1015,6 +1087,10 @@ def run_company_model():
           kkpcash_amt = kkpcash_amt * (kkpcash_returns[day])
           kfa_amt = kfa_amt * (kfa_returns[day])
           rostrum_amt = rostrum_amt * (rostrum_returns[day])
+          gnph_amt = gnph_amt * (gnph_returns[day])
+          healthcarea_amt = healthcarea_amt * (healthcarea_returns[day])
+          propa_amt = propa_amt * (propa_returns[day])
+          sp500a_amt = sp500a_amt * (sp500a_returns[day])
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc
@@ -1027,6 +1103,10 @@ def run_company_model():
             ktp_amt += inserted_funds * ktprecious_alloc
             savings_amt += inserted_funds * savings_alloc
             rostrum_amt += inserted_funds * rostrum_alloc
+            gnph_amt += inserted_funds * gnph_alloc
+            healthcarea_amt += inserted_funds * healthcarea_alloc
+            propa_amt += inserted_funds * propa_alloc
+            sp500a_amt += inserted_funds * sp500a_alloc
           if day > acum_years*252 and day %21 ==0:
             withdrawal_amount = yearly_withdrawals/12
             if savings_amt - withdrawal_amount > 0:
@@ -1049,6 +1129,14 @@ def run_company_model():
               ktp_amt = ktp_amt - withdrawal_amount
             elif rostrum_amt - withdrawal_amount > 0:
               rostrum_amt = rostrum_amt - withdrawal_amount
+            elif gnph_amt - withdrawal_amount > 0:
+                gnph_amt = gnph_amt - withdrawal_amount
+            elif healthcarea_amt - withdrawal_amount > 0:
+                healthcarea_amt = healthcarea_amt - withdrawal_amount
+            elif propa_amt - withdrawal_amount > 0:
+                propa_amt = propa_amt - withdrawal_amount
+            elif sp500a_amt - withdrawal_amount >0:
+                sp500a_amt = sp500a_amt - withdrawal_amount
             else:
               failed = 1
               break
@@ -1062,8 +1150,12 @@ def run_company_model():
             eae_amt = eae_amt * (1-eseae_managementfee)
             ktp_amt = ktp_amt * (1-ktprecious_managementfee)
             rostrum_amt = rostrum_amt * (1-rostrum_managementfee)
+            gnph_amt = gnph_amt * (1-gnph_managementfee)
+            healthcarea_amt = healthcarea_amt * (1-healthcarea_managementfee)
+            propa_amt = propa_amt * (1-propa_managementfee)
+            sp500a_amt = sp500a_amt * (1-sp500a_managementfee)
           portfolio_paths[day] = (
-              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt
+              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt
               )
 
         return portfolio_paths,failed
@@ -1110,6 +1202,22 @@ def run_company_model():
       rostrum_dailyrate = (1+rostrum_yr) ** (1/252)
       rostrum_managementfee = 0.015
 
+      gnph_yr = 0.121
+      gnph_dailyrate = (1+gnph_yr) ** (1/252)
+      gnph_managementfee = 0.0175
+
+      healthcarea_yr = (0.0658+ 0.1935)/2
+      healthcarea_dailyrate = (1+healthcarea_yr) ** (1/252)
+      healthcarea_managementfee = 0.0134
+
+      propa_yr = 0.0679
+      propa_dailyrate = (1+propa_yr) ** (1/252)
+      propa_managementfee = 0.0154
+
+      sp500a_yr = (0.1942 + 0.1247)/2
+      sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
+      sp500a_managementfee = 0.011
+
       savings_alloc = (
         1 -
           (
@@ -1121,7 +1229,11 @@ def run_company_model():
             gtech_alloc +
             eae_alloc +
             ktprecious_alloc + 
-            rostrum_alloc
+            rostrum_alloc + 
+            gnph_alloc +
+            healthcarea_alloc + 
+            propa_alloc + 
+            sp500a_alloc
           )
       )
       trials_failed = 0
@@ -1140,11 +1252,19 @@ def run_company_model():
         ktp_amt = ktprecious_alloc * total_funds
         savings_amt = savings_alloc * total_funds
         rostrum_amt = rostrum_alloc * total_funds
+        gnph_amt = gnph_alloc * total_funds
+        healthcarea_amt = healthcarea_alloc * total_funds
+        propa_amt = propa_alloc * total_funds
+        sp500a_amt = sp500a_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
         gqg_rate    = 1.1 * equity_factor
         gtech_rate  = 1.75 * equity_factor
         eae_rate    = 1.4 * equity_factor
+        gnph_rate  = 1.05 * equity_factor
+        healthcarea_rate = 1.15 * equity_factor
+        propa_rate = equity_factor
+        sp500a_rate = 1.025 * equity_factor
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 
@@ -1170,6 +1290,10 @@ def run_company_model():
         eae_truerate = eae_rate + eseae_dailyrate
         ktp_truerate = ktp_rate + ktprecious_dailyrate
         rostrum_truerate = rostrum_rate + rostrum_dailyrate
+        gnph_truerate = gnph_rate + gnph_dailyrate
+        healthcarea_truerate = healthcarea_rate + healthcarea_dailyrate
+        propa_truerate = propa_rate + propa_dailyrate
+        sp500a_truerate = sp500a_rate + sp500a_dailyrate
 
         portfolio_path,failed = sim_path(
             acum_years,
@@ -1182,6 +1306,10 @@ def run_company_model():
             eae_truerate,
             ktp_truerate,
             rostrum_truerate,
+            gnph_truerate,
+            healthcarea_truerate,
+            propa_truerate,
+            sp500a_truerate,
             days,
             inserted_funds,
             yearly_withdrawals,
@@ -1195,6 +1323,10 @@ def run_company_model():
             ktp_amt,
             savings_amt,
             rostrum_amt,
+            gnph_amt,
+            healthcarea_amt,
+            propa_amt,
+            sp500a_amt,
             kkpplus_alloc,
             kkpcash_alloc,
             kfa_alloc,
@@ -1204,7 +1336,11 @@ def run_company_model():
             eae_alloc,
             ktprecious_alloc,
             savings_alloc,
-            rostrum_alloc
+            rostrum_alloc,
+            gnph_alloc,
+            healthcarea_alloc,
+            propa_alloc,
+            sp500a_alloc
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed

@@ -632,6 +632,12 @@ def run_index_model():
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified"
       )
+
+      fig.add_vline(
+        x=years_until_retirement,
+        line_dash="dash",
+        annotation_text="Retirement"
+      )
     
       st.plotly_chart(fig, use_container_width=True)
 
@@ -1105,6 +1111,11 @@ def run_company_model():
         xaxis_title="Years",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified"
+      )
+      fig.add_vline(
+        x=years_until_retirement,
+        line_dash="dash",
+        annotation_text="Retirement"
       )
     
       st.plotly_chart(fig, use_container_width=True)

@@ -834,7 +834,20 @@ def run_company_model():
   run = st.button(
     "Run Simulation"
   )
-
+  savings_alloc = (
+        1 -
+          (
+            kkpplus_alloc +
+            kkpcash_alloc +
+            kfa_alloc +
+            ugi_alloc +
+            gqg_alloc +
+            gtech_alloc +
+            eae_alloc +
+            ktprecious_alloc + 
+            rostrum_alloc
+          )
+  )
   import pandas as pd
   import plotly.express as px
 

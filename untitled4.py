@@ -984,7 +984,7 @@ def run_company_model():
 
         fof_factor = t.rvs(df,loc=0,scale=fof_vol,size=days)
 
-        rostrum_rate = fof_factor
+        rostrum_rate = 2 * fof_factor
 
         kkpplus_truerate = kkpplus_rate + kkpsplus_dailyrate
         kkpcash_truerate = kkpcash_rate + kkpcash_dailyrate

@@ -686,26 +686,39 @@ def run_index_model():
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
 
+      import numpy as np
+      import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
+      capped_values = np.minimum(ending_values_m, 120)
 
       fig_hist = go.Figure()
 
-      fig_hist.add_trace(go.Histogram(
-            x=ending_values_m,
-            xbins=dict(
+      fig_hist.add_trace(
+        go.Histogram(
+        x=capped_values,
+        xbins=dict(
             start=0,
-            end=np.max(ending_values_m) + 5,
+            end=120,
             size=5
-            )
-      ))
+            ),
+        name="Final Portfolio Values"
+       )
+      )
 
       fig_hist.update_layout(
-            title="Distribution of Final Portfolio Values",
-            xaxis_title="Final Portfolio Value (Million THB)",
-            yaxis_title="Number of Simulations"
+        title="Distribution of Final Portfolio Values",
+        xaxis_title="Final Portfolio Value (Million THB)",
+        yaxis_title="Number of Simulations",
+        bargap=0.05
+      )
+      fig_hist.update_xaxes(
+        tickmode="array",
+        tickvals=list(range(0, 121, 20)),
+        ticktext=[str(x) for x in range(0, 120, 20)] + ["120+"]
       )
 
       st.plotly_chart(fig_hist, use_container_width=True)
+
 
       c1,c2,c3= st.columns(3)
       ending_values = portfolio_simulations[-1, :]
@@ -1249,23 +1262,35 @@ def run_company_model():
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
 
+      import numpy as np
+      import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
+      capped_values = np.minimum(ending_values_m, 120)
 
       fig_hist = go.Figure()
 
-      fig_hist.add_trace(go.Histogram(
-            x=ending_values_m,
-            xbins=dict(
+      fig_hist.add_trace(
+        go.Histogram(
+        x=capped_values,
+        xbins=dict(
             start=0,
-            end=np.max(ending_values_m) + 5,
+            end=120,
             size=5
-            )
-      ))
+            ),
+        name="Final Portfolio Values"
+       )
+      )
 
       fig_hist.update_layout(
-            title="Distribution of Final Portfolio Values",
-            xaxis_title="Final Portfolio Value (Million THB)",
-            yaxis_title="Number of Simulations"
+        title="Distribution of Final Portfolio Values",
+        xaxis_title="Final Portfolio Value (Million THB)",
+        yaxis_title="Number of Simulations",
+        bargap=0.05
+      )
+      fig_hist.update_xaxes(
+        tickmode="array",
+        tickvals=list(range(0, 121, 20)),
+        ticktext=[str(x) for x in range(0, 120, 20)] + ["120+"]
       )
 
       st.plotly_chart(fig_hist, use_container_width=True)

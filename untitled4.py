@@ -634,7 +634,7 @@ def run_index_model():
       )
 
       fig.add_vline(
-        x=years_until_retirement,
+        x=acum_years,
         line_dash="dash",
         annotation_text="Retirement"
       )
@@ -1113,7 +1113,7 @@ def run_company_model():
         hovermode="x unified"
       )
       fig.add_vline(
-        x=years_until_retirement,
+        x=acum_years,
         line_dash="dash",
         annotation_text="Retirement"
       )

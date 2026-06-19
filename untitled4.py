@@ -236,9 +236,9 @@ def run_index_model():
         ]
     })
 
-allocation_data = allocation_data[
-    allocation_data["Allocation"] > 0
-]
+  allocation_data = allocation_data[
+        allocation_data["Allocation"] > 0
+  ]
   run = st.button(
       "Run Simulation"
   )

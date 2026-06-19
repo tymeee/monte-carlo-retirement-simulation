@@ -683,6 +683,28 @@ def run_index_model():
         use_container_width=True
       )
 
+      import plotly.express as px
+
+      hist_fig = px.histogram(
+        x=ending_values / 1000000,
+        nbins=30,
+        labels={
+            "x": "Ending Portfolio Value (Million THB)",
+            "count": "Number of Simulations"
+        },
+        title="Distribution of Retirement Outcomes"
+      )
+
+      hist_fig.update_layout(
+        height=500,
+        showlegend=False
+      )
+
+      st.plotly_chart(
+        hist_fig,
+        use_container_width=True
+      )
+
       c1,c2,c3= st.columns(3)
       ending_values = portfolio_simulations[-1, :]
 
@@ -1219,6 +1241,28 @@ def run_company_model():
 
       st.plotly_chart(
         pie_fig,
+        use_container_width=True
+      )
+
+      import plotly.express as px
+
+      hist_fig = px.histogram(
+        x=ending_values / 1000000,
+        nbins=30,
+        labels={
+            "x": "Ending Portfolio Value (Million THB)",
+            "count": "Number of Simulations"
+        },
+        title="Distribution of Retirement Outcomes"
+      )
+
+      hist_fig.update_layout(
+        height=500,
+        showlegend=False
+      )
+
+      st.plotly_chart(
+        hist_fig,
         use_container_width=True
       )
 

@@ -6,3 +6,4 @@ yfinance
 numba
 pyarrow
 scipy>=1.10.0
+plotly

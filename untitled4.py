@@ -25,7 +25,7 @@ st.set_page_config(
 st.title("Monte Carlo Portfolio Simulator")
 
 st.write("This simulator is meant to help gague model effectiveness and may not always be reliable, hence, model outputs is not financial advice. "
-            " Please interpret results with caution as model outputs may not reflect reality. The model is based on a 30 year retirement plan that consists of a 10 year accumulation phase, during which a monthly DCA can be added, followed by a 20 year retirement phase where funds are withdrew from the portfolio at a specificed fixed rate.")
+            " Please interpret results with caution as model outputs may not reflect reality. The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate.")
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,

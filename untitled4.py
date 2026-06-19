@@ -1214,7 +1214,7 @@ def run_company_model():
       propa_dailyrate = (1+propa_yr) ** (1/252)
       propa_managementfee = 0.0154
 
-      sp500a_yr = (0.1942 + 0.1247)/2
+      sp500a_yr = 0.1207
       sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
       sp500a_managementfee = 0.011
 

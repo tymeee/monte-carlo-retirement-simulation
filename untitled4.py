@@ -572,7 +572,7 @@ def run_index_model():
       )
       years = np.arange(duration) / 252
 
-            import plotly.graph_objects as go
+      import plotly.graph_objects as go
     
       fig = go.Figure()
 

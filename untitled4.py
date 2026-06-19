@@ -684,6 +684,7 @@ def run_index_model():
       )
 
       import plotly.express as px
+      ending_values = portfolio_simulations[-1, :]
 
       hist_fig = px.histogram(
         x=ending_values / 1000000,
@@ -1245,6 +1246,7 @@ def run_company_model():
       )
 
       import plotly.express as px
+      ending_values = portfolio_simulations[-1, :]
 
       hist_fig = px.histogram(
         x=ending_values / 1000000,

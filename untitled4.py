@@ -686,25 +686,26 @@ def run_index_model():
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
 
-      hist_fig = px.histogram(
-        x=ending_values / 1000000,
-        nbins=30,
-        labels={
-            "x": "Ending Portfolio Value (Million THB)",
-            "count": "Number of Simulations"
-        },
-        title="Distribution of Retirement Outcomes"
+      ending_values_m = ending_values / 1_000_000
+
+      fig_hist = go.Figure()
+
+      fig_hist.add_trace(go.Histogram(
+            x=ending_values_m,
+            xbins=dict(
+            start=0,
+            end=np.max(ending_values_m) + 5,
+            size=5
+            )
+      ))
+
+      fig_hist.update_layout(
+            title="Distribution of Final Portfolio Values",
+            xaxis_title="Final Portfolio Value (Million THB)",
+            yaxis_title="Number of Simulations"
       )
 
-      hist_fig.update_layout(
-        height=500,
-        showlegend=False
-      )
-
-      st.plotly_chart(
-        hist_fig,
-        use_container_width=True
-      )
+      st.plotly_chart(fig_hist, use_container_width=True)
 
       c1,c2,c3= st.columns(3)
       ending_values = portfolio_simulations[-1, :]
@@ -1248,25 +1249,26 @@ def run_company_model():
       import plotly.express as px
       ending_values = portfolio_simulations[-1, :]
 
-      hist_fig = px.histogram(
-        x=ending_values / 1000000,
-        nbins=30,
-        labels={
-            "x": "Ending Portfolio Value (Million THB)",
-            "count": "Number of Simulations"
-        },
-        title="Distribution of Retirement Outcomes"
+      ending_values_m = ending_values / 1_000_000
+
+      fig_hist = go.Figure()
+
+      fig_hist.add_trace(go.Histogram(
+            x=ending_values_m,
+            xbins=dict(
+            start=0,
+            end=np.max(ending_values_m) + 5,
+            size=5
+            )
+      ))
+
+      fig_hist.update_layout(
+            title="Distribution of Final Portfolio Values",
+            xaxis_title="Final Portfolio Value (Million THB)",
+            yaxis_title="Number of Simulations"
       )
 
-      hist_fig.update_layout(
-        height=500,
-        showlegend=False
-      )
-
-      st.plotly_chart(
-        hist_fig,
-        use_container_width=True
-      )
+      st.plotly_chart(fig_hist, use_container_width=True)
 
       duration = days
 

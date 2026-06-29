@@ -792,6 +792,7 @@ def run_index_model():
 def run_company_model():
   @st.cache_data
   def get_data():
+          import pandas as pd
           return pd.read_parquet(
           "3.parquet"
       )

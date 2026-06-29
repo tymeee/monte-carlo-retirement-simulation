@@ -682,7 +682,7 @@ def run_index_model():
       ))
         
       fig.update_layout(
-        title="Portfolio Projection",
+        title="Nominal Portfolio Value Projection",
         xaxis_title="Years",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified",
@@ -1483,7 +1483,7 @@ def run_company_model():
       ))
         
       fig.update_layout(
-        title="Portfolio Projection",
+        title="Nominal Portfolio Value Projection",
         xaxis_title="Years",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified",

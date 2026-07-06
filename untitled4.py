@@ -693,7 +693,7 @@ def run_index_model():
       )
 
       fig.add_vline(
-        x=acum_years,
+        x=acum_years+age_years,
         line_dash="dash",
         annotation_text="Retirement"
       )

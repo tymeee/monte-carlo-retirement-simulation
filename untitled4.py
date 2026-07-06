@@ -821,7 +821,48 @@ def run_company_model():
     "KFGPROPA",
     "SCBS&P500A"
   ]
-
+  if st.button("Bluebell Basic"):
+      gnph_alloc = 0.1
+      healthcarea_alloc = 0.05
+      gtech_alloc = 0.05
+      propa_alloc = 0.05
+      kkpplus_alloc = 0.35
+      kfa_alloc = 0.3
+      ugi_alloc = 0.1
+      kkpcash_alloc = 0
+      gqg_alloc = 0
+      eae_alloc = 0
+      ktprecious_alloc = 0
+      rostrum_alloc = 0
+      sp500a_alloc = 0 
+  if st.button("Bluebell Balance"):
+      gnph_alloc = 0.25
+      healthcarea_alloc = 0.05
+      gtech_alloc = 0.05
+      propa_alloc = 0.05
+      kkpplus_alloc = 0.15
+      kfa_alloc = 0.2
+      ugi_alloc = 0.1
+      kkpcash_alloc = 0
+      gqg_alloc = 0
+      eae_alloc = 0.05
+      ktprecious_alloc = 0
+      rostrum_alloc = 0
+      sp500a_alloc = 0.1
+  if st.button("Bluebell Beyond"):
+      gnph_alloc = 0.35
+      healthcarea_alloc = 0.1
+      gtech_alloc = 0.1
+      propa_alloc = 0.1
+      kkpplus_alloc = 0.05
+      kfa_alloc = 0.05
+      ugi_alloc = 0.05
+      kkpcash_alloc = 0
+      gqg_alloc = 0
+      eae_alloc = 0.1
+      ktprecious_alloc = 0
+      rostrum_alloc = 0
+      sp500a_alloc = 0.1
   selected_funds = st.sidebar.multiselect(
     "Select Funds",
     available_funds,

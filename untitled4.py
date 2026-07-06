@@ -821,7 +821,11 @@ def run_company_model():
     "KFGPROPA",
     "SCBS&P500A"
   ]
-  if st.sidebar.button("Bluebell Basic"):
+  preset = st.sidebar.radio(
+    "Portfolio",
+    ["Custom", "Bluebell Basic", "Bluebell Balance", "Bluebell Beyond"]
+  )
+  if preset == "Bluebell Basic":
       gnph_alloc = 0.1
       healthcarea_alloc = 0.05
       gtech_alloc = 0.05
@@ -835,7 +839,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0 
-  elif st.sidebar.button("Bluebell Balance"):
+  elif preset == "Bluebell Balance":
       gnph_alloc = 0.25
       healthcarea_alloc = 0.05
       gtech_alloc = 0.05
@@ -849,7 +853,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
-  elif st.sidebar.button("Bluebell Beyond"):
+  elif preset == "Bluebell Beyond":
       gnph_alloc = 0.35
       healthcarea_alloc = 0.1
       gtech_alloc = 0.1
@@ -863,7 +867,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
-  else:
+  elif preset == "Custom":
       selected_funds = st.sidebar.multiselect(
         "Select Funds",
         available_funds,

@@ -1481,14 +1481,14 @@ def run_company_model():
         [10,25,50,75,90],
         axis=1
         )
-      years = np.arange(days) / 252
+      ages = age_years + np.arange(duration) / 252
 
       import plotly.graph_objects as go
     
       fig = go.Figure()
 
       fig.add_trace(go.Scatter(
-        x=years,
+        x=ages,
         y=percentiles[4]/1000000,
         mode='lines',
         name='90th Percentile',
@@ -1498,7 +1498,7 @@ def run_company_model():
       ))  
 
       fig.add_trace(go.Scatter(
-        x=years,
+        x=ages,
         y=percentiles[3]/1000000,
         mode='lines',
         name='75th Percentile',
@@ -1508,7 +1508,7 @@ def run_company_model():
       ))  
 
       fig.add_trace(go.Scatter(
-        x=years,
+        x=ages,
         y=percentiles[2]/1000000,
         mode='lines',
         name='50th Percentile',
@@ -1518,7 +1518,7 @@ def run_company_model():
       ))  
 
       fig.add_trace(go.Scatter(
-        x=years,
+        x=ages,
         y=percentiles[1]/1000000,
         mode='lines',
         name='25th Percentile',
@@ -1528,7 +1528,7 @@ def run_company_model():
       ))
     
       fig.add_trace(go.Scatter(
-        x=years,
+        x=ages,
         y=percentiles[0]/1000000,
         mode='lines',
         name='10th Percentile',
@@ -1539,15 +1539,20 @@ def run_company_model():
         
       fig.update_layout(
         title="Nominal Portfolio Value Projection",
-        xaxis_title="Years",
+        xaxis_title="Age",
         yaxis_title="Portfolio Value (Million THB)",
         hovermode="x unified",
         height = 700
       )
       fig.add_vline(
-        x=acum_years,
+        x=acum_years+age_years,
         line_dash="dash",
         annotation_text="Retirement"
+      )
+      fig.add_vline(
+          x=85,
+          line_dash = "dash",
+          annotation_text = "Average Thai Lifespan",
       )
     
       st.plotly_chart(fig, use_container_width=True)

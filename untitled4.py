@@ -835,7 +835,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0 
-  if st.sidebar.button("Bluebell Balance"):
+  elif st.sidebar.button("Bluebell Balance"):
       gnph_alloc = 0.25
       healthcarea_alloc = 0.05
       gtech_alloc = 0.05
@@ -849,7 +849,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
-  if st.sidebar.button("Bluebell Beyond"):
+  elif st.sidebar.button("Bluebell Beyond"):
       gnph_alloc = 0.35
       healthcarea_alloc = 0.1
       gtech_alloc = 0.1

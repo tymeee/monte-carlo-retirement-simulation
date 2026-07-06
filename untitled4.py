@@ -863,148 +863,149 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
-  selected_funds = st.sidebar.multiselect(
-    "Select Funds",
-    available_funds,
-    default=["KKP Plus","KKP Cash"]
-  )
-  if "KKP Plus" in selected_funds:
-      kkpplus_alloc = st.sidebar.slider(
-        "KKP Plus",
+  else:
+      selected_funds = st.sidebar.multiselect(
+        "Select Funds",
+        available_funds,
+        default=["KKP Plus","KKP Cash"]
+      )
+      if "KKP Plus" in selected_funds:
+          kkpplus_alloc = st.sidebar.slider(
+            "KKP Plus",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else: 
+          kkpplus_alloc = 0
+
+      if "KKP Cash" in selected_funds:
+          kkpcash_alloc = st.sidebar.slider(
+              "KKP Cash",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          kkpcash_alloc = 0
+
+      if "KFAFIX" in selected_funds:
+          kfa_alloc = st.sidebar.slider(
+              "KFAFIX",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          kfa_alloc = 0
+
+      if "UGISFX" in selected_funds:
+          ugi_alloc = st.sidebar.slider(
+              "UGISFX",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          ugi_alloc = 0
+
+      if "ESGQG" in selected_funds:
+          gqg_alloc = st.sidebar.slider(
+              "ESGQG",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          gqg_alloc = 0
+
+      if "ESGTECH" in selected_funds:
+        gtech_alloc = st.sidebar.slider(
+          "ESGTECH",
           0.0,
           1.0,
           0.10,
           0.01
-      )
-  else: 
-      kkpplus_alloc = 0
+        )
+      else:
+          gtech_alloc = 0
 
-  if "KKP Cash" in selected_funds:
-      kkpcash_alloc = st.sidebar.slider(
-          "KKP Cash",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      kkpcash_alloc = 0
+      if "ESEAE" in selected_funds:
+          eae_alloc = st.sidebar.slider(
+              "ESEAE",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          eae_alloc = 0
 
-  if "KFAFIX" in selected_funds:
-      kfa_alloc = st.sidebar.slider(
-          "KFAFIX",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      kfa_alloc = 0
-
-  if "UGISFX" in selected_funds:
-      ugi_alloc = st.sidebar.slider(
-          "UGISFX",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      ugi_alloc = 0
-
-  if "ESGQG" in selected_funds:
-      gqg_alloc = st.sidebar.slider(
-          "ESGQG",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      gqg_alloc = 0
-
-  if "ESGTECH" in selected_funds:
-    gtech_alloc = st.sidebar.slider(
-      "ESGTECH",
-      0.0,
-      1.0,
-      0.10,
-      0.01
-    )
-  else:
-      gtech_alloc = 0
-
-  if "ESEAE" in selected_funds:
-      eae_alloc = st.sidebar.slider(
-          "ESEAE",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      eae_alloc = 0
-
-  if "KTPRECIOUS" in selected_funds:
-      ktprecious_alloc = st.sidebar.slider(
-          "KTPRECIOUS",
-          0.0,
-          1.0,
-          0.10,
-          0.01
-      )
-  else:
-      ktprecious_alloc = 0 
-  if "Rostrum Wisdom Fund of Funds" in selected_funds:
-      rostrum_alloc = st.sidebar.slider(
-          "Rostrum Grand Wisdom Fund of Funds",
-          0.0,
-          1.0,
-          0.1,
-          0.01
-      ) 
-  else:
-      rostrum_alloc = 0
-  if "KKPGNPH" in selected_funds:
-      gnph_alloc = st.sidebar.slider(
-          "KKPGNPH",
-          0.0,
-          1.0,
-          0.1,
-          0.01
-      ) 
-  else:
-      gnph_alloc = 0 
-  if "KTHEALTHCAREA" in selected_funds:
-      healthcarea_alloc = st.sidebar.slider(
-          "KTHEALTHCAREA",
-          0.0,
-          1.0,
-          0.1,
-          0.01
-      )
-  else:
-      healthcarea_alloc = 0
-  if "KFGPROPA" in selected_funds:
-      propa_alloc = st.sidebar.slider(
-          "KFGPROPA",
-          0.0,
-          1.0,
-          0.1,
-          0.01
-      )
-  else: 
-      propa_alloc = 0
-  if "SCBS&P500A" in selected_funds:
-      sp500a_alloc = st.sidebar.slider(
-          "SCBS&P500A",
-          0.0,
-          1.0,
-          0.1,
-          0.01
-      ) 
-  else:
-      sp500a_alloc = 0
+      if "KTPRECIOUS" in selected_funds:
+          ktprecious_alloc = st.sidebar.slider(
+              "KTPRECIOUS",
+              0.0,
+              1.0,
+              0.10,
+              0.01
+          )
+      else:
+          ktprecious_alloc = 0 
+      if "Rostrum Wisdom Fund of Funds" in selected_funds:
+          rostrum_alloc = st.sidebar.slider(
+              "Rostrum Grand Wisdom Fund of Funds",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          ) 
+      else:
+          rostrum_alloc = 0
+      if "KKPGNPH" in selected_funds:
+          gnph_alloc = st.sidebar.slider(
+              "KKPGNPH",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          ) 
+      else:
+          gnph_alloc = 0 
+      if "KTHEALTHCAREA" in selected_funds:
+          healthcarea_alloc = st.sidebar.slider(
+              "KTHEALTHCAREA",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          )
+      else:
+          healthcarea_alloc = 0
+      if "KFGPROPA" in selected_funds:
+          propa_alloc = st.sidebar.slider(
+              "KFGPROPA",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          )
+      else: 
+          propa_alloc = 0
+      if "SCBS&P500A" in selected_funds:
+          sp500a_alloc = st.sidebar.slider(
+              "SCBS&P500A",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          ) 
+      else:
+          sp500a_alloc = 0
   total_alloc = (
     kkpplus_alloc +
     kkpcash_alloc +

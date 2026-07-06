@@ -1481,7 +1481,7 @@ def run_company_model():
         [10,25,50,75,90],
         axis=1
         )
-      ages = age_years + np.arange(duration) / 252
+      ages = age_years + np.arange(days) / 252
 
       import plotly.graph_objects as go
     

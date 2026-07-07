@@ -85,10 +85,6 @@ age_years = st.sidebar.number_input(
     100,
     1
 )
-retirement_years = 85 - (age_years + acum_years)
-if retirement_years <= 0:
-    st.error("Change your age to be under 85 for feasibility")
-    st.stop()
 def run_index_model():
   @st.cache_data
   def load_market_data():
@@ -97,6 +93,10 @@ def run_index_model():
           "1.parquet"
       )
   @st.cache_data
+  retirement_years = 85 - (age_years + acum_years)
+  if retirement_years <= 0:
+    st.error("Change your age to be under 85 for feasibility")
+    st.stop()
   def build_market_stats():
 
       combined_data = load_market_data()
@@ -806,6 +806,10 @@ def run_company_model():
           "3.parquet"
       )
   @st.cache_data
+  retirement_years = 85 - (age_years + acum_years)
+  if retirement_years <= 0:
+    st.error("Change your age to be under 85 for feasibility")
+    st.stop()
   def build_matrices():
     combined_data = get_data()
     bond_vol = combined_data["bond"].std()

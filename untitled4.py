@@ -75,7 +75,7 @@ target = st.sidebar.number_input(
 acum_years = st.sidebar.number_input(
     "Years Until Retirement",
     0,
-    25,
+    100,
     1
 )
 

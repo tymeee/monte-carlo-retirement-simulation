@@ -45,7 +45,7 @@ num_simulations = st.sidebar.slider(
     "Simulations",
     100,
     1000,
-    500,
+    250,
     10
 )
 

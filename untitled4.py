@@ -93,10 +93,6 @@ def run_index_model():
           "1.parquet"
       )
   @st.cache_data
-  retirement_years = 85 - (age_years + acum_years)
-  if retirement_years <= 0:
-    st.error("Change your age to be under 85 for feasibility")
-    st.stop()
   def build_market_stats():
 
       combined_data = load_market_data()
@@ -127,6 +123,10 @@ def run_index_model():
           bull_cov.values,
           bear_cov.values
       )
+  retirement_years = 85 - (age_years + acum_years)
+  if retirement_years <= 0:
+    st.error("Change your age to be under 85 for feasibility")
+    st.stop()
   time_period = acum_years + retirement_years
   st.sidebar.subheader("Portfolio")
 
@@ -806,10 +806,6 @@ def run_company_model():
           "3.parquet"
       )
   @st.cache_data
-  retirement_years = 85 - (age_years + acum_years)
-  if retirement_years <= 0:
-    st.error("Change your age to be under 85 for feasibility")
-    st.stop()
   def build_matrices():
     combined_data = get_data()
     bond_vol = combined_data["bond"].std()
@@ -818,7 +814,10 @@ def run_company_model():
     fof_vol = combined_data["fof"].std()
     return bond_vol, equity_vol, cmod_vol, fof_vol
   bond_vol, equity_vol, cmod_vol, fof_vol = build_matrices()
-
+  retirement_years = 85 - (age_years + acum_years)
+  if retirement_years <= 0:
+    st.error("Change your age to be under 85 for feasibility")
+    st.stop()
   available_funds = [
     "KKP Plus",
     "KKP Cash",

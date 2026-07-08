@@ -1374,7 +1374,7 @@ def run_company_model():
       sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
       sp500a_managementfee = 0.011
 
-      gcore_yr = 0.1555
+      gcore_yr = 0.1233
       gcore_dailyrate = (1+gcore_yr) ** (1/252)
       gcore_managementfee = 0.0125
 

@@ -1374,7 +1374,7 @@ def run_company_model():
       sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
       sp500a_managementfee = 0.011
 
-      gcore_yr = 0.1233
+      gcore_yr = 0.144
       gcore_dailyrate = (1+gcore_yr) ** (1/252)
       gcore_managementfee = 0.0125
 
@@ -1420,14 +1420,14 @@ def run_company_model():
         gcore_amt = gcore_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
-        gqg_rate    = 1.4 * equity_factor
-        gtech_rate  = 1.75 * equity_factor
-        eae_rate    = 1.5 * equity_factor
-        gcore_rate = 1.2 * equity_factor
-        gnph_rate  = 1.05 * equity_factor
-        healthcarea_rate = 1.15 * equity_factor
+        gqg_rate    = 1.7 * equity_factor
+        gtech_rate  = 1.8 * equity_factor
+        eae_rate    = 1.75 * equity_factor
+        gcore_rate = 1.6 * equity_factor
+        gnph_rate  = 1.6 * equity_factor
+        healthcarea_rate = 1.45 * equity_factor
         propa_rate = equity_factor
-        sp500a_rate = 1.025 * equity_factor
+        sp500a_rate = 1.25 * equity_factor
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 

@@ -839,7 +839,7 @@ def run_company_model():
     ["Custom", "Bluebell Basic", "Bluebell Balance", "Bluebell Beyond"]
   )
   if preset == "Bluebell Basic":
-      gnph_alloc = 0.1
+      gnph_alloc = 0.0
       healthcarea_alloc = 0.05
       gtech_alloc = 0.05
       propa_alloc = 0.05
@@ -1342,7 +1342,7 @@ def run_company_model():
       esgqg_dailyrate = (1+esgqg_year)**(1/252)
       esgqg_managementfee = 0.0178
 
-      esgtech_yr = 0.16656 * 0.75
+      esgtech_yr = 0.16656 * 0.6
       esgtech_dailyrate = (1+esgtech_yr)**(1/252)
       esgtech_managementfee = 0.0121
 
@@ -1374,7 +1374,7 @@ def run_company_model():
       sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
       sp500a_managementfee = 0.011
 
-      gcore_yr = 0.104983
+      gcore_yr = 0.10132
       gcore_dailyrate = (1+gcore_yr) ** (1/252)
       gcore_managementfee = 0.0125
 

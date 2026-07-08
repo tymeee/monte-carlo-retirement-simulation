@@ -1423,7 +1423,7 @@ def run_company_model():
         gqg_rate    = 1.05 * equity_factor
         gtech_rate  = 1.45 * equity_factor
         eae_rate    = 1.25 * equity_factor
-        gcore_rate = 1.1 * equity_factor
+        gcore_rate = 1.2 * equity_factor
         gnph_rate  = 1.25 * equity_factor
         healthcarea_rate = 1.1 * equity_factor
         propa_rate = 1.1 * equity_factor

@@ -1338,11 +1338,11 @@ def run_company_model():
       ugisfx_dailyrate = (1+ugisfx_year)**(1/252)
       ugisfx_managementfee = 0.0085
 
-      esgqg_year = 0.09576
+      esgqg_year = 0.1412
       esgqg_dailyrate = (1+esgqg_year)**(1/252)
       esgqg_managementfee = 0.0178
 
-      esgtech_yr = 0.16656 * 0.7
+      esgtech_yr = 0.16656 * 0.85
       esgtech_dailyrate = (1+esgtech_yr)**(1/252)
       esgtech_managementfee = 0.0121
 

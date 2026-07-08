@@ -1420,14 +1420,14 @@ def run_company_model():
         gcore_amt = gcore_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
-        gqg_rate    = 1.2 * equity_factor
-        gtech_rate  = 1.5 * equity_factor
-        eae_rate    = 1.4 * equity_factor
-        gcore_rate = 1.2 * equity_factor
-        gnph_rate  = 1.1 * equity_factor
-        healthcarea_rate= 1.2 * equity_factor
-        propa_rate = 1.1 * equity_factor
-        sp500a_rate = 1.025 * equity_factor
+        gqg_rate    = 1.3 * equity_factor
+        gtech_rate  = 1.6 * equity_factor
+        eae_rate    = 1.5 * equity_factor
+        gcore_rate = 1.3 * equity_factor
+        gnph_rate  = 1.2 * equity_factor
+        healthcarea_rate= 1.3 * equity_factor
+        propa_rate = 1.2 * equity_factor
+        sp500a_rate = 1.125 * equity_factor
 
         bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
 

@@ -1346,8 +1346,8 @@ def run_company_model():
       esgtech_dailyrate = (1+esgtech_yr)**(1/756)
       esgtech_managementfee = 0.0121
 
-      eseae_yr = 0.1767
-      eseae_dailyrate = (1+eseae_yr)**(1/756)
+      eseae_yr = 0.1412
+      eseae_dailyrate = (1+eseae_yr)**(1/252)
       eseae_managementfee = 0.0178
 
       ktprecious_3yr = 0.4149

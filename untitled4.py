@@ -1322,43 +1322,43 @@ def run_company_model():
         (days, num_simulations),
         dtype=np.float32
       )
-      KKPSPLUS_mean = 0.0193
+      KKPSPLUS_mean = 0.023533
       kkpplus_managementfee = 0.00383
       kkpsplus_dailyrate = (1+KKPSPLUS_mean) **(1/252)
 
-      KKPCASH_mean = 0.0133
+      KKPCASH_mean = 0.0186
       kkpcash_managementfee =  0.0029
       kkpcash_dailyrate = (1+KKPCASH_mean)**(1/252)
 
-      kfafix_year = 0.0196
-      kfafix_dailyrate = (1+kfafix_year)**(1/1260)
+      kfafix_year = 0.02357778
+      kfafix_dailyrate = (1+kfafix_year)**(1/252)
       kfa_mangementfee = 0.0041
 
-      ugisfx_year = 0.0686
+      ugisfx_year = 0.0473
       ugisfx_dailyrate = (1+ugisfx_year)**(1/252)
       ugisfx_managementfee = 0.0085
 
-      esgqg_year = 0.1332
+      esgqg_year = 0.09576
       esgqg_dailyrate = (1+esgqg_year)**(1/252)
       esgqg_managementfee = 0.0178
 
-      esgtech_yr = 0.16656
+      esgtech_yr = 0.16656 * 0.75
       esgtech_dailyrate = (1+esgtech_yr)**(1/252)
       esgtech_managementfee = 0.0121
 
-      eseae_yr = 0.1767
-      eseae_dailyrate = (1+eseae_yr)**(1/756)
+      eseae_yr = 0.0973
+      eseae_dailyrate = (1+eseae_yr)**(1/252)
       eseae_managementfee = 0.0178
 
-      ktprecious_3yr = 0.4149
-      ktprecious_dailyrate = (1+ktprecious_3yr)**(1/756)
+      ktprecious_yr = 0.10803
+      ktprecious_dailyrate = (1+ktprecious_yr)**(1/252)
       ktprecious_managementfee = 0.0134
 
       rostrum_yr = 0.126*(1/3) + 0.13*(1/3) + 0.139*(1/3)
       rostrum_dailyrate = (1+rostrum_yr) ** (1/252)
       rostrum_managementfee = 0.015
 
-      gnph_yr = 0.121
+      gnph_yr = 0.0978666
       gnph_dailyrate = (1+gnph_yr) ** (1/252)
       gnph_managementfee = 0.0175
 

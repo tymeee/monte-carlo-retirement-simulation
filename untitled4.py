@@ -831,7 +831,8 @@ def run_company_model():
     "KKPGNPH",
     "KTHEALTHCAREA",
     "KFGPROPA",
-    "SCBS&P500A"
+    "SCBS&P500A",
+    "ESGCORE"
   ]
   preset = st.sidebar.radio(
     "Portfolio",
@@ -851,8 +852,9 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0 
+      gcore_alloc = 0.1
   elif preset == "Bluebell Balance":
-      gnph_alloc = 0.25
+      gnph_alloc = 0.0
       healthcarea_alloc = 0.05
       gtech_alloc = 0.05
       propa_alloc = 0.05
@@ -865,8 +867,9 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
+      gcore_alloc = 0.25
   elif preset == "Bluebell Beyond":
-      gnph_alloc = 0.35
+      gnph_alloc = 0.0
       healthcarea_alloc = 0.1
       gtech_alloc = 0.1
       propa_alloc = 0.1
@@ -879,6 +882,7 @@ def run_company_model():
       ktprecious_alloc = 0
       rostrum_alloc = 0
       sp500a_alloc = 0.1
+      gcore_alloc = 0.35
   elif preset == "Custom":
       selected_funds = st.sidebar.multiselect(
         "Select Funds",
@@ -1022,6 +1026,16 @@ def run_company_model():
           ) 
       else:
           sp500a_alloc = 0
+      if "ESGCORE" in selected_funds:
+          gcore_alloc = st.sidebar.slider(
+              "ESGCORE",
+              0.0,
+              1.0,
+              0.1,
+              0.01
+          )
+      else:
+          gcore_alloc = 0
   total_alloc = (
     kkpplus_alloc +
     kkpcash_alloc +
@@ -1035,7 +1049,8 @@ def run_company_model():
     gnph_alloc + 
     healthcarea_alloc + 
     propa_alloc + 
-    sp500a_alloc
+    sp500a_alloc +
+    gcore_alloc
   )
 
   if total_alloc > 1:
@@ -1062,7 +1077,8 @@ def run_company_model():
             gnph_alloc +
             healthcarea_alloc + 
             propa_alloc + 
-            sp500a_alloc
+            sp500a_alloc +
+            gcore_alloc
           )
   )
   import pandas as pd
@@ -1083,7 +1099,8 @@ def run_company_model():
         "KKPGNPH",
         "KTHEALTHCAREA",
         "KFGPROPA",
-        "SCBS&P500A"
+        "SCBS&P500A",
+        "ESGCORE"
     ],
   "Allocation": [
         kkpplus_alloc,
@@ -1099,7 +1116,8 @@ def run_company_model():
         gnph_alloc,
         healthcarea_alloc,
         propa_alloc,
-        sp500a_alloc
+        sp500a_alloc,
+        gcore_alloc
     ]
   })
 
@@ -1126,6 +1144,7 @@ def run_company_model():
         healthcarea_returns,
         propa_returns,
         sp500a_returns,
+        gcore_returns,
         duration,
         inserted_funds,
         yearly_withdrawals,
@@ -1144,6 +1163,7 @@ def run_company_model():
         healthcarea_amt,
         propa_amt,
         sp500a_amt,
+        gcore_amt,
 
         kkpplus_alloc,
         kkpcash_alloc,
@@ -1158,7 +1178,8 @@ def run_company_model():
         gnph_alloc,
         healthcarea_alloc,
         propa_alloc,
-        sp500a_alloc
+        sp500a_alloc,
+        gcore_alloc
       ):
         portfolio_paths = np.zeros(duration)
         failed = 0 # Initialize failed variable
@@ -1176,6 +1197,7 @@ def run_company_model():
           healthcarea_amt = healthcarea_amt * (healthcarea_returns[day])
           propa_amt = propa_amt * (propa_returns[day])
           sp500a_amt = sp500a_amt * (sp500a_returns[day])
+          gcore_amt = gcore_amt * (gcore_returns[day])
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc
@@ -1192,6 +1214,7 @@ def run_company_model():
             healthcarea_amt += inserted_funds * healthcarea_alloc
             propa_amt += inserted_funds * propa_alloc
             sp500a_amt += inserted_funds * sp500a_alloc
+            gcore_amt += inserted_funds * gcore_alloc
           if day > acum_years*252 and day %21 ==0:
             withdrawal_amount = yearly_withdrawals/12
             if savings_amt - withdrawal_amount > 0:
@@ -1210,6 +1233,8 @@ def run_company_model():
               gtech_amt = gtech_amt - withdrawal_amount
             elif eae_amt - withdrawal_amount > 0:
               eae_amt = eae_amt - withdrawal_amount
+            elif gcore_amt - withdrawal_amount > 0:
+                gcore_amt = gcore_amt - withdrawal_amount
             elif ktp_amt - withdrawal_amount > 0:
               ktp_amt = ktp_amt - withdrawal_amount
             elif rostrum_amt - withdrawal_amount > 0:
@@ -1239,8 +1264,9 @@ def run_company_model():
             healthcarea_amt = healthcarea_amt * (1-healthcarea_managementfee)
             propa_amt = propa_amt * (1-propa_managementfee)
             sp500a_amt = sp500a_amt * (1-sp500a_managementfee)
+            gcore_amt = gcore_amt * (1-gcore_managementfee)
           if day % 63 == 0:
-              curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt
+              curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
               kkpplus_amt = curnt_amt * kkpplus_alloc
               kkpcash_amt = curnt_amt * kkpcash_alloc
               kfa_amt = curnt_amt * kfa_alloc
@@ -1251,6 +1277,7 @@ def run_company_model():
               ktp_amt = curnt_amt * ktprecious_alloc
               savings_amt = curnt_amt * savings_alloc
               rostrum_amt = curnt_amt * rostrum_alloc
+              gcore_amt = curnt_amt * gcore_alloc
               if rostrum_amt < 3000000 and rostrum_amt != 0:
                   if savings_amt - (3000000-rostrum_amt) > 0:
                       rostrum_amt = rostrum_amt + savings_amt
@@ -1284,7 +1311,7 @@ def run_company_model():
               propa_amt = curnt_amt * propa_alloc
               sp500a_amt = curnt_amt * sp500a_alloc
           portfolio_paths[day] = (
-              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt
+              kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + gcore_amt
               )
 
         return portfolio_paths,failed
@@ -1347,6 +1374,10 @@ def run_company_model():
       sp500a_dailyrate = (1+sp500a_yr) ** (1/252)
       sp500a_managementfee = 0.011
 
+      gcore_yr = 0.1555
+      gcore_dailyrate = (1+gcore_yr) ** (1/252)
+      gcore_managementfee = 0.0125
+
       savings_alloc = (
         1 -
           (
@@ -1362,7 +1393,8 @@ def run_company_model():
             gnph_alloc +
             healthcarea_alloc + 
             propa_alloc + 
-            sp500a_alloc
+            sp500a_alloc +
+            gcore_alloc
           )
       )
       trials_failed = 0
@@ -1385,11 +1417,13 @@ def run_company_model():
         healthcarea_amt = healthcarea_alloc * total_funds
         propa_amt = propa_alloc * total_funds
         sp500a_amt = sp500a_alloc * total_funds
+        gcore_amt = gcore_alloc * total_funds
         equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
 
-        gqg_rate    = 1.1 * equity_factor
+        gqg_rate    = 1.4 * equity_factor
         gtech_rate  = 1.75 * equity_factor
-        eae_rate    = 1.4 * equity_factor
+        eae_rate    = 1.5 * equity_factor
+        gcore_rate = 1.2 * equity_factor
         gnph_rate  = 1.05 * equity_factor
         healthcarea_rate = 1.15 * equity_factor
         propa_rate = equity_factor
@@ -1423,6 +1457,7 @@ def run_company_model():
         healthcarea_truerate = healthcarea_rate + healthcarea_dailyrate
         propa_truerate = propa_rate + propa_dailyrate
         sp500a_truerate = sp500a_rate + sp500a_dailyrate
+        gcore_truerate = gcore_rate + gcore_dailyrate
 
         portfolio_path,failed = sim_path(
             acum_years,
@@ -1439,6 +1474,7 @@ def run_company_model():
             healthcarea_truerate,
             propa_truerate,
             sp500a_truerate,
+            gcore_truerate,
             days,
             inserted_funds,
             yearly_withdrawals,
@@ -1456,6 +1492,7 @@ def run_company_model():
             healthcarea_amt,
             propa_amt,
             sp500a_amt,
+            gcore_amt,
             kkpplus_alloc,
             kkpcash_alloc,
             kfa_alloc,
@@ -1469,7 +1506,8 @@ def run_company_model():
             gnph_alloc,
             healthcarea_alloc,
             propa_alloc,
-            sp500a_alloc
+            sp500a_alloc,
+            gcore_alloc
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed

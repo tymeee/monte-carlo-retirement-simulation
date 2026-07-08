@@ -1342,7 +1342,7 @@ def run_company_model():
       esgqg_dailyrate = (1+esgqg_year)**(1/252)
       esgqg_managementfee = 0.0178
 
-      esgtech_yr = 0.16656 * 0.6
+      esgtech_yr = 0.16656 * 0.7
       esgtech_dailyrate = (1+esgtech_yr)**(1/252)
       esgtech_managementfee = 0.0121
 

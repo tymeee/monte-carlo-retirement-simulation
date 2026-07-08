@@ -410,7 +410,7 @@ def run_index_model():
               thai_inv_bond = 0.0
               thai_spec_bond = 0.0
               us_spec_bond = 0.0
-          if day% 63 == 0:
+          if day% 252 == 0:
               cur_amount = pure_cash_amt + savings_account + assets.sum()
               pure_cash_amt = cur_amount * pure_cash_weight
               savings_account = cur_amount * savings_account_weight
@@ -1265,7 +1265,7 @@ def run_company_model():
             propa_amt = propa_amt * (1-propa_managementfee)
             sp500a_amt = sp500a_amt * (1-sp500a_managementfee)
             gcore_amt = gcore_amt * (1-gcore_managementfee)
-          if day % 63 == 0:
+          if day % 252 == 0:
               curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
               kkpplus_amt = curnt_amt * kkpplus_alloc
               kkpcash_amt = curnt_amt * kkpcash_alloc
@@ -1438,7 +1438,7 @@ def run_company_model():
 
         commodity_factor = t.rvs(df, loc=0, scale=cmod_vol, size=days)
 
-        ktp_rate = 1.5 * commodity_factor
+        ktp_rate = 1.7 * commodity_factor
 
         fof_factor = t.rvs(df,loc=0,scale=fof_vol,size=days)
 

@@ -806,6 +806,19 @@ def run_company_model():
           "3.parquet"
       )
   @st.cache_data
+  def grab_data():
+      import pandas as pd
+      return pd.read_csv(
+          "master_investment_data.csv"
+      )
+  def build_the_data()
+    complete_data = grab_data()
+    log_returns = np.log(complete_data/ complete_data.shift(1)).dropna()
+    cov_matrix = log_returns.cov()
+    means = log_returns.mean()
+    return means,cov_matrix
+  means, cov_matrix = build_the_data()
+  @st.cache_data
   def build_matrices():
     combined_data = get_data()
     bond_vol = combined_data["bond"].std()
@@ -1419,46 +1432,33 @@ def run_company_model():
         propa_amt = propa_alloc * total_funds
         sp500a_amt = sp500a_alloc * total_funds
         gcore_amt = gcore_alloc * total_funds
-        equity_factor = t.rvs(df, loc=0, scale=equity_vol, size=days)
-
-        gqg_rate    = 1.25 * equity_factor
-        gtech_rate  = 1.4 * equity_factor
-        eae_rate    = 1.3 * equity_factor
-        gcore_rate = 1.25 * equity_factor
-        gnph_rate  = 1.15 * equity_factor
-        healthcarea_rate= 1.25 * equity_factor
-        propa_rate = 1.15 * equity_factor
-        sp500a_rate = 1.125 * equity_factor
-
-        bond_factor = t.rvs(df, loc=0, scale=bond_vol, size=days)
-
-        kkpcash_rate = 0.1 * bond_factor
-        kkpplus_rate = 0.2 * bond_factor
-        kfa_rate     = 0.25 * bond_factor
-        ugi_rate     = 1.00 * bond_factor
-
-        commodity_factor = t.rvs(df, loc=0, scale=cmod_vol, size=days)
-
-        ktp_rate = 1.7 * commodity_factor
 
         fof_factor = t.rvs(df,loc=0,scale=fof_vol,size=days)
 
         rostrum_rate = 1.75 * fof_factor
-
-        kkpplus_truerate = kkpplus_rate + kkpsplus_dailyrate
-        kkpcash_truerate = kkpcash_rate + kkpcash_dailyrate
-        kfa_truerate = kfa_rate + kfafix_dailyrate
-        ugi_truerate = ugi_rate + ugisfx_dailyrate
-        gqg_truerate = gqg_rate + esgqg_dailyrate
-        gtech_truerate = gtech_rate + esgtech_dailyrate
-        eae_truerate = eae_rate + eseae_dailyrate
-        ktp_truerate = ktp_rate + ktprecious_dailyrate
+        
         rostrum_truerate = rostrum_rate + rostrum_dailyrate
-        gnph_truerate = gnph_rate + gnph_dailyrate
-        healthcarea_truerate = healthcarea_rate + healthcarea_dailyrate
-        propa_truerate = propa_rate + propa_dailyrate
-        sp500a_truerate = sp500a_rate + sp500a_dailyrate
-        gcore_truerate = gcore_rate + gcore_dailyrate
+        from scipy.stats import multivariate_t
+        df = 5
+        all_assets_returns = multivariate_t.rvs(
+            loc=means, 
+            shape=cov_matrix, 
+            df=df, 
+            size=days
+        )
+        ktp_truerate = all_assets_returns[:,0]
+        gqg_truerate = all_assets_returns[:,1]
+        eae_truerate = all_assets_returns[:,2]
+        gtech_truerate = all_assets_returns[:,3]
+        gnph_truerate = all_assets_returns[:,4]
+        gcore_truerate = all_assets_returns[:,5]
+        kkpplus_truerate = all_assets_returns[:,6]
+        kkpcash_truerate = all_assets_returns[:,7]
+        kfa_truerate = all_assets_returns[:,8]
+        ugi_truerate = all_assets_returns[:,9]
+        healthcarea_truerate = all_assets_returns[:,10]
+        propa_truerate = all_assets_returns[:,11]
+        sp500a_truerate = all_assets_returns[:,12]
 
         portfolio_path,failed = sim_path(
             acum_years,

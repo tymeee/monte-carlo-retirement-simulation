@@ -1203,8 +1203,8 @@ def run_company_model():
         for day in range(duration):
           gqg_amt *= np.exp(gqg_returns[day])
           gtech_amt *= (np.exp(gtech_returns[day])-0.00095)
-          eae_amt *= np.exp(eae_returns[day] + 0.00015)
-          ktp_amt *= np.exp(ktp_returns[day]+0.00015)
+          eae_amt *= np.exp(eae_returns[day] + 0.00095)
+          ktp_amt *= np.exp(ktp_returns[day]+0.0015)
           ugi_amt *= np.exp(ugi_returns[day])
           kkpplus_amt *= np.exp(kkpplus_returns[day])
           kkpcash_amt *= np.exp(kkpcash_returns[day])
@@ -1212,7 +1212,7 @@ def run_company_model():
           rostrum_amt *= (rostrum_returns[day])
           gnph_amt *= np.exp(gnph_returns[day])
           healthcarea_amt *= np.exp(healthcarea_returns[day]+0.0001)
-          propa_amt *= np.exp(propa_returns[day]+0.00015)
+          propa_amt *= np.exp(propa_returns[day]-0.0002)
           sp500a_amt *= np.exp(sp500a_returns[day] + 0.00015)
           gcore_amt *= (np.exp(gcore_returns[day])-0.0003)
           savings_amt = savings_amt

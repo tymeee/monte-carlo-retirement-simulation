@@ -811,7 +811,7 @@ def run_company_model():
       return pd.read_csv(
           "master_investment_data.csv"
       )
-  def build_the_data()
+  def build_the_data():
     complete_data = grab_data()
     log_returns = np.log(complete_data/ complete_data.shift(1)).dropna()
     cov_matrix = log_returns.cov()

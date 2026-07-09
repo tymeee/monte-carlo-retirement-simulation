@@ -1201,20 +1201,22 @@ def run_company_model():
         portfolio_paths = np.zeros(duration)
         failed = 0 # Initialize failed variable
         for day in range(duration):
-          gqg_amt = gqg_amt * (gqg_returns[day]) # Changed kfa_returns to gqg_returns
-          gtech_amt = gtech_amt *(gtech_returns[day])
-          eae_amt = eae_amt *(eae_returns[day])
-          ktp_amt = ktp_amt * (ktp_returns[day])
-          ugi_amt = ugi_amt * (ugi_returns[day])
-          kkpplus_amt = kkpplus_amt * (kkpplus_returns[day])
-          kkpcash_amt = kkpcash_amt * (kkpcash_returns[day])
-          kfa_amt = kfa_amt * (kfa_returns[day])
-          rostrum_amt = rostrum_amt * (rostrum_returns[day])
-          gnph_amt = gnph_amt * (gnph_returns[day])
-          healthcarea_amt = healthcarea_amt * (healthcarea_returns[day])
-          propa_amt = propa_amt * (propa_returns[day])
-          sp500a_amt = sp500a_amt * (sp500a_returns[day])
-          gcore_amt = gcore_amt * (gcore_returns[day])
+            gqg_amt *= np.exp(gqg_returns[day])
+            gtech_amt *= np.exp(gtech_returns[day])
+            eae_amt *= np.exp(eae_returns[day])
+            ktp_amt *= np.exp(ktp_returns[day])
+            ugi_amt *= np.exp(ugi_returns[day])
+            kkpplus_amt *= np.exp(kkpplus_returns[day])
+            kkpcash_amt *= np.exp(kkpcash_returns[day])
+            kfa_amt *= np.exp(kfa_returns[day])
+            rostrum_amt *= (rostrum_returns[day])
+            gnph_amt *= np.exp(gnph_returns[day])
+            healthcarea_amt *= np.exp(healthcarea_returns[day])
+            propa_amt *= np.exp(propa_returns[day])
+            sp500a_amt *= np.exp(sp500a_returns[day])
+            gcore_amt *= np.exp(gcore_returns[day])
+            savings_amt = savings_amt
+
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc

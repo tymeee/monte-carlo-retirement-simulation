@@ -813,10 +813,14 @@ def run_company_model():
       )
   def build_the_data():
     complete_data = grab_data()
-    log_returns = np.log(complete_data/ complete_data.shift(1)).dropna()
-    cov_matrix = log_returns.cov()
-    means = log_returns.mean()
-    return means,cov_matrix
+    
+    numeric_df = complete_data.select_dtypes(include=['number'])
+    
+    numeric_df = numeric_df.replace(0, np.nan).dropna()
+    
+    log_returns = np.log(numeric_df / numeric_df.shift(1)).dropna()
+    
+    return log_returns.mean(), log_returns.cov()
   means, cov_matrix = build_the_data()
   @st.cache_data
   def build_matrices():

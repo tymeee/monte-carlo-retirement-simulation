@@ -17,44 +17,34 @@ from scipy.stats import multivariate_t
 from scipy.stats import t
 from numba import njit
 
+
+# Force all slider elements (track, thumb, and value text) to be blue
 st.markdown(
     """
     <style>
-        /* 1. Changes top header decoration bar from red to blue */
-        [data-testid="stHeader"] {
-            background-color: transparent !important;
-        }
-        [data-testid="stHeader"]::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: #1C83E1 !important; /* Streamlit Blue */
-        }
-
-        /* 2. Changes active widget borders (inputs, sliders, checkboxes) */
-        div[data-baseweb="input"] > div:focus-within,
-        div[data-baseweb="textarea"] > div:focus-within,
-        div[data-baseweb="select"] > div:focus-within {
+        /* 1. Change the colored track and handle of the slider */
+        div[data-testid="stSlider"] [role="slider"] {
+            background-color: #1C83E1 !important;
             border-color: #1C83E1 !important;
         }
-
-        /* 3. Changes error box red background and borders to blue */
-        div[data-testid="stNotificationV2"] {
-            border-left-color: #1C83E1 !important;
+        div[data-testid="stSlider"] [data-disabled="false"] {
+            background: #1C83E1 !important;
         }
-        
-        /* 4. Changes red accent text, links, and selected tab highlights */
-        a, .st-emotion-cache-16ids9d, [data-baseweb="tab"][aria-selected="true"] {
+
+        /* 2. Change the floating value text above the slider */
+        div[data-testid="stSlider"] div {
             color: #1C83E1 !important;
-            border-bottom-color: #1C83E1 !important;
+        }
+
+        /* 3. Ensure standard labels or track bases don't override the blue */
+        .stSlider > div [data-baseweb="slider"] > div {
+            background: linear-gradient(to right, #1C83E1 0%, #1C83E1 100%) !important;
         }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",

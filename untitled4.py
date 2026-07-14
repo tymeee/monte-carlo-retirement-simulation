@@ -18,34 +18,6 @@ from scipy.stats import t
 from numba import njit
 
 
-# Force all slider elements (track, thumb, and value text) to be blue
-st.markdown(
-    """
-    <style>
-        /* 1. Change the colored track and handle of the slider */
-        div[data-testid="stSlider"] [role="slider"] {
-            background-color: #1C83E1 !important;
-            border-color: #1C83E1 !important;
-        }
-        div[data-testid="stSlider"] [data-disabled="false"] {
-            background: #1C83E1 !important;
-        }
-
-        /* 2. Change the floating value text above the slider */
-        div[data-testid="stSlider"] div {
-            color: #1C83E1 !important;
-        }
-
-        /* 3. Ensure standard labels or track bases don't override the blue */
-        .stSlider > div [data-baseweb="slider"] > div {
-            background: linear-gradient(to right, #1C83E1 0%, #1C83E1 100%) !important;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide"

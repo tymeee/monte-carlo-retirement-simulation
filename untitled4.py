@@ -17,6 +17,71 @@ from scipy.stats import multivariate_t
 from scipy.stats import t
 from numba import njit
 
+st.markdown("""
+<style>
+
+/* Slider active track */
+.stSlider [data-baseweb="slider"] div[role="slider"] {
+    background-color: #0B3D91 !important;
+}
+
+.stSlider [data-baseweb="slider"] div[data-testid="stThumbValue"] {
+    color: #0B3D91 !important;
+}
+
+/* Buttons */
+.stButton > button {
+    background-color: #0B3D91 !important;
+    color: white !important;
+    border: none !important;
+}
+
+.stButton > button:hover {
+    background-color: #082d6b !important;
+}
+
+/* Number input +/- buttons */
+button[kind="secondary"] {
+    color: #0B3D91 !important;
+}
+
+/* Radio buttons */
+div[role="radiogroup"] label div:first-child {
+    border-color: #0B3D91 !important;
+}
+
+/* Checkbox tick */
+input[type="checkbox"]:checked {
+    accent-color: #0B3D91 !important;
+}
+
+/* Selectbox focus */
+.stSelectbox *:focus {
+    border-color: #0B3D91 !important;
+}
+
+/* Multiselect */
+.stMultiSelect *:focus {
+    border-color: #0B3D91 !important;
+}
+
+/* Progress bars */
+.stProgress > div > div {
+    background-color: #0B3D91 !important;
+}
+
+/* Links */
+a {
+    color: #0B3D91 !important;
+}
+
+/* Metrics */
+[data-testid="stMetricValue"] {
+    color: #0B3D91 !important;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",

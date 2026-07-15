@@ -90,7 +90,7 @@ def run_index_model():
   def load_market_data():
 
       return pd.read_parquet(
-          "6.parquet"
+          "new.parquet"
       )
   @st.cache_data
   def build_market_stats():
@@ -98,11 +98,11 @@ def run_index_model():
       combined_data = load_market_data()
 
       bear_data = combined_data.loc[
-          "2008-01-01":"2015-04-01"
+          "2005-01-10":"2015-06-01"
       ]
 
       bull_data = combined_data.loc[
-          "2015-04-01":"2025-01-01"
+          "2015-06-01":"2025-12-30"
       ]
 
       bull_mean = bull_data.mean()
@@ -483,7 +483,7 @@ def run_index_model():
                     cur_amount * bond_mutualfund_allocation,
                     cur_amount * hybrid_mutualfund_aggresive_allocation,
                     cur_amount * hybrid_mutualfund_moderate_allocation,
-                    cur_amount * hybrid_mutualfund_conservative_allocation
+                    cur_amount * hybrid_mutualfund_conservative_allocation,
                     cur_amount * stock_allocations[3],
                     cur_amount * stock_allocations[4],
                     cur_amount * stock_allocations[5],

@@ -621,36 +621,48 @@ def run_index_model():
           portfolio_simulations[:, sim] = portfolio_path
 
           trials_failed += failed
-          if failed == 0:
+          accumulation_annualized_returns = []
+
+          retirement_day = int(acum_years * 252)
+
+          for sim in range(num_simulations):
             previous_value = float(initial_amount)
-            total_growth_factor = 1.0
+            log_growth = 0.0
             valid_path = True
 
-          for day in range(duration):
-            current_value = float(portfolio_path[day])
+            for day in range(retirement_day):
+                ending_value = float(portfolio_simulations[day, sim])
 
-            if previous_value <= 0 or current_value <= 0:
-                valid_path = False
-                break
+                contribution = (
+                    float(monthly_contribution)
+                    if day % 21 == 0
+                    else 0.0
+                )
+                value_before_contribution = ending_value - contribution
 
-            daily_return = (
-                (current_value - net_cash_flows[day])
-                / previous_value
+                if previous_value <= 0 or value_before_contribution <= 0:
+                    valid_path = False
+                    break
+
+                daily_return = (
+                    value_before_contribution / previous_value
                 ) - 1.0
 
-            if not np.isfinite(daily_return) or daily_return <= -1.0:
-                valid_path = False
-                break
+                if not np.isfinite(daily_return) or daily_return <= -1:
+                    valid_path = False
+                    break
 
-            total_growth_factor *= 1.0 + daily_return
-            previous_value = current_value
+                log_growth += np.log1p(daily_return)
+                previous_value = ending_value
 
-            if valid_path:
-                annualized_return = (
-                total_growth_factor ** (252.0 / duration)
-                ) - 1.0
+                if valid_path and retirement_day > 0:
+                    annualized_return = np.expm1(
+                    log_growth * 252.0 / retirement_day
+                    )
 
-            annualized_returns.append(annualized_return)
+                    accumulation_annualized_returns.append(
+                        annualized_return
+                    )
           
           path = portfolio_simulations[:, sim]
           running_max = np.maximum.accumulate(path)
@@ -658,12 +670,12 @@ def run_index_model():
           drawdowns.append(dd)
 
       median_dd = np.median(drawdowns)
-      if len(annualized_returns) > 0:
-        median_cagr = np.median(
-            np.asarray(annualized_returns)
+      if accumulation_annualized_returns:
+        median_accumulation_return = np.median(
+        accumulation_annualized_returns
         )
-      else:
-        median_cagr = np.nan
+    else:
+        median_accumulation_return = np.nan
 
 
       percentiles = np.percentile(
@@ -829,8 +841,8 @@ def run_index_model():
 
       if np.isfinite(median_cagr):
         c1.metric(
-            "Median Annualized Return",
-            f"{median_cagr:.2%}",
+            "Median Annualized Return Before Retirement",
+            f"{median_accumulation_return:.2%}",
             help=(
             "Cash-flow-adjusted annualized return across "
             "successful simulation paths. Contributions and "

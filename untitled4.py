@@ -1679,6 +1679,29 @@ def run_company_model():
                 accumulation_annualized_returns.append(
                     annualized_return
                 )
+            valid_returns = accumulation_annualized_returns[
+                np.isfinite(accumulation_annualized_returns)
+                ]
+
+            if valid_returns.size > 0:
+                sorted_returns = np.sort(valid_returns)
+
+                trim_count = int(
+                    sorted_returns.size * 0.10
+                    )
+
+                if trim_count > 0 and sorted_returns.size > 2 * trim_count:
+                    trimmed_returns = sorted_returns[
+                    trim_count:-trim_count
+                    ]
+                else:
+                    trimmed_returns = sorted_returns
+
+                stable_annualized_return = np.mean(
+                    trimmed_returns
+                )
+            else:
+                stable_annualized_return = np.nan
         path = portfolio_simulations[:, sim]
         running_max = np.maximum.accumulate(path)
         dd = np.min(path / running_max - 1)
@@ -1847,7 +1870,7 @@ def run_company_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      if np.isfinite(median_accumulation_return):
+      if np.isfinite(stable_annualized_return):
         c1.metric(
             "Median Annualized Return Before Retirement",
             f"{median_accumulation_return:.2%}",

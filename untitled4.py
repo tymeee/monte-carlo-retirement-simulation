@@ -44,7 +44,7 @@ monthly_contribution = st.sidebar.number_input(
 num_simulations = st.sidebar.slider(
     "Simulations",
     100,
-    10000,
+    1000,
     250,
     10
 )
@@ -862,26 +862,11 @@ def run_index_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      if np.isfinite(median_accumulation_return):
-        c1.metric(
-            "Median Annualized Return Before Retirement",
-            f"{median_accumulation_return:.2%}",
-            help=(
-            "Cash-flow-adjusted annualized return across "
-            "successful simulation paths. Contributions and "
-            "withdrawals are excluded from investment performance."
-            )
-        )
-      else:
-        c1.metric(
-            "Median Annualized Return",
-            "N/A"
-        )
       probability = (
          np.mean(ending_values >= target)
         * 100
       )
-      c2.metric(
+      c1.metric(
       "Probabiltiy of reaching retirement goal",
       f"{probability:.1f}%"
       )
@@ -1866,27 +1851,11 @@ def run_company_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      if np.isfinite(stable_annualized_return):
-        c1.metric(
-            "Median Annualized Return Before Retirement",
-            f"{stable_annualized_return:.2%}",
-            help=(
-            "Cash-flow-adjusted annualized return across "
-            "successful simulation paths. Contributions and "
-            "withdrawals are excluded from investment performance."
-            )
-        )
-      else:
-        c1.metric(
-            "Median Annualized Return",
-            "N/A"
-        )
-
       probability = (
          np.mean(ending_values >= target)
         * 100
       )
-      c2.metric(
+      c1.metric(
       "Probabiltiy of reaching retirement goal",
       f"{probability:.1f}%"
       )

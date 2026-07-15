@@ -98,11 +98,11 @@ def run_index_model():
       combined_data = load_market_data()
 
       bear_data = combined_data.loc[
-          "2005-01-01":"2009-04-01"
+          "2000-01-01":"2009-04-01"
       ]
 
       bull_data = combined_data.loc[
-          "2000-03-01":"2025-01-01"
+          "2010-03-01":"2025-01-01"
       ]
 
       bull_mean = bull_data.mean()
@@ -309,7 +309,6 @@ def run_index_model():
 
               if np.random.random() < 0.02:
                   market = 1
-          current = bull_mult[day]
 
           assets *= current
 

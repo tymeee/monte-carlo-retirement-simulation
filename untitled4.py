@@ -1681,25 +1681,23 @@ def run_company_model():
                 )
             valid_returns = accumulation_annualized_returns
 
-            if valid_returns.size > 0:
-                sorted_returns = np.sort(valid_returns)
 
-                trim_count = int(
+            sorted_returns = np.sort(valid_returns)
+
+            trim_count = int(
                     sorted_returns.size * 0.10
                     )
 
-                if trim_count > 0 and sorted_returns.size > 2 * trim_count:
+            if trim_count > 0 and sorted_returns.size > 2 * trim_count:
                     trimmed_returns = sorted_returns[
                     trim_count:-trim_count
                     ]
-                else:
+            else:
                     trimmed_returns = sorted_returns
 
-                stable_annualized_return = np.mean(
+            stable_annualized_return = np.mean(
                     trimmed_returns
                 )
-            else:
-                stable_annualized_return = np.nan
         path = portfolio_simulations[:, sim]
         running_max = np.maximum.accumulate(path)
         dd = np.min(path / running_max - 1)

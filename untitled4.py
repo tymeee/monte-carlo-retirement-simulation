@@ -309,6 +309,7 @@ def run_index_model():
 
               if np.random.random() < 0.02:
                   market = 1
+          current = bull_mult[day]
 
           assets *= current
 

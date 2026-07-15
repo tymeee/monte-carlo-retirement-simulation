@@ -102,7 +102,7 @@ def run_index_model():
       ]
 
       bull_data = combined_data.loc[
-          "2010-03-01":"2019-01-01"
+          "2000-03-01":"2025-01-01"
       ]
 
       bull_mean = bull_data.mean()

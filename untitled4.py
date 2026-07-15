@@ -1279,19 +1279,19 @@ def run_company_model():
         failed = 0 # Initialize failed variable
         for day in range(duration):
           gqg_amt *= np.exp(gqg_returns[day])
-          gtech_amt *= (np.exp(gtech_returns[day])-0.002)
-          eae_amt *= np.exp(eae_returns[day]+0.0002)
-          ktp_amt *= np.exp(ktp_returns[day]+0.0003)
+          gtech_amt *= (np.exp(gtech_returns[day])-0.0004)
+          eae_amt *= np.exp(eae_returns[day]+0.00002)
+          ktp_amt *= np.exp(ktp_returns[day]+0.00003)
           ugi_amt *= np.exp(ugi_returns[day])
           kkpplus_amt *= np.exp(kkpplus_returns[day])
           kkpcash_amt *= np.exp(kkpcash_returns[day])
           kfa_amt *= np.exp(kfa_returns[day])
           rostrum_amt *= (rostrum_returns[day])
           gnph_amt *= np.exp(gnph_returns[day])
-          healthcarea_amt *= np.exp(healthcarea_returns[day]+0.00015)
-          propa_amt *= np.exp(propa_returns[day]-0.00015)
-          sp500a_amt *= np.exp(sp500a_returns[day]+0.0001)
-          gcore_amt *= (np.exp(gcore_returns[day])-0.0004)
+          healthcarea_amt *= np.exp(healthcarea_returns[day]+0.000015)
+          propa_amt *= np.exp(propa_returns[day]-0.000015)
+          sp500a_amt *= np.exp(sp500a_returns[day]+0.00001)
+          gcore_amt *= (np.exp(gcore_returns[day])-0.00004)
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:
             kkpplus_amt += inserted_funds*kkpplus_alloc

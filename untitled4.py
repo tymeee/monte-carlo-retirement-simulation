@@ -622,47 +622,63 @@ def run_index_model():
 
           trials_failed += failed
           accumulation_annualized_returns = []
+          if retirement_day > 0 and initial_amount > 0:
 
-          retirement_day = int(acum_years * 252)
+            ending_values_accum = np.asarray(
+                portfolio_path[:retirement_day],
+                dtype=np.float64
+            )
 
-          for sim in range(num_simulations):
-            previous_value = float(initial_amount)
-            log_growth = 0.0
-            valid_path = True
+            beginning_values_accum = np.empty(
+                retirement_day,
+                dtype=np.float64
+            )
 
-            for day in range(retirement_day):
-                ending_value = float(portfolio_simulations[day, sim])
+            beginning_values_accum[0] = float(initial_amount)
 
-                contribution = (
-                    float(monthly_contribution)
-                    if day % 21 == 0
-                    else 0.0
+            beginning_values_accum[1:] = (
+                ending_values_accum[:-1]
+            )
+
+            values_before_contribution = (
+                ending_values_accum
+                - accumulation_contributions
+            )
+
+            valid_values = (
+                np.isfinite(beginning_values_accum)
+                & np.isfinite(values_before_contribution)
+                & (beginning_values_accum > 0)
+                & (values_before_contribution > 0)
+            )
+
+            if np.all(valid_values):
+
+                daily_growth_factors = (
+                    values_before_contribution
+                    / beginning_values_accum
                 )
-                value_before_contribution = ending_value - contribution
 
-                if previous_value <= 0 or value_before_contribution <= 0:
-                    valid_path = False
-                    break
+                valid_growth = (
+                    np.all(np.isfinite(daily_growth_factors))
+                    and np.all(daily_growth_factors > 0)
+                )
 
-                daily_return = (
-                    value_before_contribution / previous_value
-                ) - 1.0
+            if valid_growth:
 
-                if not np.isfinite(daily_return) or daily_return <= -1:
-                    valid_path = False
-                    break
+                total_log_growth = np.sum(
+                    np.log(daily_growth_factors)
+                )
 
-                log_growth += np.log1p(daily_return)
-                previous_value = ending_value
+                annualized_return = np.expm1(
+                    total_log_growth
+                    * 252.0
+                    / retirement_day
+                )
 
-                if valid_path and retirement_day > 0:
-                    annualized_return = np.expm1(
-                    log_growth * 252.0 / retirement_day
-                    )
-
-                    accumulation_annualized_returns.append(
-                        annualized_return
-                    )
+                accumulation_annualized_returns.append(
+                    annualized_return
+                )
           
           path = portfolio_simulations[:, sim]
           running_max = np.maximum.accumulate(path)

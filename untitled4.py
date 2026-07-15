@@ -98,11 +98,11 @@ def run_index_model():
       combined_data = load_market_data()
 
       bear_data = combined_data.loc[
-          "2008-01-01":"2016-04-01"
+          "2008-01-01":"2013-04-01"
       ]
 
       bull_data = combined_data.loc[
-          "2016-04-01":"2025-01-01"
+          "2013-04-01":"2025-01-01"
       ]
 
       bull_mean = bull_data.mean()

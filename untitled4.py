@@ -1873,7 +1873,7 @@ def run_company_model():
       if np.isfinite(stable_annualized_return):
         c1.metric(
             "Median Annualized Return Before Retirement",
-            f"{median_accumulation_return:.2%}",
+            f"{stable_annualized_return:.2%}",
             help=(
             "Cash-flow-adjusted annualized return across "
             "successful simulation paths. Contributions and "

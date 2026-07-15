@@ -519,6 +519,15 @@ def run_index_model():
         total_bond_weight = 0.0
 
         savings_account_weight = savings_weight
+        annualized_returns = []
+        net_cash_flows = np.zeros(duration, dtype=np.float64)
+
+        for day in range(duration):
+            if day < acum_years * 252 and day % 21 == 0:
+                net_cash_flows[day] = monthly_contribution
+
+            elif day > acum_years * 252 and day % 21 == 0:
+                net_cash_flows[day] = -(withdrawal / 12.0)
         for sim in range(num_simulations):
           matured = False
           matured_duration = np.random.randint(504,2520)
@@ -612,12 +621,49 @@ def run_index_model():
           portfolio_simulations[:, sim] = portfolio_path
 
           trials_failed += failed
+          if failed == 0:
+            previous_value = float(initial_amount)
+            total_growth_factor = 1.0
+            valid_path = True
+
+          for day in range(duration):
+            current_value = float(portfolio_path[day])
+
+            if previous_value <= 0 or current_value <= 0:
+                valid_path = False
+                break
+
+            daily_return = (
+                (current_value - net_cash_flows[day])
+                / previous_value
+                ) - 1.0
+
+            if not np.isfinite(daily_return) or daily_return <= -1.0:
+                valid_path = False
+                break
+
+            total_growth_factor *= 1.0 + daily_return
+            previous_value = current_value
+
+            if valid_path:
+                annualized_return = (
+                total_growth_factor ** (252.0 / duration)
+                ) - 1.0
+
+            annualized_returns.append(annualized_return)
+          
           path = portfolio_simulations[:, sim]
           running_max = np.maximum.accumulate(path)
           dd = np.min(path / running_max - 1)
           drawdowns.append(dd)
 
       median_dd = np.median(drawdowns)
+      if len(annualized_returns) > 0:
+        median_cagr = np.median(
+            np.asarray(annualized_returns)
+        )
+      else:
+        median_cagr = np.nan
 
 
       percentiles = np.percentile(
@@ -781,10 +827,21 @@ def run_index_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      c1.metric(
-      "Success Rate",
-      f"{success_rate:.1f}%"
-      )
+      if np.isfinite(median_cagr):
+        c1.metric(
+            "Median Annualized Return",
+            f"{median_cagr:.2%}",
+            help=(
+            "Cash-flow-adjusted annualized return across "
+            "successful simulation paths. Contributions and "
+            "withdrawals are excluded from investment performance."
+            )
+        )
+      else:
+        c1.metric(
+            "Median Annualized Return",
+            "N/A"
+        )
       probability = (
          np.mean(ending_values >= target)
         * 100

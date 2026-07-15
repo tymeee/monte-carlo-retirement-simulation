@@ -88,10 +88,39 @@ age_years = st.sidebar.number_input(
 def run_index_model():
   @st.cache_data
   def load_market_data():
+    df = pd.read_parquet("new.parquet")
 
-      return pd.read_parquet(
-          "new.parquet"
-      )
+    expected_columns = [
+        "^GSPC",
+        "^SET.BK",
+        "China",
+        "AGG",
+        "FDSVX",
+        "WENX",
+        "WVIAX",
+        "ACWI",
+        "IXJ",
+        "IXN",
+        "IYR",
+        "EEM"
+    ]
+
+    missing_columns = [
+        column
+        for column in expected_columns
+        if column not in df.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            f"Missing market-data columns: {missing_columns}"
+        )
+
+    df = df[expected_columns].copy()
+    df.index = pd.to_datetime(df.index)
+    df = df.sort_index()
+
+    return df
   @st.cache_data
   def build_market_stats():
 
@@ -267,7 +296,7 @@ def run_index_model():
         "Conservative Hybrid Mutual Fund",
         "Global Equity Index",
         "Healthcare Index",
-        "Technology Index"
+        "Technology Index",
         "Property and Real Estate Index",
         "Emerging Markets Index",
         "Savings Account"
@@ -416,9 +445,9 @@ def run_index_model():
 
                       assets[5] -= withdrawal_amount
 
-                  elif assets[12] >= withdrawal_amount:
+                  elif assets[11] >= withdrawal_amount:
 
-                      assets[12] -= withdrawal_amount
+                      assets[11] -= withdrawal_amount
 
                   elif assets[3] >= withdrawal_amount:
 

@@ -90,7 +90,7 @@ def run_index_model():
   def load_market_data():
 
       return pd.read_parquet(
-          "5.parquet"
+          "6.parquet"
       )
   @st.cache_data
   def build_market_stats():

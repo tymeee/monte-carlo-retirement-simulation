@@ -1290,7 +1290,7 @@ def run_company_model():
           gnph_amt *= np.exp(gnph_returns[day])
           healthcarea_amt *= np.exp(healthcarea_returns[day]+0.000025)
           propa_amt *= np.exp(propa_returns[day]-0.000015)
-          sp500a_amt *= np.exp(sp500a_returns[day]+0.00075)
+          sp500a_amt *= np.exp(sp500a_returns[day]+0.00055)
           gcore_amt *= (np.exp(gcore_returns[day])-0.00006)
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:

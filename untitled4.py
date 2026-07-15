@@ -1679,9 +1679,7 @@ def run_company_model():
                 accumulation_annualized_returns.append(
                     annualized_return
                 )
-            valid_returns = accumulation_annualized_returns[
-                np.isfinite(accumulation_annualized_returns)
-                ]
+            valid_returns = accumulation_annualized_returns
 
             if valid_returns.size > 0:
                 sorted_returns = np.sort(valid_returns)

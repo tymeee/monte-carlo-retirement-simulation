@@ -1685,7 +1685,7 @@ def run_company_model():
             sorted_returns = np.sort(valid_returns)
 
             trim_count = int(
-                    sorted_returns.size * 0.10
+                    sorted_returns.size * 0.25
                     )
 
             if trim_count > 0 and sorted_returns.size > 2 * trim_count:

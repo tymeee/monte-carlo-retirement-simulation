@@ -862,7 +862,7 @@ def run_index_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      if np.isfinite(median_cagr):
+      if np.isfinite(median_accumulation_return):
         c1.metric(
             "Median Annualized Return Before Retirement",
             f"{median_accumulation_return:.2%}",

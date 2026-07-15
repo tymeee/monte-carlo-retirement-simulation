@@ -1700,6 +1700,76 @@ def run_company_model():
         [10,25,50,75,90],
         axis=1
         )
+      median_line = np.asarray(
+            percentiles[2],
+            dtype=np.float64
+        )
+
+      accumulation_days = min(
+        int(acum_years * 252),
+        len(median_line)
+     )
+
+      median_line_annualized_return = np.nan
+
+      if accumulation_days > 0 and initial_amount > 0:
+
+        ending_values = median_line[:accumulation_days]
+
+        beginning_values = np.empty_like(ending_values)
+
+        beginning_values[0] = float(initial_amount)
+        beginning_values[1:] = ending_values[:-1]
+
+        contributions = np.zeros(
+            accumulation_days,
+            dtype=np.float64
+        )
+
+        contribution_days = (
+            np.arange(accumulation_days) % 21 == 0
+        )
+
+        contributions[contribution_days] = float(
+            monthly_contribution
+        )
+
+        values_before_contribution = (
+            ending_values - contributions
+        )
+
+        valid = (
+            np.isfinite(beginning_values)
+            & np.isfinite(values_before_contribution)
+            & (beginning_values > 0.0)
+            & (values_before_contribution > 0.0)
+        )
+
+        if np.all(valid):
+
+            daily_growth_factors = np.ones_like(
+            beginning_values
+            )
+
+            np.divide(
+                values_before_contribution,
+                beginning_values,
+                out=daily_growth_factors,
+                where=valid
+            )
+
+        if (
+            np.all(np.isfinite(daily_growth_factors))
+            and np.all(daily_growth_factors > 0.0)
+        ):
+            cumulative_growth = np.prod(
+                daily_growth_factors
+            )
+
+            median_line_annualized_return = (
+                cumulative_growth
+                ** (252.0 / accumulation_days)
+            ) - 1.0
       ages = age_years + np.arange(days) / 252
 
       import plotly.graph_objects as go
@@ -1864,6 +1934,19 @@ def run_company_model():
         "Median Maximum Drawdown",
         f"{median_dd:.1%}"
         )
+      c2.metric(
+        "Median-Line Annualized Return",
+        (
+        f"{median_line_annualized_return:.1%}"
+        if np.isfinite(median_line_annualized_return)
+        else "N/A"
+        ),
+        help=(
+        "Time-weighted annualized growth calculated from the "
+        "50th-percentile portfolio-value line during accumulation. "
+        "Monthly contributions are removed from the calculation."
+        )
+      )
 
 st.sidebar.title("Retirement Simulator")
 

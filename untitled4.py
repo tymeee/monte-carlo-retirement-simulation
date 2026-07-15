@@ -945,7 +945,7 @@ def run_index_model():
         "Median Maximum Drawdown",
         f"{median_dd:.1%}"
         )
-            c2.metric(
+      c2.metric(
         "Median-Line Annualized Return",
         (
         f"{median_line_annualized_return:.1%}"

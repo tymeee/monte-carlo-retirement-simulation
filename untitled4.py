@@ -1512,6 +1512,19 @@ def run_company_model():
       total_funds = initial_amount
       inserted_funds = monthly_contribution
       yearly_withdrawals = withdrawal
+      retirement_day = int(acum_years * 252)
+      accumulation_annualized_returns = []
+      if retirement_day > 0:
+            accumulation_contributions = np.where(
+                np.arange(retirement_day) % 21 == 0,
+                float(inserted_funds),
+                0.0
+                )
+      else:
+            accumulation_contributions = np.empty(
+                0,
+                dtype=np.float64
+            )
       for sim in range(num_simulations):
         kfa_amt = kfa_alloc * total_funds
         ugi_amt = ugi_alloc * total_funds
@@ -1608,12 +1621,76 @@ def run_company_model():
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
+        accumulation_annualized_returns = []
+        if retirement_day > 0 and initial_amount > 0:
+
+            ending_values_accum = np.asarray(
+                portfolio_path[:retirement_day],
+                dtype=np.float64
+            )
+
+            beginning_values_accum = np.empty(
+                retirement_day,
+                dtype=np.float64
+            )
+
+            beginning_values_accum[0] = float(initial_amount)
+
+            beginning_values_accum[1:] = (
+                ending_values_accum[:-1]
+            )
+
+            values_before_contribution = (
+                ending_values_accum
+                - accumulation_contributions
+            )
+
+            valid_values = (
+                np.isfinite(beginning_values_accum)
+                & np.isfinite(values_before_contribution)
+                & (beginning_values_accum > 0)
+                & (values_before_contribution > 0)
+            )
+
+            if np.all(valid_values):
+
+                daily_growth_factors = (
+                    values_before_contribution
+                    / beginning_values_accum
+                )
+
+                valid_growth = (
+                    np.all(np.isfinite(daily_growth_factors))
+                    and np.all(daily_growth_factors > 0)
+                )
+
+            if valid_growth:
+
+                total_log_growth = np.sum(
+                    np.log(daily_growth_factors)
+                )
+
+                annualized_return = np.expm1(
+                    total_log_growth
+                    * 252.0
+                    / retirement_day
+                )
+
+                accumulation_annualized_returns.append(
+                    annualized_return
+                )
         path = portfolio_simulations[:, sim]
         running_max = np.maximum.accumulate(path)
         dd = np.min(path / running_max - 1)
         drawdowns.append(dd)
 
       median_dd = np.median(drawdowns)
+      if accumulation_annualized_returns:
+        median_accumulation_return = np.median(
+        accumulation_annualized_returns
+        )
+      else:
+        median_accumulation_return = np.nan
       percentiles = np.percentile(
         portfolio_simulations,
         [10,25,50,75,90],
@@ -1770,10 +1847,21 @@ def run_company_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      c1.metric(
-      "Success Rate",
-      f"{success_rate:.1f}%"
-      )
+      if np.isfinite(median_accumulation_return):
+        c1.metric(
+            "Median Annualized Return Before Retirement",
+            f"{median_accumulation_return:.2%}",
+            help=(
+            "Cash-flow-adjusted annualized return across "
+            "successful simulation paths. Contributions and "
+            "withdrawals are excluded from investment performance."
+            )
+        )
+      else:
+        c1.metric(
+            "Median Annualized Return",
+            "N/A"
+        )
 
       probability = (
          np.mean(ending_values >= target)

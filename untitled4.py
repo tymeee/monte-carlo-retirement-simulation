@@ -1279,9 +1279,9 @@ def run_company_model():
         failed = 0 # Initialize failed variable
         for day in range(duration):
           gqg_amt *= np.exp(gqg_returns[day])
-          gtech_amt *= (np.exp(gtech_returns[day])-0.0007)
+          gtech_amt *= (np.exp(gtech_returns[day])-0.00085)
           eae_amt *= np.exp(eae_returns[day]+0.00006)
-          ktp_amt *= np.exp(ktp_returns[day]+0.00055)
+          ktp_amt *= np.exp(ktp_returns[day]+0.001)
           ugi_amt *= np.exp(ugi_returns[day])
           kkpplus_amt *= np.exp(kkpplus_returns[day])
           kkpcash_amt *= np.exp(kkpcash_returns[day])
@@ -1290,7 +1290,7 @@ def run_company_model():
           gnph_amt *= np.exp(gnph_returns[day])
           healthcarea_amt *= np.exp(healthcarea_returns[day]+0.000025)
           propa_amt *= np.exp(propa_returns[day]-0.000015)
-          sp500a_amt *= np.exp(sp500a_returns[day]+0.000225)
+          sp500a_amt *= np.exp(sp500a_returns[day]+0.00025)
           gcore_amt *= (np.exp(gcore_returns[day])-0.00006)
           savings_amt = savings_amt
           if day < acum_years*252 and day % 21 ==0:

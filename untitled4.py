@@ -519,15 +519,22 @@ def run_index_model():
         total_bond_weight = 0.0
 
         savings_account_weight = savings_weight
-        annualized_returns = []
-        net_cash_flows = np.zeros(duration, dtype=np.float64)
+        retirement_day = int(acum_years * 252)
 
-        for day in range(duration):
-            if day < acum_years * 252 and day % 21 == 0:
-                net_cash_flows[day] = monthly_contribution
+        accumulation_annualized_returns = []
 
-            elif day > acum_years * 252 and day % 21 == 0:
-                net_cash_flows[day] = -(withdrawal / 12.0)
+
+        if retirement_day > 0:
+            accumulation_contributions = np.where(
+                np.arange(retirement_day) % 21 == 0,
+                float(inserted_funds),
+                0.0
+                )
+        else:
+            accumulation_contributions = np.empty(
+                0,
+                dtype=np.float64
+            )
         for sim in range(num_simulations):
           matured = False
           matured_duration = np.random.randint(504,2520)

@@ -1686,7 +1686,7 @@ def run_company_model():
 
       median_dd = np.median(drawdowns)
       if accumulation_annualized_returns:
-        median_accumulation_return = np.median(
+        median_accumulation_return = np.mean(
         accumulation_annualized_returns
         )
       else:

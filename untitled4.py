@@ -674,7 +674,7 @@ def run_index_model():
         median_accumulation_return = np.median(
         accumulation_annualized_returns
         )
-    else:
+      else:
         median_accumulation_return = np.nan
 
 

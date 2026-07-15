@@ -44,7 +44,7 @@ monthly_contribution = st.sidebar.number_input(
 num_simulations = st.sidebar.slider(
     "Simulations",
     100,
-    1000,
+    10000,
     250,
     10
 )

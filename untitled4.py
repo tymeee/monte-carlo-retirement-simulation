@@ -2811,26 +2811,41 @@ def run_company_model():
         'Year: %{x:.1f}<br>' +
         'Value: ฿%{y:,.2f}M<extra></extra>'
       ))
-        
-      fig.update_layout(
-        title="Nominal Portfolio Value Projection",
-        xaxis_title="Age",
-        yaxis_title="Portfolio Value (Million THB)",
-        hovermode="x unified",
-        height = 700
-      )
+
       fig.add_vline(
         x=acum_years+age_years,
         line_dash="dash",
-        annotation_text="Retirement"
+        annotation_text="Retirement",
+        line_color = "white"
       )
       fig.add_vline(
           x=85,
           line_dash = "dash",
           annotation_text = "Average Thai Lifespan",
+          line_color = "white"
       )
-    
-      st.plotly_chart(fig, use_container_width=True)
+
+      fig.update_xaxes(
+        title_text="Age"
+        )
+
+      fig.update_yaxes(
+        title_text="Portfolio Value (Million THB)"
+        )
+
+      fig = style_line_chart(
+        fig,
+        "Nominal Portfolio Value Projection"
+      )
+
+      st.plotly_chart(
+        fig,
+        width="stretch",
+        config={
+            "responsive": True,
+            "displayModeBar": False
+        }
+      )
 
       pie_fig = px.pie(
         allocation_data,

@@ -1874,47 +1874,99 @@ def run_index_model():
       import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
       capped_values = np.minimum(ending_values_m, 120)
+      ending_values = portfolio_simulations[-1, :]
+
+      histogram_values = np.minimum(
+        ending_values_m,
+        250.0
+        )
 
       fig_hist = go.Figure()
 
       fig_hist.add_trace(
         go.Histogram(
-        x=capped_values,
+            x=histogram_values,
+
+
         xbins=dict(
             start=0,
-            end=120,
-            size=5
+            end=260,
+            size=10
+        ),
+
+        marker=dict(
+            color="#7DBCF0",
+            line=dict(
+                color="rgba(5, 16, 32, 0.65)",
+                width=1
+            )
             ),
-        name="Final Portfolio Values"
-       )
-      )
-      fig_hist.update_layout(
-        title="Distribution of Final Portfolio Values",
-        xaxis_title="Final Portfolio Value (Million THB)",
-        yaxis_title="Number of Simulations",
-        height=500,
-        bargap=0.03,
-        margin=dict(
-            l=75,
-            r=55,
-            t=85,
-            b=70
+
+        hovertemplate=(
+            "Final value: ฿%{x:,.0f}M<br>"
+            "Simulations: %{y}"
+            "<extra></extra>"
+            )
         )
       )
 
-      x_min = np.min(ending_values_m)
-      x_max = np.max(ending_values_m)
-      x_padding = max((x_max - x_min) * 0.04, 1.0)
+      fig_hist.update_layout(
+        title=dict(
+            text="Distribution of Final Portfolio Values",
+            x=0.01,
+            xanchor="left",
+            font=dict(
+            size=20,
+            color="#F1F6FF"
+            )
+        ),
+
+        xaxis_title="Final Portfolio Value (Million THB)",
+        yaxis_title="Number of Simulations",
+
+        height=500,
+        bargap=0.04,
+        showlegend=False,
+
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(5,13,27,0.35)",
+
+        font=dict(
+            family="Inter, Arial, sans-serif",
+            color="#D9E5F5"
+        ),
+
+        margin=dict(
+            l=80,
+            r=45,
+            t=85,
+            b=75
+        )
+      )
 
       fig_hist.update_xaxes(
-        range=[
-            max(0, x_min - x_padding),
-            x_max + x_padding
+        range=[0, 260],
+
+        tickmode="array",
+        tickvals=[0, 50, 100, 150, 200, 250],
+        ticktext=[
+            "0",
+            "50",
+            "100",
+            "150",
+            "200",
+            "250+"
         ],
+
+        showgrid=False,
+        zeroline=False,
         automargin=True
       )
 
       fig_hist.update_yaxes(
+        showgrid=True,
+        gridcolor="rgba(140,180,235,0.13)",
+        zeroline=False,
         automargin=True
       )
 

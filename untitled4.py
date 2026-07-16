@@ -322,10 +322,9 @@ st.html("""
         </h1>
 
         <p class="mc-hero-description">
-            Explore thousands of potential portfolio outcomes,
-            compare investment strategies, and understand how
-            contributions, withdrawals, and market uncertainty
-            may affect your financial plan.
+            Explore potential portfolio outcomes, compare investment
+            strategies, and understand how contributions, withdrawals,
+            and market uncertainty may affect your financial plan.
         </p>
 
         <div class="mc-badges">
@@ -334,53 +333,41 @@ st.html("""
             <span>Risk scenario analysis</span>
         </div>
     </div>
-
-    <div class="mc-hero-visual">
-        <div class="mc-orbit mc-orbit-one"></div>
-        <div class="mc-orbit mc-orbit-two"></div>
-
-        <div class="mc-visual-card">
-            <div class="mc-visual-label">Scenario engine</div>
-            <div class="mc-visual-number">1,000</div>
-            <div class="mc-visual-caption">
-                simulated market paths
-            </div>
-        </div>
-    </div>
 </section>
 
 <style>
 .mc-hero {
     position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.75fr);
-    align-items: center;
-    gap: 3rem;
     overflow: hidden;
-    min-height: 390px;
-    margin-bottom: 2rem;
+    min-height: 330px;
+    margin-bottom: 1rem;
     padding: 3.7rem 4rem;
+
     border: 1px solid rgba(118, 169, 239, 0.18);
     border-radius: 28px;
+
     background:
         radial-gradient(
-            circle at 80% 30%,
-            rgba(56, 155, 235, 0.17),
-            transparent 32%
+            circle at 88% 25%,
+            rgba(56, 155, 235, 0.18),
+            transparent 35%
         ),
         linear-gradient(
             130deg,
             rgba(14, 35, 63, 0.96),
             rgba(5, 16, 32, 0.94)
         );
-    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.4);
+
+    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.40);
 }
 
 .mc-hero::before {
     content: "";
     position: absolute;
     inset: 0;
+
     opacity: 0.22;
+
     background-image:
         linear-gradient(
             rgba(100, 155, 225, 0.08) 1px,
@@ -391,38 +378,45 @@ st.html("""
             rgba(100, 155, 225, 0.08) 1px,
             transparent 1px
         );
+
     background-size: 38px 38px;
+
     mask-image:
         linear-gradient(
             to right,
             black,
-            transparent 82%
+            transparent 90%
         );
 }
 
-.mc-hero-content,
-.mc-hero-visual {
+.mc-hero-content {
     position: relative;
     z-index: 1;
+    max-width: 850px;
 }
 
 .mc-eyebrow {
     display: inline-flex;
     margin-bottom: 1.2rem;
     padding: 0.42rem 0.75rem;
-    border: 1px solid rgba(95, 156, 246, 0.3);
+
+    border: 1px solid rgba(95, 156, 246, 0.30);
     border-radius: 999px;
+
     background: rgba(57, 116, 208, 0.12);
     color: #86b5ff;
+
     font-size: 0.73rem;
     font-weight: 750;
     letter-spacing: 0.13em;
 }
 
 .mc-hero-title {
-    max-width: 750px;
+    max-width: 800px;
     margin: 0;
+
     color: #f5f8ff;
+
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1.02;
     font-weight: 790;
@@ -434,9 +428,11 @@ st.html("""
 }
 
 .mc-hero-description {
-    max-width: 700px;
+    max-width: 720px;
     margin: 1.5rem 0 1.8rem;
+
     color: #aebed5;
+
     font-size: 1.05rem;
     line-height: 1.72;
 }
@@ -449,80 +445,20 @@ st.html("""
 
 .mc-badges span {
     padding: 0.5rem 0.8rem;
+
     border: 1px solid rgba(134, 177, 236, 0.14);
     border-radius: 999px;
+
     background: rgba(255, 255, 255, 0.04);
     color: #c5d5e9;
+
     font-size: 0.82rem;
-}
-
-.mc-hero-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 250px;
-}
-
-.mc-visual-card {
-    position: relative;
-    z-index: 3;
-    width: 220px;
-    padding: 1.8rem;
-    text-align: center;
-    border: 1px solid rgba(117, 174, 248, 0.28);
-    border-radius: 22px;
-    background: rgba(8, 24, 45, 0.72);
-    box-shadow:
-        0 24px 60px rgba(0, 0, 0, 0.42),
-        inset 0 1px rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(16px);
-}
-
-.mc-visual-label {
-    color: #89a2c2;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.11em;
-}
-
-.mc-visual-number {
-    margin: 0.45rem 0;
-    color: #f5f8ff;
-    font-size: 3.3rem;
-    line-height: 1;
-    font-weight: 750;
-}
-
-.mc-visual-caption {
-    color: #91a7c3;
-    font-size: 0.84rem;
-}
-
-.mc-orbit {
-    position: absolute;
-    border: 1px solid rgba(79, 140, 255, 0.22);
-    border-radius: 50%;
-}
-
-.mc-orbit-one {
-    width: 290px;
-    height: 290px;
-}
-
-.mc-orbit-two {
-    width: 205px;
-    height: 205px;
-    border-color: rgba(56, 189, 248, 0.28);
 }
 
 @media (max-width: 900px) {
     .mc-hero {
-        grid-template-columns: 1fr;
+        min-height: auto;
         padding: 2.3rem 1.6rem;
-    }
-
-    .mc-hero-visual {
-        display: none;
     }
 }
 </style>

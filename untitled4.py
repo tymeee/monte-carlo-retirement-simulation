@@ -2728,7 +2728,7 @@ def run_company_model():
         failed = 0 # Initialize failed variable
         for day in range(duration):
           gqg_amt *= np.exp(gqg_returns[day]-0.0002)
-          gtech_amt *= np.exp(gtech_returns[day]-0.0019)
+          gtech_amt *= np.exp(gtech_returns[day]-0.001875)
           eae_amt *= np.exp(eae_returns[day]-0.001)
           ktp_amt *= np.exp(ktp_returns[day]-0.00185)
           ugi_amt *= np.exp(ugi_returns[day])

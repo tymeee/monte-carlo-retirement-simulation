@@ -971,112 +971,163 @@ def run_index_model():
     st.stop()
   time_period = acum_years + retirement_years
   st.sidebar.subheader("Portfolio")
-
-  us_weight = st.sidebar.slider(
-      "US Equity",
-      0.0,
-      1.0,
-      0.20,
-      0.01
-  )
-
-  thai_weight = st.sidebar.slider(
-      "Thai Equity",
-      0.0,
-      1.0,
-      0.20,
-      0.01
-  )
-
-  china_weight = st.sidebar.slider(
-      "Chinese Equity",
-      0.0,
-      1.0,
-      0.10,
-      0.01
-  )
-
-  bond_weight = st.sidebar.slider(
-      "Bond Fund",
-      0.0,
-      1.0,
-      0.20,
-      0.01
-  )
-
-  agg_weight = st.sidebar.slider(
-      "Aggressive Hybrid Fund",
-      0.0,
-      1.0,
-      0.10,
-      0.01
-  )
-
-  mod_weight = st.sidebar.slider(
-      "Moderate Hybrid Fund",
-      0.0,
-      1.0,
-      0.10,
-      0.01
-  )
-
-  cons_weight = st.sidebar.slider(
-      "Conservative Hybrid Fund",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-
-  savings_weight = st.sidebar.slider(
-      "Savings",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  technology_weight = st.sidebar.slider(
-      "Technology Sector index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  globalequity_weight = st.sidebar.slider(
-      "Global Equity index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  healthcare_weight = st.sidebar.slider(
-      "Healthcare index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  property_weight = st.sidebar.slider(
-      "Property and Real Estate Index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  emerging_weight = st.sidebar.slider(
-      "Emerging Markets Index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
-  commodity_weight = st.sidebar.slider(
-      "Commodity Index",
-      0.0,
-      1.0,
-      0.05,
-      0.01
-  )
+  available_fund = [
+    "US Equity",
+    "Thai Equity",
+    "Chinese Equity",
+    "Bond/Fixed Income Fund",
+    "Aggressive Mutual Fund",
+    "Moderate Mutual Fund",
+    "Conservative Mutual Fund",
+    "Savings",
+    "Technology Sector Fund",
+    "Healthcare Sector Fund",
+    "Property/Real Estate Fund",
+    "Commodity Fund",
+    "Global Equity Fund",
+    "Emerging Market Fund"
+  ]
+  selection = st.sidebar.multiselect(
+      "Select Funds",
+      available_fund)
+  if "US Equity" in selection:
+      us_weight = st.sidebar.slider(
+          "US Equity",
+          0.0,
+          1.0,
+          0.20,
+          0.01
+      )
+  else:
+      us_weight = 0
+  if "Thai Equity" in selection:
+      thai_weight = st.sidebar.slider(
+          "Thai Equity",
+          0.0,
+          1.0,
+          0.20,
+          0.01
+          )
+  else:
+      thai_weight = 0
+  if "China Equity" in selection:
+      china_weight = st.sidebar.slider(
+          "Chinese Equity",
+          0.0,
+          1.0,
+          0.10,
+          0.01
+      )
+  else:
+      china_weight = 0
+  if "Bond/Fixed Income Fund" in selection:
+      bond_weight = st.sidebar.slider(
+          "Bond Fund",
+          0.0,
+          1.0,
+          0.20,
+          0.01
+      )
+  else:
+      bond_weight = 0
+  if "Aggresive Mutual Fund" in selection:
+      agg_weight = st.sidebar.slider(
+          "Aggressive Hybrid Fund",
+          0.0,
+          1.0,
+          0.10,
+          0.01
+      )
+  else:
+      agg_weight = 0
+  if "Moderate Mutual Fund" in selection:
+      mod_weight = st.sidebar.slider(
+          "Moderate Hybrid Fund",
+          0.0,
+          1.0,
+          0.10,
+          0.01
+      )
+  else:
+      mod_weight = 0
+  if "Conservative Mutual Fund" in selection:
+      cons_weight = st.sidebar.slider(
+          "Conservative Hybrid Fund",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else:
+      cons_weight = 0
+  if "Savings" in selection:
+      savings_weight = st.sidebar.slider(
+          "Savings",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else: 
+      savings_weight = 0
+  if "Technology Sector Fund" in selection:
+      technology_weight = st.sidebar.slider(
+          "Technology Sector index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else:
+      technology_weight = 0
+  if "Global Equity Fund" in selection:
+      globalequity_weight = st.sidebar.slider(
+          "Global Equity index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  if "Healthcare Sector Fund" in selection:
+      healthcare_weight = st.sidebar.slider(
+          "Healthcare index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else:
+      healthcare_weight = 0
+  if "Property/Real Estate Fund" in selection:
+      property_weight = st.sidebar.slider(
+          "Property and Real Estate Index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else:
+      property_weight = 0
+  if "Emerging Market Fund" in selection:
+      emerging_weight = st.sidebar.slider(
+          "Emerging Markets Index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else:
+      emerging_weight = 0
+  if "Commodity Fund" in selection:
+      commodity_weight = st.sidebar.slider(
+          "Commodity Index",
+          0.0,
+          1.0,
+          0.05,
+          0.01
+      )
+  else: 
+      commodity_weight = 0
   total_weight = (
       us_weight +
       thai_weight +

@@ -1991,7 +1991,7 @@ def run_index_model():
 
 
 # Mobile version
-       with st.container(key="projection_mobile"):
+      with st.container(key="projection_mobile"):
         st.html("""
         <div class="mobile-chart-heading">
             Nominal Portfolio Value Projection

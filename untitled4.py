@@ -995,7 +995,7 @@ def run_index_model():
           "US Equity",
           0.0,
           1.0,
-          0.20,
+          0.0,
           0.01
       )
   else:
@@ -1005,7 +1005,7 @@ def run_index_model():
           "Thai Equity",
           0.0,
           1.0,
-          0.20,
+          0.0,
           0.01
           )
   else:
@@ -1015,7 +1015,7 @@ def run_index_model():
           "Chinese Equity",
           0.0,
           1.0,
-          0.10,
+          0.0,
           0.01
       )
   else:
@@ -1025,7 +1025,7 @@ def run_index_model():
           "Bond Fund",
           0.0,
           1.0,
-          0.20,
+          0.0,
           0.01
       )
   else:
@@ -1035,7 +1035,7 @@ def run_index_model():
           "Aggressive Hybrid Fund",
           0.0,
           1.0,
-          0.10,
+          0.0,
           0.01
       )
   else:
@@ -1045,7 +1045,7 @@ def run_index_model():
           "Moderate Hybrid Fund",
           0.0,
           1.0,
-          0.10,
+          0.0,
           0.01
       )
   else:
@@ -1055,7 +1055,7 @@ def run_index_model():
           "Conservative Hybrid Fund",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1065,7 +1065,7 @@ def run_index_model():
           "Savings",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else: 
@@ -1075,7 +1075,7 @@ def run_index_model():
           "Technology Sector index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1085,7 +1085,7 @@ def run_index_model():
           "Global Equity index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1095,7 +1095,7 @@ def run_index_model():
           "Healthcare index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1105,7 +1105,7 @@ def run_index_model():
           "Property and Real Estate Index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1115,7 +1115,7 @@ def run_index_model():
           "Emerging Markets Index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else:
@@ -1125,7 +1125,7 @@ def run_index_model():
           "Commodity Index",
           0.0,
           1.0,
-          0.05,
+          0.0,
           0.01
       )
   else: 
@@ -2429,7 +2429,7 @@ def run_company_model():
             "KKP Plus",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else: 
@@ -2440,7 +2440,7 @@ def run_company_model():
               "KKP Cash",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2451,7 +2451,7 @@ def run_company_model():
               "KFAFIX",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2462,7 +2462,7 @@ def run_company_model():
               "UGISFX",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2473,7 +2473,7 @@ def run_company_model():
               "ESGQG",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2484,7 +2484,7 @@ def run_company_model():
           "ESGTECH",
           0.0,
           1.0,
-          0.10,
+          0.0,
           0.01
         )
       else:
@@ -2495,7 +2495,7 @@ def run_company_model():
               "ESEAE",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2506,7 +2506,7 @@ def run_company_model():
               "KTPRECIOUS",
               0.0,
               1.0,
-              0.10,
+              0.0,
               0.01
           )
       else:
@@ -2516,7 +2516,7 @@ def run_company_model():
               "Rostrum Grand Wisdom Fund of Funds",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           ) 
       else:
@@ -2526,7 +2526,7 @@ def run_company_model():
               "KKPGNPH",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           ) 
       else:
@@ -2536,7 +2536,7 @@ def run_company_model():
               "KTHEALTHCAREA",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           )
       else:
@@ -2546,7 +2546,7 @@ def run_company_model():
               "KFGPROPA",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           )
       else: 
@@ -2556,7 +2556,7 @@ def run_company_model():
               "SCBS&P500A",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           ) 
       else:
@@ -2566,7 +2566,7 @@ def run_company_model():
               "ESGCORE",
               0.0,
               1.0,
-              0.1,
+              0,
               0.01
           )
       else:

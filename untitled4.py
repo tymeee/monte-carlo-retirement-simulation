@@ -2520,7 +2520,7 @@ def run_company_model():
               "Rostrum Grand Wisdom Fund of Funds",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           ) 
       else:
@@ -2530,7 +2530,7 @@ def run_company_model():
               "KKPGNPH",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           ) 
       else:
@@ -2540,7 +2540,7 @@ def run_company_model():
               "KTHEALTHCAREA",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           )
       else:
@@ -2550,7 +2550,7 @@ def run_company_model():
               "KFGPROPA",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           )
       else: 
@@ -2560,7 +2560,7 @@ def run_company_model():
               "SCBS&P500A",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           ) 
       else:
@@ -2570,7 +2570,7 @@ def run_company_model():
               "ESGCORE",
               0.0,
               1.0,
-              0,
+              0.0,
               0.01
           )
       else:

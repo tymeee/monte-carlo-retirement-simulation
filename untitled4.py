@@ -3099,34 +3099,110 @@ def run_company_model():
       import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
       capped_values = np.minimum(ending_values_m, 120)
+            ending_values = portfolio_simulations[-1, :]
+
+      histogram_values = np.minimum(
+        ending_values_m,
+        250.0
+        )
 
       fig_hist = go.Figure()
 
       fig_hist.add_trace(
         go.Histogram(
-        x=capped_values,
+            x=histogram_values,
+
+
         xbins=dict(
             start=0,
-            end=120,
-            size=5
+            end=260,
+            size=10
+        ),
+
+        marker=dict(
+            color="#7DBCF0",
+            line=dict(
+                color="rgba(5, 16, 32, 0.65)",
+                width=1
+            )
             ),
-        name="Final Portfolio Values"
-       )
+
+        hovertemplate=(
+            "Final value: ฿%{x:,.0f}M<br>"
+            "Simulations: %{y}"
+            "<extra></extra>"
+            )
+        )
       )
 
       fig_hist.update_layout(
-        title="Distribution of Final Portfolio Values",
+        title=dict(
+            text="Distribution of Final Portfolio Values",
+            x=0.01,
+            xanchor="left",
+            font=dict(
+            size=20,
+            color="#F1F6FF"
+            )
+        ),
+
         xaxis_title="Final Portfolio Value (Million THB)",
         yaxis_title="Number of Simulations",
-        bargap=0.05
-      )
-      fig_hist.update_xaxes(
-        tickmode="array",
-        tickvals=list(range(0, 121, 20)),
-        ticktext=[str(x) for x in range(0, 120, 20)] + ["120+"]
+
+        height=500,
+        bargap=0.04,
+        showlegend=False,
+
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(5,13,27,0.35)",
+
+        font=dict(
+            family="Inter, Arial, sans-serif",
+            color="#D9E5F5"
+        ),
+
+        margin=dict(
+            l=80,
+            r=45,
+            t=85,
+            b=75
+        )
       )
 
-      st.plotly_chart(fig_hist, use_container_width=True)
+      fig_hist.update_xaxes(
+        range=[0, 260],
+
+        tickmode="array",
+        tickvals=[0, 50, 100, 150, 200, 250],
+        ticktext=[
+            "0",
+            "50",
+            "100",
+            "150",
+            "200",
+            "250+"
+        ],
+
+        showgrid=False,
+        zeroline=False,
+        automargin=True
+      )
+
+      fig_hist.update_yaxes(
+        showgrid=True,
+        gridcolor="rgba(140,180,235,0.13)",
+        zeroline=False,
+        automargin=True
+      )
+
+      st.plotly_chart(
+        fig_hist,
+        width="stretch",
+        config={
+            "responsive": True,
+            "displayModeBar": False
+        }
+      )
 
       duration = days
 

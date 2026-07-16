@@ -3214,7 +3214,7 @@ def run_company_model():
 
       fig.update_xaxes(
         title_text="Age",
-        range=[float(age_years),x=85]
+        range=[float(age_years),85]
         )
 
       fig.update_yaxes(

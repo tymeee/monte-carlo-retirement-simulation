@@ -16,6 +16,8 @@ import random
 from scipy.stats import multivariate_t
 from scipy.stats import t
 from numba import njit
+import base64
+from pathlib import Path
 
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",

@@ -1808,7 +1808,8 @@ def run_company_model():
             healthcarea_alloc,
             propa_alloc,
             sp500a_alloc,
-            gcore_alloc
+            gcore_alloc,
+            target
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed

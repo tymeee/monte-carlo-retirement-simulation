@@ -24,6 +24,15 @@ st.set_page_config(
     layout="wide"
 )
 
+logo_path = Path("bluebell_logo.png")
+
+if logo_path.exists():
+    logo_base64 = base64.b64encode(
+        logo_path.read_bytes()
+    ).decode("utf-8")
+else:
+    logo_base64 = ""
+
 st.html("""
 <style>
 :root {
@@ -311,7 +320,7 @@ hr {
 </style>
 """)
 
-st.html("""
+st.html(f"""
 <section class="mc-hero">
     <div class="mc-hero-content">
         <div class="mc-eyebrow">
@@ -320,7 +329,7 @@ st.html("""
 
         <h1 class="mc-hero-title">
             Plan your retirement with
-            <span>BLUEBELL.</span>
+            <span>BLUEBELL</span>
         </h1>
 
         <p class="mc-hero-description">
@@ -328,18 +337,26 @@ st.html("""
             strategies, and understand how contributions, withdrawals,
             and market uncertainty may affect your financial plan.
         </p>
+    </div>
 
-        <div class="mc-badges">
-            <span>Monte Carlo simulation</span>
-            <span>Long-term planning</span>
-            <span>Risk scenario analysis</span>
-        </div>
+    <div class="mc-logo-area">
+        <div class="mc-logo-glow"></div>
+
+        <img
+            class="mc-bluebell-logo"
+            src="data:image/png;base64,{logo_base64}"
+            alt="Bluebell logo"
+        >
     </div>
 </section>
 
 <style>
-.mc-hero {
+.mc-hero {{
     position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.65fr);
+    align-items: center;
+    gap: 3rem;
     overflow: hidden;
     min-height: 330px;
     margin-bottom: 1rem;
@@ -361,13 +378,12 @@ st.html("""
         );
 
     box-shadow: 0 28px 75px rgba(0, 0, 0, 0.40);
-}
+}}
 
-.mc-hero::before {
+.mc-hero::before {{
     content: "";
     position: absolute;
     inset: 0;
-
     opacity: 0.22;
 
     background-image:
@@ -382,22 +398,19 @@ st.html("""
         );
 
     background-size: 38px 38px;
+}}
 
-    mask-image:
-        linear-gradient(
-            to right,
-            black,
-            transparent 90%
-        );
-}
-
-.mc-hero-content {
+.mc-hero-content,
+.mc-logo-area {{
     position: relative;
     z-index: 1;
-    max-width: 850px;
-}
+}}
 
-.mc-eyebrow {
+.mc-hero-content {{
+    max-width: 850px;
+}}
+
+.mc-eyebrow {{
     display: inline-flex;
     margin-bottom: 1.2rem;
     padding: 0.42rem 0.75rem;
@@ -411,41 +424,39 @@ st.html("""
     font-size: 0.73rem;
     font-weight: 750;
     letter-spacing: 0.13em;
-}
+}}
 
-.mc-hero-title {
+.mc-hero-title {{
     max-width: 800px;
     margin: 0;
-
     color: #f5f8ff;
 
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1.02;
     font-weight: 790;
     letter-spacing: -0.055em;
-}
+}}
 
-.mc-hero-title span {
+.mc-hero-title span {{
     color: #76a8ff;
-}
+}}
 
-.mc-hero-description {
+.mc-hero-description {{
     max-width: 720px;
     margin: 1.5rem 0 1.8rem;
 
     color: #aebed5;
-
     font-size: 1.05rem;
     line-height: 1.72;
-}
+}}
 
-.mc-badges {
+.mc-badges {{
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem;
-}
+}}
 
-.mc-badges span {
+.mc-badges span {{
     padding: 0.5rem 0.8rem;
 
     border: 1px solid rgba(134, 177, 236, 0.14);
@@ -455,14 +466,69 @@ st.html("""
     color: #c5d5e9;
 
     font-size: 0.82rem;
-}
+}}
 
-@media (max-width: 900px) {
-    .mc-hero {
-        min-height: auto;
+/* Right-side logo area */
+.mc-logo-area {{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 230px;
+}}
+
+.mc-bluebell-logo {{
+    position: relative;
+    z-index: 2;
+    display: block;
+
+    width: min(100%, 280px);
+    max-height: 180px;
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
+}}
+
+.mc-logo-glow {{
+    position: absolute;
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(79, 140, 255, 0.23),
+            rgba(56, 189, 248, 0.08) 45%,
+            transparent 70%
+        );
+
+    filter: blur(8px);
+}}
+
+@media (max-width: 900px) {{
+    .mc-hero {{
+        grid-template-columns: 1fr;
         padding: 2.3rem 1.6rem;
-    }
-}
+    }}
+
+    .mc-logo-area {{
+        min-height: 150px;
+        justify-content: flex-start;
+    }}
+
+    .mc-bluebell-logo {{
+        width: 190px;
+        max-height: 120px;
+    }}
+
+    .mc-logo-glow {{
+        width: 190px;
+        height: 190px;
+    }}
+}}
 </style>
 """)
 

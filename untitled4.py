@@ -360,7 +360,8 @@ def run_index_model():
       bond_mutualfund_allocation,
       hybrid_mutualfund_aggresive_allocation,
       hybrid_mutualfund_moderate_allocation,
-      hybrid_mutualfund_conservative_allocation
+      hybrid_mutualfund_conservative_allocation,
+      target
   ):
 
       portfolio_path = np.zeros(duration, dtype=np.float32)
@@ -525,7 +526,12 @@ def run_index_model():
                     cur_amount * stock_allocations[7]
           ], dtype=np.float64)
                   
-
+          if day = acum_years * 252:
+              cur_amount = pure_cash_amt + savings_account + assets.sum()
+              if cur_amount >= target:
+                  goal_count = 1
+              else:
+                  goal_count = 0
           portfolio_path[day] = (
               assets[0]
               + assets[1]
@@ -543,7 +549,7 @@ def run_index_model():
               + pure_cash_amt
           )
               
-      return portfolio_path,failed
+      return portfolio_path,failed,goal_count
   us_gov_bond_weight = 0.0
   us_inv_bond_weight = 0.0
   us_spec_bond_weight = 0.0
@@ -594,6 +600,7 @@ def run_index_model():
           dtype=np.float32
         )
         trials_failed = 0
+        goal_reached = 0
         saving_returns = 0.0175
         drawdowns = []
         saving_daily_return = (1 + saving_returns) ** (1/252)
@@ -718,7 +725,7 @@ def run_index_model():
           us_spec_bond_daily_return = (1+us_spec_bond_return)**(1/252)
 
 
-          portfolio_path, failed = run_path(
+          portfolio_path, failed, success = run_path(
             acum_years,
             bull_daily_stock_multipliers,
             bear_daily_stock_multipliers,
@@ -753,12 +760,14 @@ def run_index_model():
             bond_mutualfund_allocation,
             hybrid_mutualfund_aggresive_allocation,
             hybrid_mutualfund_moderate_allocation,
-            hybrid_mutualfund_conservative_allocation
+            hybrid_mutualfund_conservative_allocation,
+            target
           )
 
           portfolio_simulations[:, sim] = portfolio_path
 
           trials_failed += failed
+          goal_reached += success
           accumulation_annualized_returns = []
           if retirement_day > 0 and initial_amount > 0:
 
@@ -1060,13 +1069,10 @@ def run_index_model():
       )
 
       success_rate = np.mean(
-      (num_simulations-trials_failed)/num_simulations
+      (goal_reached)/num_simulations
       ) * 100
 
-      probability = (
-         np.mean(ending_values >= target)
-        * 100
-      )
+      probability = (goal_reached/num_simulations) * 100
       c1.metric(
       "Probabiltiy of reaching retirement goal",
       f"{probability:.1f}%"
@@ -1487,7 +1493,8 @@ def run_company_model():
         healthcarea_alloc,
         propa_alloc,
         sp500a_alloc,
-        gcore_alloc
+        gcore_alloc,
+        target
       ):
         portfolio_paths = np.zeros(duration)
         failed = 0 # Initialize failed variable
@@ -1614,8 +1621,14 @@ def run_company_model():
           portfolio_paths[day] = (
               kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + gcore_amt
               )
+        if day = acum_years * 252:
+           curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
+           if curnt_amt >= target:
+               goal_count = 1
+           else: 
+               goal_count = 0
 
-        return portfolio_paths,failed
+        return portfolio_paths,failed,goal_count
       days = (acum_years + retirement_years) * 252
       df = 10
 
@@ -1700,6 +1713,7 @@ def run_company_model():
           )
       )
       trials_failed = 0
+      goal_reached = 0
       drawdowns = []
       total_funds = initial_amount
       inserted_funds = monthly_contribution
@@ -1761,7 +1775,7 @@ def run_company_model():
         propa_truerate = all_assets_returns[:,11]
         sp500a_truerate = all_assets_returns[:,12]
 
-        portfolio_path,failed = sim_path(
+        portfolio_path,failed,success = sim_path(
             acum_years,
             kfa_truerate,
             ugi_truerate,
@@ -1813,6 +1827,7 @@ def run_company_model():
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
+        goal_reach +=success
         accumulation_annualized_returns = []
         if retirement_day > 0 and initial_amount > 0:
 
@@ -2128,10 +2143,7 @@ def run_company_model():
       (num_simulations-trials_failed)/num_simulations
       ) * 100
 
-      probability = (
-         np.mean(ending_values >= target)
-        * 100
-      )
+      probability = (goal_reached/num_simulations) * 100
       c1.metric(
       "Probabiltiy of reaching retirement goal",
       f"{probability:.1f}%"

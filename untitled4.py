@@ -102,7 +102,8 @@ def run_index_model():
         "IXJ",
         "IXN",
         "IYR",
-        "EEM"
+        "EEM",
+        "^DJGSP"
     ]
 
     missing_columns = [
@@ -127,7 +128,7 @@ def run_index_model():
       combined_data = load_market_data()
 
       bear_data = combined_data.loc[
-          "2005-01-10":"2015-06-01"
+          "2005-12-01":"2015-06-01"
       ]
 
       bull_data = combined_data.loc[
@@ -257,6 +258,13 @@ def run_index_model():
       0.05,
       0.01
   )
+  commodity_weight = st.sidebar.slider(
+      "Commodity Index",
+      0.0,
+      1.0,
+      0.05,
+      0.01
+  )
   total_weight = (
       us_weight +
       thai_weight +
@@ -270,7 +278,8 @@ def run_index_model():
       healthcare_weight +
       technology_weight + 
       property_weight + 
-      emerging_weight   
+      emerging_weight +
+      commodity_weight
   )
 
   st.sidebar.write(
@@ -299,6 +308,7 @@ def run_index_model():
         "Technology Index",
         "Property and Real Estate Index",
         "Emerging Markets Index",
+        "Commodity Index",
         "Savings Account"
     ],
     "Allocation": [
@@ -314,6 +324,7 @@ def run_index_model():
         technology_weight,
         property_weight,
         emerging_weight,
+        commodity_weight,
         savings_weight,
         ]
     })
@@ -475,6 +486,8 @@ def run_index_model():
                       assets[10] -= withdrawal_amount
                   elif assets[11] >= withdrawal_amount:
                       assets[11] -= withdrawal_amount
+                  elif assets[12] >= withdrawal_amount:
+                      assets[12] -= withdrawal_amount
                   elif assets[6] >= withdrawal_amount:
                       assets[6] -= withdrawal_amount
                   elif total_amount >= withdrawal_amount:
@@ -523,7 +536,8 @@ def run_index_model():
                     cur_amount * stock_allocations[4],
                     cur_amount * stock_allocations[5],
                     cur_amount * stock_allocations[6],
-                    cur_amount * stock_allocations[7]
+                    cur_amount * stock_allocations[7],
+                    cur_amount * stock_allocations[8]
           ], dtype=np.float64)
                   
           if day == acum_years * 252:
@@ -545,6 +559,7 @@ def run_index_model():
               + assets[9]
               +assets[10]
               + assets[11]
+              + assets[12]
               + savings_account
               + pure_cash_amt
           )
@@ -574,6 +589,7 @@ def run_index_model():
         0.002,
         0.002,
         0.002,
+        0.002,
         0.002
         ])
 
@@ -587,7 +603,8 @@ def run_index_model():
           healthcare_weight,
           technology_weight,
           property_weight,
-          emerging_weight
+          emerging_weight,
+          commodity_weight
           ])
 
         bond_mutualfund_allocation = bond_weight
@@ -617,7 +634,8 @@ def run_index_model():
           healthcare_weight,
           technology_weight,
           property_weight,
-          emerging_weight
+          emerging_weight,
+          commodity_weight
         ], dtype=np.float64)
         inserted_funds = monthly_contribution
 
@@ -631,7 +649,8 @@ def run_index_model():
           healthcare_weight + 
           technology_weight + 
           property_weight + 
-          emerging_weight
+          emerging_weight +
+          commodity_weight
       )
 
         total_mutualfund_weight = (
@@ -701,7 +720,8 @@ def run_index_model():
             initial_amount * stock_allocations[4],
             initial_amount * stock_allocations[5],
             initial_amount * stock_allocations[6],
-            initial_amount * stock_allocations[7]
+            initial_amount * stock_allocations[7],
+            initial_amount * stock_allocations[8]
           ], dtype=np.float64)
           savings_account = initial_amount * savings_account_weight
 

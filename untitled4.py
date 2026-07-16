@@ -2151,15 +2151,6 @@ def run_company_model():
   if initial_amount * rostrum_alloc < 3000000 and rostrum_alloc != 0:
     st.error("Minimum investment for Rostrum Grand Fund of Funds is 3 million THB")
     st.stop()
-  with st.container(key="hero_actions"):
-    run = st.button(
-        "Run Simulation",
-        key="run_simulation",
-        type="primary",
-        icon=":material/arrow_forward:",
-        icon_position="right",
-        width=240
-    )
   savings_alloc = (
         1 -
           (

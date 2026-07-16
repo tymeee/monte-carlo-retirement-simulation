@@ -21,7 +21,8 @@ from pathlib import Path
 
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="auto"
 )
 
 logo_path = Path("bluebell.png")
@@ -93,10 +94,23 @@ body,
     background: transparent;
 }
 
-[data-testid="stToolbar"],
+
 #MainMenu,
 footer {
     display: none !important;
+}
+
+/* Keep the top header transparent */
+[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
 }
 
 /* Sidebar control panel */

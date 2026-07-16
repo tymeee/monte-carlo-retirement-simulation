@@ -24,7 +24,7 @@ st.set_page_config(
     layout="wide"
 )
 
-logo_path = Path("bluebell_logo.png")
+logo_path = Path("bluebell.png")
 
 if logo_path.exists():
     logo_base64 = base64.b64encode(

@@ -3099,7 +3099,7 @@ def run_company_model():
       import plotly.graph_objects as go
       ending_values_m = ending_values / 1_000_000
       capped_values = np.minimum(ending_values_m, 120)
-            ending_values = portfolio_simulations[-1, :]
+      ending_values = portfolio_simulations[-1, :]
 
       histogram_values = np.minimum(
         ending_values_m,

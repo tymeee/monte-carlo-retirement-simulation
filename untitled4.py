@@ -3226,7 +3226,7 @@ def run_company_model():
         "Nominal Portfolio Value Projection"
       )
 
-            import copy
+      import copy
 
       mobile_fig = copy.deepcopy(fig)
 

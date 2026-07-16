@@ -24,8 +24,8 @@ st.set_page_config(
 
 st.title("Monte Carlo Portfolio Simulator")
 
-st.write("This simulator is meant to help gague model effectiveness and may not always be reliable, hence, model outputs is not financial advice. "
-            " Please interpret results with caution as model outputs may not reflect reality. The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate. The model also performs quarterly rebalancing to maintain the allocations that the user inputs. The industry standard for a good retirement plan is around an 80-90% success rate. For those who are more open to adjusting their lifestyles a 65-80% success rate may be viable.")
+st.write("This simulator is meant to help gague portfolio effectiveness and may not always be accurate, hence, model outputs does not constitute raw financial advice. The model is useful in assessing different portfolios and gauging the portfolio's effectiveness. "
+            " The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate. The model also performs annual rebalancing to maintain the allocations that the user inputs. The industry standard for a good retirement plan is around an 90+% success rate. Plans with success rates around 70 to 80% may still be viable but would require a more adaptable lifestyle.")
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,
@@ -426,7 +426,7 @@ def run_index_model():
                   savings_account += inserted_funds * savings_account_weight
 
               else:
-
+                  total_amount = pure_cash_amt + savings_account + assets.sum()
                   withdrawal_amount = withdrawal_percentage / 12.0
 
                   if pure_cash_amt >= withdrawal_amount:
@@ -476,6 +476,11 @@ def run_index_model():
                       assets[11] -= withdrawal_amount
                   elif assets[6] >= withdrawal_amount:
                       assets[6] -= withdrawal_amount
+                  elif total_amount >= withdrawal_amount:
+                      total_amount -= withdrawal_amount
+                      assets = total_amount * contribution_weights
+                      pure_cash_amt = total_amount * pure_cash_weight
+                      savings_account = savings_account * savings_account_weight
 
                   else:
 
@@ -1519,6 +1524,7 @@ def run_company_model():
             sp500a_amt += inserted_funds * sp500a_alloc
             gcore_amt += inserted_funds * gcore_alloc
           if day > acum_years*252 and day %21 ==0:
+            curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
             withdrawal_amount = yearly_withdrawals/12
             if savings_amt - withdrawal_amount > 0:
               savings_amt = savings_amt-withdrawal_amount
@@ -1550,6 +1556,23 @@ def run_company_model():
                 propa_amt = propa_amt - withdrawal_amount
             elif sp500a_amt - withdrawal_amount >0:
                 sp500a_amt = sp500a_amt - withdrawal_amount
+            elif curnt_amt - withdrawal_amount >0:
+                curnt_amt -= withdrawal_amount
+                savings_amt = curnt_amt * savings_alloc
+                kfa_amt = curnt_amt * kfa_alloc
+                ugi_amt = curnt_amt * ugi_alloc
+                kkpplus_amt = curnt_amt *kkpplus_alloc
+                kkpcash_amt = curnt_amt * kkpcash_alloc
+                gqg_amt = curnt_amt * gqg_alloc
+                eae_amt = curnt_amt * eae_alloc
+                gtech_amt = curnt_amt * gtech_alloc
+                gcore_amt = curnt_amt * gcore_alloc
+                ktp_amt =curnt_amt * ktprecious_alloc
+                rostrum_amt = curnt_amt * rostrum_alloc
+                gnph_amt = curnt_amt*gnph_alloc
+                healthcarea_amt = curnt_amt * healthcarea_alloc
+                propa_amt = curnt_amt * propa_alloc
+                sp500a_amt = curnt_amt * sp500a_alloc
             else:
               failed = 1
               break
@@ -1570,6 +1593,9 @@ def run_company_model():
             gcore_amt = gcore_amt * (1-gcore_managementfee)
           if day % 252 == 0:
               curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
+              if curnt_amt * rostrum_alloc < 3000000 and rostrum_alloc != 0:
+                  savings_alloc += rostrum_alloc
+                  rostrum_alloc = 0
               kkpplus_amt = curnt_amt * kkpplus_alloc
               kkpcash_amt = curnt_amt * kkpcash_alloc
               kfa_amt = curnt_amt * kfa_alloc
@@ -1581,34 +1607,6 @@ def run_company_model():
               savings_amt = curnt_amt * savings_alloc
               rostrum_amt = curnt_amt * rostrum_alloc
               gcore_amt = curnt_amt * gcore_alloc
-              if rostrum_amt < 3000000 and rostrum_amt != 0:
-                  if savings_amt - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = rostrum_amt + savings_amt
-                  elif kkpplus_amt - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      kkpplus_amt = kkpplus_amt - (3000000-rostrum_amt)
-                  elif kkpcash_amt - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      kkpcash_amt = kkpcash_amt - (3000000-rostrum_amt)
-                  elif (kkpcash_amt + kkpplus_amt) - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      pool = (kkpcash_amt + kkpplus_amt) - (3000000-rostrum_amt)
-                      kkpcash_amt = 0.5*pool
-                      kkpplus_amt = 0.5*pool
-                  elif kfa_amt - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      kfa_amt = kfa_amt - (3000000-rostrum_amt)
-                  elif ugi_amt - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      ugi_amt = ugi_amt - (3000000-rostrum_amt)
-                  elif (kfa_amt + ugi_amt) - (3000000-rostrum_amt) > 0:
-                      rostrum_amt = 3000000
-                      pool = (kfa_amt + ugi_amt) - (3000000-rostrum_amt)
-                      kfa_amt = 0.5*pool
-                      ugi_amt = 0.5*pool
-                  else:
-                      savings_amt = savings_amt + rostrum_amt
-                      rostrum_amt = 0
               gnph_amt = curnt_amt * gnph_alloc
               healthcarea_amt = curnt_amt * healthcarea_alloc
               propa_amt = curnt_amt * propa_alloc

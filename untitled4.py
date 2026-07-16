@@ -1088,6 +1088,8 @@ def run_index_model():
           0.05,
           0.01
       )
+  else:
+      globalequity_weight = 0
   if "Healthcare Sector Fund" in selection:
       healthcare_weight = st.sidebar.slider(
           "Healthcare index",

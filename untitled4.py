@@ -2596,13 +2596,13 @@ def run_company_model():
   )
   if total_alloc > 1:
     st.error("Allocations exceed 100%")
-    st.stop()
-  if initial_amount * rostrum_alloc < 3000000 and rostrum_alloc != 0:
-    st.error("Minimum investment for Rostrum Grand Fund of Funds is 3 million THB")
     st.sidebar.error(
         f"Allocated: {total_weight:.0%}. "
         "Reduce the allocation to 100% or less."
     )
+    st.stop()
+  if initial_amount * rostrum_alloc < 3000000 and rostrum_alloc != 0:
+    st.error("Minimum investment for Rostrum Grand Fund of Funds is 3 million THB")
     st.stop()
   savings_alloc = (
         1 -

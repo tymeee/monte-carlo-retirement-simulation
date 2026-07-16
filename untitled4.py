@@ -1742,13 +1742,15 @@ def run_index_model():
       fig.add_vline(
         x=acum_years+age_years,
         line_dash="dash",
-        annotation_text="Retirement"
+        annotation_text="Retirement",
+        line_color = "white"
       )
 
       fig.add_vline(
           x=85,
           line_dash = "dash",
-          annotation_text = "Average Thai Lifespan"
+          annotation_text = "Average Thai Lifespan",
+          line_color = "white"
       )
 
       fig.update_xaxes(

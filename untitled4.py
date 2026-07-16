@@ -262,17 +262,33 @@ button[data-baseweb="tab"][aria-selected="true"] {
 
 /* Plotly chart cards */
 [data-testid="stPlotlyChart"] {
+    width: 100%;
     overflow: hidden;
-    padding: 0.7rem;
+    padding: 1rem;
+
     background:
         linear-gradient(
             145deg,
             rgba(13, 31, 55, 0.82),
             rgba(7, 18, 35, 0.82)
         );
+
     border: 1px solid var(--border);
     border-radius: 22px;
     box-shadow: var(--shadow);
+
+    box-sizing: border-box;
+}
+
+/* Force the embedded Plotly element to use the available width */
+[data-testid="stPlotlyChart"] > div {
+    width: 100% !important;
+}
+
+[data-testid="stPlotlyChart"] .js-plotly-plot,
+[data-testid="stPlotlyChart"] .plot-container,
+[data-testid="stPlotlyChart"] .svg-container {
+    width: 100% !important;
 }
 
 /* Dataframes */
@@ -650,6 +666,103 @@ st.html("""
 </style>
 """)
 
+def style_line_chart(fig, title):
+    fig.update_layout(
+        title=dict(
+            text=title,
+            x=0.02,
+            xanchor="left",
+            y=0.97,
+            yanchor="top",
+            font=dict(
+                size=21,
+                color="#F1F6FF"
+            )
+        ),
+
+        # Responsive chart sizing
+        autosize=True,
+        height=620,
+
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(5,13,27,0.35)",
+
+        font=dict(
+            family="Inter, Arial, sans-serif",
+            size=13,
+            color="#B8C8DD"
+        ),
+
+        # Put the legend above the plot rather than outside on the right
+        legend=dict(
+            orientation="h",
+            x=0.5,
+            xanchor="center",
+            y=1.02,
+            yanchor="bottom",
+
+            bgcolor="rgba(0,0,0,0)",
+
+            font=dict(
+                size=12,
+                color="#D9E5F5"
+            ),
+
+            itemwidth=55
+        ),
+
+        margin=dict(
+            l=70,
+            r=35,
+            t=125,
+            b=65
+        ),
+
+        hovermode="x unified",
+
+        hoverlabel=dict(
+            bgcolor="#0D1B31",
+            bordercolor="#315989",
+            font=dict(
+                color="#F1F6FF"
+            )
+        )
+    )
+
+    fig.update_xaxes(
+        showgrid=False,
+        zeroline=False,
+        automargin=True,
+
+        linecolor="rgba(140,180,235,0.15)",
+
+        tickfont=dict(
+            color="#A8BAD4"
+        ),
+
+        title_font=dict(
+            color="#DCE8F8"
+        )
+    )
+
+    fig.update_yaxes(
+        showgrid=True,
+        gridcolor="rgba(140,180,235,0.13)",
+        zeroline=False,
+        automargin=True,
+
+        linecolor="rgba(140,180,235,0.15)",
+
+        tickfont=dict(
+            color="#A8BAD4"
+        ),
+
+        title_font=dict(
+            color="#DCE8F8"
+        )
+    )
+
+    return fig
 with st.container(key="hero_actions"):
     run = st.button(
         "Run Simulation",
@@ -1625,14 +1738,6 @@ def run_index_model():
         'Year: %{x:.1f}<br>' +
         'Value: ฿%{y:,.2f}M<extra></extra>'
       ))
-        
-      fig.update_layout(
-        title="Nominal Portfolio Value Projection",
-        xaxis_title="Age",
-        yaxis_title="Portfolio Value (Million THB)",
-        hovermode="x unified",
-        height = 700
-      )
 
       fig.add_vline(
         x=acum_years+age_years,
@@ -1645,8 +1750,28 @@ def run_index_model():
           line_dash = "dash",
           annotation_text = "Average Thai Lifespan"
       )
-    
-      st.plotly_chart(fig, use_container_width=True)
+
+      fig.update_xaxes(
+            title_text="Age"
+        )
+
+      fig.update_yaxes(
+        title_text="Portfolio Value (Million THB)"
+      )
+
+      fig = style_line_chart(
+        fig,
+        "Nominal Portfolio Value Projection"
+      )
+
+      st.plotly_chart(
+        fig,
+        width="stretch",
+        config={
+            "responsive": True,
+            "displayModeBar": False
+            }
+      )
 
       pie_fig = px.pie(
         allocation_data,

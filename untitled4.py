@@ -480,7 +480,7 @@ def run_index_model():
                       total_amount -= withdrawal_amount
                       assets = total_amount * contribution_weights
                       pure_cash_amt = total_amount * pure_cash_weight
-                      savings_account = savings_account * savings_account_weight
+                      savings_account = total_amount * savings_account_weight
 
                   else:
 

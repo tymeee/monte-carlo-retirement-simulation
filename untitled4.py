@@ -22,10 +22,512 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Monte Carlo Portfolio Simulator")
+st.html("""
+<style>
+:root {
+    --bg-main: #050b18;
+    --bg-secondary: #081426;
+    --surface: rgba(14, 30, 52, 0.76);
+    --surface-strong: #0d1b31;
+    --surface-hover: #122642;
+    --border: rgba(140, 180, 235, 0.14);
+    --border-bright: rgba(96, 165, 250, 0.32);
+    --primary: #4f8cff;
+    --primary-bright: #79a8ff;
+    --cyan: #38bdf8;
+    --text-main: #f1f6ff;
+    --text-secondary: #a8bad4;
+    --text-muted: #7086a4;
+    --positive: #37d49b;
+    --negative: #ff6b81;
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+}
 
-st.write("This simulator is meant to help gague portfolio effectiveness and may not always be accurate, hence, model outputs does not constitute raw financial advice. The model is useful in assessing different portfolios and gauging the portfolio's effectiveness. "
-            " The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate. The model also performs annual rebalancing to maintain the allocations that the user inputs. A good retirement plan is around an 90+% success rate. Plans with success rates around 70 to 80% may still be viable but would require a more adaptable lifestyle.")
+/* Entire application */
+html,
+body,
+[data-testid="stAppViewContainer"],
+.stApp {
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(38, 91, 168, 0.26),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 88% 8%,
+            rgba(16, 125, 171, 0.15),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #040914 0%,
+            #071121 45%,
+            #050b18 100%
+        );
+    color: var(--text-main);
+}
+
+/* Main page width */
+.block-container {
+    max-width: 1500px;
+    padding-top: 1.3rem;
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+    padding-bottom: 5rem;
+}
+
+/* Reduce default Streamlit appearance */
+[data-testid="stHeader"] {
+    background: transparent;
+}
+
+[data-testid="stToolbar"],
+#MainMenu,
+footer {
+    display: none !important;
+}
+
+/* Sidebar control panel */
+[data-testid="stSidebar"] {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8, 19, 37, 0.98),
+            rgba(5, 13, 27, 0.98)
+        );
+    border-right: 1px solid var(--border);
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.22);
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 1.5rem;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+/* Main headings */
+h1, h2, h3 {
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    color: var(--text-main);
+}
+
+h1 {
+    font-weight: 750 !important;
+    letter-spacing: -0.045em !important;
+}
+
+h2 {
+    font-weight: 680 !important;
+    letter-spacing: -0.025em !important;
+}
+
+/* Paragraphs and labels */
+p,
+label,
+[data-testid="stWidgetLabel"] {
+    color: var(--text-secondary);
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    min-height: 135px;
+    padding: 1.35rem 1.4rem;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 66, 0.90),
+            rgba(8, 21, 40, 0.88)
+        );
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-bright);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary);
+    font-weight: 550;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 720;
+    letter-spacing: -0.035em;
+}
+
+/* Standard buttons */
+.stButton > button {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid rgba(133, 178, 255, 0.3);
+    border-radius: 13px;
+    background:
+        linear-gradient(
+            100deg,
+            #316edc,
+            #4f8cff 55%,
+            #388fdf
+        );
+    color: white;
+    font-size: 0.98rem;
+    font-weight: 680;
+    box-shadow: 0 12px 30px rgba(49, 110, 220, 0.28);
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        filter 160ms ease;
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 16px 38px rgba(49, 110, 220, 0.42);
+}
+
+.stButton > button:active {
+    transform: translateY(0);
+}
+
+/* Number inputs */
+[data-testid="stNumberInput"] input {
+    background: rgba(9, 24, 44, 0.9);
+    color: var(--text-main);
+    border-color: var(--border);
+    border-radius: 11px;
+}
+
+/* Selects and multiselects */
+div[data-baseweb="select"] > div {
+    background: rgba(9, 24, 44, 0.9);
+    border-color: var(--border);
+    border-radius: 11px;
+}
+
+/* Radio buttons */
+[data-testid="stRadio"] {
+    padding: 0.45rem 0;
+}
+
+/* Sliders */
+[data-testid="stSlider"] {
+    padding-top: 0.15rem;
+    padding-bottom: 0.55rem;
+}
+
+/* Tabs */
+button[data-baseweb="tab"] {
+    color: var(--text-secondary);
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary-bright);
+}
+
+/* Plotly chart cards */
+[data-testid="stPlotlyChart"] {
+    overflow: hidden;
+    padding: 0.7rem;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 31, 55, 0.82),
+            rgba(7, 18, 35, 0.82)
+        );
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+}
+
+/* Dataframes */
+[data-testid="stDataFrame"] {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+/* Dividers */
+hr {
+    border-color: var(--border);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050b18;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1d3658;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2e5181;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    [data-testid="stMetric"] {
+        min-height: 110px;
+    }
+}
+</style>
+""")
+
+st.html("""
+<section class="mc-hero">
+    <div class="mc-hero-content">
+        <div class="mc-eyebrow">
+            PORTFOLIO PLANNING PLATFORM
+        </div>
+
+        <h1 class="mc-hero-title">
+            Plan retirement with
+            <span>greater clarity.</span>
+        </h1>
+
+        <p class="mc-hero-description">
+            Explore thousands of potential portfolio outcomes,
+            compare investment strategies, and understand how
+            contributions, withdrawals, and market uncertainty
+            may affect your financial plan.
+        </p>
+
+        <div class="mc-badges">
+            <span>Monte Carlo simulation</span>
+            <span>Long-term planning</span>
+            <span>Risk scenario analysis</span>
+        </div>
+    </div>
+
+    <div class="mc-hero-visual">
+        <div class="mc-orbit mc-orbit-one"></div>
+        <div class="mc-orbit mc-orbit-two"></div>
+
+        <div class="mc-visual-card">
+            <div class="mc-visual-label">Scenario engine</div>
+            <div class="mc-visual-number">1,000</div>
+            <div class="mc-visual-caption">
+                simulated market paths
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.mc-hero {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.75fr);
+    align-items: center;
+    gap: 3rem;
+    overflow: hidden;
+    min-height: 390px;
+    margin-bottom: 2rem;
+    padding: 3.7rem 4rem;
+    border: 1px solid rgba(118, 169, 239, 0.18);
+    border-radius: 28px;
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(56, 155, 235, 0.17),
+            transparent 32%
+        ),
+        linear-gradient(
+            130deg,
+            rgba(14, 35, 63, 0.96),
+            rgba(5, 16, 32, 0.94)
+        );
+    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.4);
+}
+
+.mc-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.22;
+    background-image:
+        linear-gradient(
+            rgba(100, 155, 225, 0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(100, 155, 225, 0.08) 1px,
+            transparent 1px
+        );
+    background-size: 38px 38px;
+    mask-image:
+        linear-gradient(
+            to right,
+            black,
+            transparent 82%
+        );
+}
+
+.mc-hero-content,
+.mc-hero-visual {
+    position: relative;
+    z-index: 1;
+}
+
+.mc-eyebrow {
+    display: inline-flex;
+    margin-bottom: 1.2rem;
+    padding: 0.42rem 0.75rem;
+    border: 1px solid rgba(95, 156, 246, 0.3);
+    border-radius: 999px;
+    background: rgba(57, 116, 208, 0.12);
+    color: #86b5ff;
+    font-size: 0.73rem;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+}
+
+.mc-hero-title {
+    max-width: 750px;
+    margin: 0;
+    color: #f5f8ff;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.02;
+    font-weight: 790;
+    letter-spacing: -0.055em;
+}
+
+.mc-hero-title span {
+    color: #76a8ff;
+}
+
+.mc-hero-description {
+    max-width: 700px;
+    margin: 1.5rem 0 1.8rem;
+    color: #aebed5;
+    font-size: 1.05rem;
+    line-height: 1.72;
+}
+
+.mc-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.mc-badges span {
+    padding: 0.5rem 0.8rem;
+    border: 1px solid rgba(134, 177, 236, 0.14);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    color: #c5d5e9;
+    font-size: 0.82rem;
+}
+
+.mc-hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.mc-visual-card {
+    position: relative;
+    z-index: 3;
+    width: 220px;
+    padding: 1.8rem;
+    text-align: center;
+    border: 1px solid rgba(117, 174, 248, 0.28);
+    border-radius: 22px;
+    background: rgba(8, 24, 45, 0.72);
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.42),
+        inset 0 1px rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(16px);
+}
+
+.mc-visual-label {
+    color: #89a2c2;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+}
+
+.mc-visual-number {
+    margin: 0.45rem 0;
+    color: #f5f8ff;
+    font-size: 3.3rem;
+    line-height: 1;
+    font-weight: 750;
+}
+
+.mc-visual-caption {
+    color: #91a7c3;
+    font-size: 0.84rem;
+}
+
+.mc-orbit {
+    position: absolute;
+    border: 1px solid rgba(79, 140, 255, 0.22);
+    border-radius: 50%;
+}
+
+.mc-orbit-one {
+    width: 290px;
+    height: 290px;
+}
+
+.mc-orbit-two {
+    width: 205px;
+    height: 205px;
+    border-color: rgba(56, 189, 248, 0.28);
+}
+
+@media (max-width: 900px) {
+    .mc-hero {
+        grid-template-columns: 1fr;
+        padding: 2.3rem 1.6rem;
+    }
+
+    .mc-hero-visual {
+        display: none;
+    }
+}
+</style>
+""")
+
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,

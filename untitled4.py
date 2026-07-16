@@ -1813,7 +1813,7 @@ def run_company_model():
         )
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
-        goal_reach +=success
+        goal_reached +=success
         accumulation_annualized_returns = []
         if retirement_day > 0 and initial_amount > 0:
 

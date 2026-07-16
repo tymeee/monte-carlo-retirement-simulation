@@ -25,7 +25,7 @@ st.set_page_config(
 st.title("Monte Carlo Portfolio Simulator")
 
 st.write("This simulator is meant to help gague portfolio effectiveness and may not always be accurate, hence, model outputs does not constitute raw financial advice. The model is useful in assessing different portfolios and gauging the portfolio's effectiveness. "
-            " The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate. The model also performs annual rebalancing to maintain the allocations that the user inputs. The industry standard for a good retirement plan is around an 90+% success rate. Plans with success rates around 70 to 80% may still be viable but would require a more adaptable lifestyle.")
+            " The model is based on a retirement plan that consists of an accumulation phase, during which a monthly DCA can be added, followed by a retirement phase where funds are withdrew from the portfolio at a specificed fixed annual rate. The model also performs annual rebalancing to maintain the allocations that the user inputs. A good retirement plan is around an 90+% success rate. Plans with success rates around 70 to 80% may still be viable but would require a more adaptable lifestyle.")
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,

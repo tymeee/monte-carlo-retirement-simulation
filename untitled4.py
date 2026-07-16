@@ -88,7 +88,7 @@ age_years = st.sidebar.number_input(
 def run_index_model():
   @st.cache_data
   def load_market_data():
-    df = pd.read_parquet("new.parquet")
+    df = pd.read_parquet("updated.parquet")
 
     expected_columns = [
         "^GSPC",

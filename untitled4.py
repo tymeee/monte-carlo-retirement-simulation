@@ -532,6 +532,134 @@ st.html(f"""
 </style>
 """)
 
+# ---------------------------------------------------------
+# RUN SIMULATION BUTTON
+# Put this immediately after the hero st.html(...) block
+# ---------------------------------------------------------
+
+st.html("""
+<style>
+
+/* Position the button under the hero and align it with hero text */
+.st-key-hero_actions {
+    margin-top: 0.9rem;
+    margin-left: 4rem;
+    margin-bottom: 2.8rem;
+}
+
+/* Style only this Run Simulation button */
+.st-key-run_simulation button {
+    position: relative;
+
+    width: 240px !important;
+    min-height: 58px !important;
+    padding: 0 1.6rem !important;
+
+    border: 1px solid rgba(149, 192, 255, 0.55) !important;
+    border-radius: 16px !important;
+
+    background:
+        linear-gradient(
+            110deg,
+            #2868d7 0%,
+            #4f91f7 50%,
+            #3a7ee8 100%
+        ) !important;
+
+    color: #ffffff !important;
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif !important;
+
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.01em !important;
+
+    box-shadow:
+        0 12px 30px rgba(41, 105, 220, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease,
+        border-color 180ms ease,
+        filter 180ms ease;
+}
+
+/* Keep both the text and arrow white */
+.st-key-run_simulation button p,
+.st-key-run_simulation button span,
+.st-key-run_simulation button svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+/* Hover effect */
+.st-key-run_simulation button:hover {
+    transform: translateY(-3px);
+
+    filter: brightness(1.1);
+
+    border-color: rgba(181, 213, 255, 0.85) !important;
+
+    box-shadow:
+        0 18px 42px rgba(41, 105, 220, 0.48),
+        0 0 24px rgba(79, 145, 247, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.30);
+}
+
+/* Click effect */
+.st-key-run_simulation button:active {
+    transform: translateY(0) scale(0.98);
+
+    box-shadow:
+        0 7px 18px rgba(41, 105, 220, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.20);
+}
+
+/* Keyboard-focus effect */
+.st-key-run_simulation button:focus {
+    outline: none !important;
+
+    box-shadow:
+        0 0 0 4px rgba(79, 145, 247, 0.20),
+        0 15px 36px rgba(41, 105, 220, 0.42) !important;
+}
+
+/* Mobile layout */
+@media (max-width: 900px) {
+    .st-key-hero_actions {
+        margin-top: 0.8rem;
+        margin-left: 1.6rem;
+        margin-right: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .st-key-run_simulation button {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+</style>
+""")
+
+with st.container(key="hero_actions"):
+    run = st.button(
+        "Run Simulation",
+        key="run_simulation",
+        type="primary",
+        icon=":material/arrow_forward:",
+        icon_position="right",
+        width=240
+    )
+
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,
@@ -838,9 +966,6 @@ def run_index_model():
   allocation_data = allocation_data[
         allocation_data["Allocation"] > 0
   ]
-  run = st.button(
-      "Run Simulation"
-  )
   @njit(cache=True)
   def run_path(
       acum_years,

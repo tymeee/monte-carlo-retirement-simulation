@@ -1839,7 +1839,7 @@ def run_index_model():
 # Remove the large Plotly title from inside the mobile chart.
 # We will display a cleaner title above the chart instead.
       mobile_fig.update_layout(
-        title=None,
+        title=dict(text="",x=0),
 
         autosize=True,
         height=560,
@@ -3213,7 +3213,8 @@ def run_company_model():
       )
 
       fig.update_xaxes(
-        title_text="Age"
+        title_text="Age",
+        range = [float(age_years),x=85)]
         )
 
       fig.update_yaxes(
@@ -3225,15 +3226,181 @@ def run_company_model():
         "Nominal Portfolio Value Projection"
       )
 
-      st.plotly_chart(
-        fig,
-        width="stretch",
-        config={
-            "responsive": True,
-            "displayModeBar": False
-        }
+            import copy
+
+      mobile_fig = copy.deepcopy(fig)
+
+# Remove the large Plotly title from inside the mobile chart.
+# We will display a cleaner title above the chart instead.
+      mobile_fig.update_layout(
+        title=dict(text="",x=0),
+
+        autosize=True,
+        height=560,
+
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(5,13,27,0.35)",
+
+        margin=dict(
+            l=48,
+            r=14,
+            t=125,
+            b=58
+        ),
+
+        legend=dict(
+            orientation="h",
+
+            x=0.5,
+            xanchor="center",
+
+            y=1.19,
+            yanchor="top",
+
+            font=dict(
+                size=10,
+                color="#D9E5F5"
+                ),
+
+            bgcolor="rgba(0,0,0,0)",
+
+        # Makes each legend item more compact
+            itemwidth=32
+        ),
+
+        hovermode="x unified",
+
+        hoverlabel=dict(
+            bgcolor="#0D1B31",
+            bordercolor="#315989",
+            font=dict(
+                size=11,
+                color="#F1F6FF"
+            )
+        )
+      )
+      mobile_fig.update_xaxes(
+        range=[
+            float(age_years),
+            85
+          ],
+
+        dtick=10,
+
+        title=dict(
+            text="Age",
+            font=dict(
+                size=12,
+                color="#DCE8F8"
+            )
+        ),
+
+        tickfont=dict(
+            size=10,
+            color="#A8BAD4"
+        ),
+
+        automargin=True,
+        showgrid=False,
+        zeroline=False
       )
 
+      mobile_fig.update_yaxes(
+        nticks=6,
+
+        title=dict(
+            text="Portfolio Value<br>(Million THB)",
+            font=dict(
+                size=11,
+                color="#DCE8F8"
+            )
+        ),
+
+        tickfont=dict(
+            size=10,
+            color="#A8BAD4"
+        ),
+
+        automargin=True,
+
+        gridcolor="rgba(140,180,235,0.13)",
+        zeroline=False
+      )
+
+      mobile_fig.update_layout(
+        annotations=[]
+      )
+
+      retirement_age = age_years + acum_years
+
+      mobile_fig.add_annotation(
+        x=retirement_age,
+        y=1.01,
+
+        xref="x",
+        yref="paper",
+
+        text="Retirement",
+        showarrow=False,
+
+        xanchor="left",
+        yanchor="bottom",
+
+        font=dict(
+            size=10,
+            color="#D9E5F5"
+        )
+      )
+
+      mobile_fig.add_annotation(
+        x=85,
+        y=1.01,
+
+        xref="x",
+        yref="paper",
+
+        text="Age 85",
+        showarrow=False,
+
+        xanchor="right",
+        yanchor="bottom",
+
+        font=dict(
+            size=10,
+            color="#D9E5F5"
+        )
+      )
+
+      # Desktop version
+      with st.container(key="projection_desktop"):
+        st.plotly_chart(
+            fig,
+            width="stretch",
+            key="projection_desktop_chart",
+            config={
+                "responsive": True,
+                "displayModeBar": False
+            }
+        )
+
+
+# Mobile version
+      with st.container(key="projection_mobile"):
+        st.html("""
+        <div class="mobile-chart-heading">
+            Nominal Portfolio Value Projection
+        </div>
+        """)
+
+        st.plotly_chart(
+            mobile_fig,
+            width="stretch",
+            key="projection_mobile_chart",
+            config={
+                "responsive": True,
+                "displayModeBar": False
+            }
+        )
       pie_fig = px.pie(
         allocation_data,
         names="Asset",

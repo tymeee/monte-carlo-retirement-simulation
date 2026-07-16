@@ -1155,6 +1155,10 @@ def run_index_model():
       st.error(
           "Weights exceed 100%"
       )
+      st.sidebar.error(
+        f"Allocated: {total_weight:.0%}. "
+        "Reduce the allocation to 100% or less."
+        )    
       st.stop()
   import pandas as pd
   import plotly.express as px

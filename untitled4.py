@@ -1606,12 +1606,12 @@ def run_company_model():
           portfolio_paths[day] = (
               kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + gcore_amt
               )
-        if day == acum_years * 252:
-           curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
-           if curnt_amt >= target:
-               goal_count = 1
-           else: 
-               goal_count = 0
+          if day == acum_years * 252:
+               curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
+               if curnt_amt >= target:
+                   goal_count = 1
+               else: 
+                   goal_count = 0
 
         return portfolio_paths,failed,goal_count
       days = (acum_years + retirement_years) * 252

@@ -2587,7 +2587,9 @@ def run_company_model():
     sp500a_alloc +
     gcore_alloc
   )
-
+  st.sidebar.write(
+      f"Total Weight: {total_alloc:.2f}"
+  )
   if total_alloc > 1:
     st.error("Allocations exceed 100%")
     st.stop()

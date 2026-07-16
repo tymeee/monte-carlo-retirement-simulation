@@ -1888,20 +1888,44 @@ def run_index_model():
         name="Final Portfolio Values"
        )
       )
-
       fig_hist.update_layout(
         title="Distribution of Final Portfolio Values",
         xaxis_title="Final Portfolio Value (Million THB)",
         yaxis_title="Number of Simulations",
-        bargap=0.05
-      )
-      fig_hist.update_xaxes(
-        tickmode="array",
-        tickvals=list(range(0, 121, 20)),
-        ticktext=[str(x) for x in range(0, 120, 20)] + ["120+"]
+        height=500,
+        bargap=0.03,
+        margin=dict(
+            l=75,
+            r=55,
+            t=85,
+            b=70
+        )
       )
 
-      st.plotly_chart(fig_hist, use_container_width=True)
+      x_min = np.min(ending_values_m)
+      x_max = np.max(ending_values_m)
+      x_padding = max((x_max - x_min) * 0.04, 1.0)
+
+      fig_hist.update_xaxes(
+        range=[
+            max(0, x_min - x_padding),
+            x_max + x_padding
+        ],
+        automargin=True
+      )
+
+      fig_hist.update_yaxes(
+        automargin=True
+      )
+
+      st.plotly_chart(
+        fig_hist,
+        width="stretch",
+        config={
+            "responsive": True,
+            "displayModeBar": False
+        }
+      )
 
 
       c1,c2,c3= st.columns(3)

@@ -2597,7 +2597,7 @@ def run_company_model():
   if total_alloc > 1:
     st.error("Allocations exceed 100%")
     st.sidebar.error(
-        f"Allocated: {total_weight:.0%}. "
+        f"Allocated: {total_alloc:.0%}. "
         "Reduce the allocation to 100% or less."
     )
     st.stop()

@@ -1584,21 +1584,6 @@ def run_company_model():
               failed = 1
               break
           if day % 252 == 0:
-            kkpplus_amt = kkpplus_amt * (1-kkpplus_managementfee)
-            kkpcash_amt = kkpcash_amt * (1-kkpcash_managementfee)
-            kfa_amt = kfa_amt * (1-kfa_mangementfee)
-            ugi_amt = ugi_amt * (1-ugisfx_managementfee)
-            gqg_amt = gqg_amt * (1-esgqg_managementfee)
-            gtech_amt = gtech_amt * (1-esgtech_managementfee)
-            eae_amt = eae_amt * (1-eseae_managementfee)
-            ktp_amt = ktp_amt * (1-ktprecious_managementfee)
-            rostrum_amt = rostrum_amt * (1-rostrum_managementfee)
-            gnph_amt = gnph_amt * (1-gnph_managementfee)
-            healthcarea_amt = healthcarea_amt * (1-healthcarea_managementfee)
-            propa_amt = propa_amt * (1-propa_managementfee)
-            sp500a_amt = sp500a_amt * (1-sp500a_managementfee)
-            gcore_amt = gcore_amt * (1-gcore_managementfee)
-          if day % 252 == 0:
               curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
               if curnt_amt * rostrum_alloc < 3000000 and rostrum_alloc != 0:
                   savings_alloc += rostrum_alloc

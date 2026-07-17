@@ -731,146 +731,390 @@ st.html(f"""
     </div>
 
     <div class="mc-logo-area">
-        <div class="mc-logo-glow"></div>
+        <div class="mc-logo-panel">
+            <div class="mc-logo-glow"></div>
 
-        <img
-            class="mc-bluebell-logo"
-            src="data:image/png;base64,{logo_base64}"
-            alt="Bluebell logo"
-        >
+            <img
+                class="mc-bluebell-logo"
+                src="data:image/png;base64,{logo_base64}"
+                alt="Bluebell logo"
+            >
+        </div>
     </div>
 </section>
 
 <style>
-.mc-hero{{
-    border-color: rgba(69, 111, 158, 0.35);
+/* =========================================================
+   LIGHT SILVER HERO
+   ========================================================= */
+
+.mc-hero {{
+    position: relative;
+
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(240px, 0.65fr);
+
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+
+    width: 100%;
+    min-height: 410px;
+
+    margin: 1rem 0 1.6rem;
+    padding: clamp(2.4rem, 5vw, 4.5rem);
+
+    overflow: hidden;
+
+    border: 1px solid rgba(93, 136, 187, 0.27);
+    border-radius: 28px;
 
     background:
         radial-gradient(
-            circle at 88% 25%,
-            rgba(179, 203, 228, 0.28),
-            transparent 35%
+            circle at 88% 15%,
+            rgba(179, 203, 228, 0.64),
+            transparent 24rem
         ),
         linear-gradient(
-            130deg,
+            135deg,
+            rgba(255, 255, 255, 0.97),
+            rgba(232, 236, 240, 0.96)
+        );
+
+    box-shadow:
+        0 24px 55px rgba(16, 35, 54, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+    box-sizing: border-box;
+}}
+
+
+/* Subtle grid texture */
+.mc-hero::before {{
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.28;
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(93, 136, 187, 0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(93, 136, 187, 0.08) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+}}
+
+
+/* Blue accent line */
+.mc-hero::after {{
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+
+    height: 4px;
+
+    border-radius: 0 0 999px 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #5d88bb 25%,
+            #b3cbe4 75%,
+            transparent
+        );
+}}
+
+
+.mc-hero-content,
+.mc-logo-area {{
+    position: relative;
+    z-index: 2;
+}}
+
+
+.mc-hero-content {{
+    max-width: 760px;
+}}
+
+
+/* Small upper label */
+.mc-eyebrow {{
+    display: inline-flex !important;
+    align-items: center;
+
+    width: fit-content !important;
+    max-width: 100%;
+
+    margin: 0 0 1.25rem !important;
+    padding: 0.52rem 0.9rem;
+
+    border: 1px solid rgba(93, 136, 187, 0.34);
+    border-radius: 999px;
+
+    background: rgba(179, 203, 228, 0.36);
+
+    color: #456f9e !important;
+
+    font-size: 0.76rem;
+    font-weight: 760;
+    line-height: 1;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+}}
+
+
+/* Main title */
+.mc-hero-title {{
+    max-width: 760px;
+
+    margin: 0 !important;
+
+    color: #102336 !important;
+
+    font-size: clamp(2.7rem, 5vw, 4.8rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.058em !important;
+
+    text-wrap: balance;
+}}
+
+
+/* Remove global h1 underline from hero title */
+.mc-hero-title::after {{
+    display: none !important;
+}}
+
+
+.mc-hero-title span {{
+    display: block;
+
+    margin-top: 0.16em;
+
+    color: #5d88bb !important;
+}}
+
+
+/* Description */
+.mc-hero-description {{
+    max-width: 670px;
+
+    margin: 1.45rem 0 0 !important;
+
+    color: #526579 !important;
+
+    font-size: clamp(1rem, 1.5vw, 1.13rem) !important;
+    font-weight: 450;
+    line-height: 1.75 !important;
+}}
+
+
+/* =========================================================
+   LOGO AREA
+   ========================================================= */
+
+.mc-logo-area {{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+}}
+
+
+.mc-logo-panel {{
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: min(100%, 310px);
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(93, 136, 187, 0.28);
+    border-radius: 30px;
+
+    background:
+        radial-gradient(
+            circle at 35% 25%,
+            rgba(179, 203, 228, 0.42),
+            transparent 55%
+        ),
+        linear-gradient(
+            145deg,
             #5d88bb,
             #456f9e
         );
 
     box-shadow:
-        0 26px 60px rgba(16, 35, 54, 0.20);
+        0 23px 48px rgba(69, 111, 158, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.24);
 }}
 
-.mc-eyebrow {{
-    border-color: rgba(255, 255, 255, 0.42);
-    background: rgba(255, 255, 255, 0.14);
-    color: #ffffff;
+
+.mc-logo-panel::before {{
+    content: "";
+
+    position: absolute;
+    inset: 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 22px;
+
+    pointer-events: none;
 }}
 
-.mc-hero-title,
-.mc-hero-title span {{
-    color: #ffffff;
-}}
-
-.mc-hero-description {{
-    color: #eef3f8;
-}}
-
-.mc-logo-area {{
-    position: relative;
-    z-index: 1;
-}}
-
-.mc-hero-content {{
-    max-width: 850px;
-}}
-
-.mc-hero-description {{
-    max-width: 720px;
-    margin: 1.5rem 0 1.8rem;
-
-    color: #aebed5;
-    font-size: 1.05rem;
-    line-height: 1.72;
-}}
-
-.mc-badges {{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.65rem;
-}}
-
-.mc-badges span {{
-    padding: 0.5rem 0.8rem;
-
-    border: 1px solid rgba(134, 177, 236, 0.14);
-    border-radius: 999px;
-
-    background: rgba(255, 255, 255, 0.04);
-    color: #c5d5e9;
-
-    font-size: 0.82rem;
-}}
-
-/* Right-side logo area */
-.mc-logo-area {{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 230px;
-}}
 
 .mc-bluebell-logo {{
     position: relative;
     z-index: 2;
+
     display: block;
 
-    width: min(100%, 280px);
-    max-height: 180px;
+    width: 68%;
+    max-height: 190px;
+
     object-fit: contain;
 
     filter:
-        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
+        drop-shadow(0 17px 28px rgba(16, 35, 54, 0.28));
 }}
+
 
 .mc-logo-glow {{
     position: absolute;
-    width: 260px;
-    height: 260px;
+
+    width: 85%;
+    height: 85%;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(79, 140, 255, 0.23),
-            rgba(56, 189, 248, 0.08) 45%,
-            transparent 70%
+            rgba(255, 255, 255, 0.25),
+            rgba(179, 203, 228, 0.13) 45%,
+            transparent 72%
         );
 
-    filter: blur(8px);
+    filter: blur(10px);
 }}
 
-@media (max-width: 900px) {{
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {{
     .mc-hero {{
-        grid-template-columns: 1fr;
-        padding: 2.3rem 1.6rem;
+        grid-template-columns:
+            minmax(0, 1.2fr)
+            minmax(210px, 0.55fr);
+
+        gap: 2rem;
+        min-height: 370px;
+        padding: 3rem 2.5rem;
+    }}
+
+    .mc-logo-panel {{
+        width: min(100%, 250px);
+        border-radius: 25px;
+    }}
+}}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {{
+    .mc-hero {{
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+        gap: 2rem;
+
+        min-height: auto;
+
+        margin-top: 0.4rem;
+        padding: 2.2rem 1.35rem 1.6rem;
+
+        border-radius: 22px;
+    }}
+
+    .mc-eyebrow {{
+        margin-bottom: 1rem !important;
+        padding: 0.48rem 0.72rem;
+
+        font-size: 0.66rem;
+        letter-spacing: 0.1em;
+
+        white-space: normal;
+    }}
+
+    .mc-hero-title {{
+        font-size: clamp(2.35rem, 12vw, 3.35rem) !important;
+        line-height: 1.04 !important;
+        letter-spacing: -0.05em !important;
+    }}
+
+    .mc-hero-description {{
+        margin-top: 1.2rem !important;
+
+        font-size: 0.98rem !important;
+        line-height: 1.65 !important;
     }}
 
     .mc-logo-area {{
-        min-height: 150px;
-        justify-content: flex-start;
+        justify-content: center;
+    }}
+
+    .mc-logo-panel {{
+        width: min(76vw, 245px);
+        border-radius: 24px;
     }}
 
     .mc-bluebell-logo {{
-        width: 190px;
-        max-height: 120px;
+        width: 68%;
+        max-height: 150px;
+    }}
+}}
+
+
+@media (max-width: 420px) {{
+    .mc-hero {{
+        padding:
+            1.85rem
+            1rem
+            1.3rem;
+
+        border-radius: 18px;
     }}
 
-    .mc-logo-glow {{
-        width: 190px;
-        height: 190px;
+    .mc-hero-title {{
+        font-size: 2.25rem !important;
+    }}
+
+    .mc-logo-panel {{
+        width: min(78vw, 220px);
     }}
 }}
 </style>

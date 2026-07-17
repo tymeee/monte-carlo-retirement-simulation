@@ -51,840 +51,372 @@ if logo_path.exists():
 else:
     logo_base64 = ""
 
-st.markdown(
-    """
-    <style>
-    /* =========================================================
-       BLUEBELL SILVER-BLUE THEME
-       Main palette:
-       Navy       #102336
-       Main blue  #5D88BB
-       Light blue #B3CBE4
-       White      #FFFFFF
-       Silver     #D6D6D6
-       Muted      #A1A8B2
-       ========================================================= */
+st.html("""
+<style>
+:root {
+    --bg-main: #050b18;
+    --bg-secondary: #081426;
+    --surface: rgba(14, 30, 52, 0.76);
+    --surface-strong: #0d1b31;
+    --surface-hover: #122642;
+    --border: rgba(140, 180, 235, 0.14);
+    --border-bright: rgba(96, 165, 250, 0.32);
+    --primary: #4f8cff;
+    --primary-bright: #79a8ff;
+    --cyan: #38bdf8;
+    --text-main: #f1f6ff;
+    --text-secondary: #a8bad4;
+    --text-muted: #7086a4;
+    --positive: #37d49b;
+    --negative: #ff6b81;
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+}
 
-    :root {
-        --bb-navy: #102336;
-        --bb-navy-deep: #081725;
-        --bb-navy-light: #19344f;
+/* Mobile chart is hidden on desktop */
+.st-key-projection_mobile {
+    display: none;
+}
 
-        --bb-blue: #5d88bb;
-        --bb-blue-hover: #709ac8;
-        --bb-blue-dark: #456f9e;
+/* Mobile chart title */
+.mobile-chart-heading {
+    margin: 0.5rem 0 0.1rem;
+    padding-left: 0.35rem;
 
-        --bb-light-blue: #b3cbe4;
-        --bb-white: #ffffff;
-        --bb-silver: #d6d6d6;
-        --bb-muted: #a1a8b2;
+    color: #f1f6ff;
 
-        --bb-card:
-            linear-gradient(
-                145deg,
-                rgba(30, 59, 88, 0.96),
-                rgba(16, 35, 54, 0.95)
-            );
+    font-size: 1.15rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+}
 
-        --bb-card-hover:
-            linear-gradient(
-                145deg,
-                rgba(39, 73, 106, 0.98),
-                rgba(20, 43, 66, 0.97)
-            );
 
-        --bb-border: rgba(179, 203, 228, 0.20);
-        --bb-border-hover: rgba(179, 203, 228, 0.48);
-        --bb-shadow: 0 20px 55px rgba(2, 10, 18, 0.30);
+@media (max-width: 768px) {
+
+    /* Hide desktop figure */
+    .st-key-projection_desktop {
+        display: none !important;
     }
 
-
-    /* =========================================================
-       MAIN PAGE
-       ========================================================= */
-
-    html,
-    body,
-    .stApp,
-    [data-testid="stAppViewContainer"] {
-        background:
-            radial-gradient(
-                circle at 12% 0%,
-                rgba(93, 136, 187, 0.28),
-                transparent 34rem
-            ),
-            radial-gradient(
-                circle at 92% 24%,
-                rgba(179, 203, 228, 0.10),
-                transparent 30rem
-            ),
-            linear-gradient(
-                155deg,
-                #102336 0%,
-                #0c1d2f 58%,
-                #07131f 100%
-            ) !important;
-
-        color: var(--bb-white) !important;
+    /* Show mobile figure */
+    .st-key-projection_mobile {
+        display: block !important;
     }
 
-    [data-testid="stAppViewContainer"] {
-        min-height: 100vh;
-    }
-
+    /* Give the page more usable mobile width */
     .block-container {
-        width: 100%;
-        max-width: 1220px;
-
-        padding-top: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        padding-bottom: 4rem;
+        padding-left: 0.55rem !important;
+        padding-right: 0.55rem !important;
+        padding-top: 0.8rem !important;
     }
 
-
-    /* =========================================================
-       STREAMLIT HEADER
-       Keep it visible so the mobile sidebar control still works
-       ========================================================= */
-
-    [data-testid="stHeader"] {
-        background: rgba(8, 23, 37, 0.80) !important;
-        border-bottom: 1px solid rgba(179, 203, 228, 0.12);
-
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+    /* Tighter chart card */
+    .st-key-projection_mobile [data-testid="stPlotlyChart"] {
+        padding: 0.2rem !important;
+        border-radius: 17px !important;
     }
 
-    #MainMenu,
-    footer {
-        visibility: hidden;
+    .st-key-projection_mobile .js-plotly-plot,
+    .st-key-projection_mobile .plot-container,
+    .st-key-projection_mobile .svg-container {
+        width: 100% !important;
+        max-width: 100% !important;
     }
+}
 
-    [data-testid="stToolbar"] {
-        color: var(--bb-light-blue) !important;
-    }
+/* Entire application */
+html,
+body,
+[data-testid="stAppViewContainer"],
+.stApp {
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(38, 91, 168, 0.26),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 88% 8%,
+            rgba(16, 125, 171, 0.15),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #040914 0%,
+            #071121 45%,
+            #050b18 100%
+        );
+    color: var(--text-main);
+}
 
+/* Main page width */
+.block-container {
+    max-width: 1500px;
+    padding-top: 1.3rem;
+    padding-left: 2.2rem;
+    padding-right: 2.2rem;
+    padding-bottom: 5rem;
+}
 
-    /* =========================================================
-       TEXT AND HEADINGS
-       ========================================================= */
-
-    h1 {
-        margin-bottom: 0.8rem !important;
-
-        color: var(--bb-white) !important;
-
-        font-size: clamp(2.25rem, 4vw, 3.8rem) !important;
-        font-weight: 780 !important;
-        line-height: 1.06 !important;
-        letter-spacing: -0.045em !important;
-    }
-
-    h1::after {
-        content: "";
-        display: block;
-
-        width: 76px;
-        height: 4px;
-
-        margin-top: 0.8rem;
-
-        border-radius: 999px;
-
-        background:
-            linear-gradient(
-                90deg,
-                var(--bb-blue),
-                var(--bb-light-blue)
-            );
-
-        box-shadow: 0 0 18px rgba(93, 136, 187, 0.28);
-    }
-
-    h2,
-    h3,
-    h4 {
-        color: var(--bb-white) !important;
-        letter-spacing: -0.025em !important;
-    }
-
-    [data-testid="stMarkdownContainer"] p,
-    [data-testid="stCaptionContainer"] {
-        color: var(--bb-silver) !important;
-        line-height: 1.65;
-    }
-
-    a {
-        color: var(--bb-light-blue) !important;
-    }
+/* Reduce default Streamlit appearance */
+[data-testid="stHeader"] {
+    background: transparent;
+}
 
 
-    /* =========================================================
-       OPTIONAL DATA NOTE / DISCLAIMER
-       Works with <div class="fund-data-note">...</div>
-       ========================================================= */
+#MainMenu,
+footer {
+    display: none !important;
+}
 
-    .fund-data-note {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.7rem;
+/* Keep the top header transparent */
+[data-testid="stHeader"] {
+    background: transparent !important;
+}
 
-        width: fit-content;
-        max-width: 100%;
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
+}
 
-        margin: 0.5rem 0 1.8rem;
-        padding: 0.8rem 1rem;
+/* Sidebar control panel */
+[data-testid="stSidebar"] {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(8, 19, 37, 0.98),
+            rgba(5, 13, 27, 0.98)
+        );
+    border-right: 1px solid var(--border);
+    box-shadow: 12px 0 35px rgba(0, 0, 0, 0.22);
+}
 
-        border: 1px solid rgba(179, 203, 228, 0.20);
-        border-radius: 14px;
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 1.5rem;
+}
 
-        background:
-            linear-gradient(
-                135deg,
-                rgba(93, 136, 187, 0.15),
-                rgba(16, 35, 54, 0.68)
-            );
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
 
-        color: var(--bb-silver);
-        font-size: 0.88rem;
-        line-height: 1.5;
+/* Main headings */
+h1, h2, h3 {
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    color: var(--text-main);
+}
 
-        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
-    }
+h1 {
+    font-weight: 750 !important;
+    letter-spacing: -0.045em !important;
+}
 
-    .fund-data-note::before {
-        content: "i";
+h2 {
+    font-weight: 680 !important;
+    letter-spacing: -0.025em !important;
+}
 
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 auto;
+/* Paragraphs and labels */
+p,
+label,
+[data-testid="stWidgetLabel"] {
+    color: var(--text-secondary);
+}
 
-        width: 21px;
-        height: 21px;
+/* Metric cards */
+[data-testid="stMetric"] {
+    min-height: 135px;
+    padding: 1.35rem 1.4rem;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 66, 0.90),
+            rgba(8, 21, 40, 0.88)
+        );
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(14px);
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
 
-        border: 1px solid rgba(179, 203, 228, 0.55);
-        border-radius: 50%;
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-bright);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+}
 
-        color: var(--bb-light-blue);
+[data-testid="stMetricLabel"] {
+    color: var(--text-secondary);
+    font-weight: 550;
+}
 
-        font-size: 0.75rem;
-        font-weight: 750;
-    }
+[data-testid="stMetricValue"] {
+    color: var(--text-main);
+    font-size: 2rem;
+    font-weight: 720;
+    letter-spacing: -0.035em;
+}
 
+/* Standard buttons */
+.stButton > button {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid rgba(133, 178, 255, 0.3);
+    border-radius: 13px;
+    background:
+        linear-gradient(
+            100deg,
+            #316edc,
+            #4f8cff 55%,
+            #388fdf
+        );
+    color: white;
+    font-size: 0.98rem;
+    font-weight: 680;
+    box-shadow: 0 12px 30px rgba(49, 110, 220, 0.28);
+    transition:
+        transform 160ms ease,
+        box-shadow 160ms ease,
+        filter 160ms ease;
+}
 
-    /* =========================================================
-       SIDEBAR
-       ========================================================= */
+.stButton > button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 16px 38px rgba(49, 110, 220, 0.42);
+}
 
-    [data-testid="stSidebar"] {
-        background:
-            radial-gradient(
-                circle at 20% 0%,
-                rgba(93, 136, 187, 0.18),
-                transparent 18rem
-            ),
-            linear-gradient(
-                180deg,
-                #102336,
-                #081725
-            ) !important;
+.stButton > button:active {
+    transform: translateY(0);
+}
 
-        border-right: 1px solid rgba(179, 203, 228, 0.17);
-    }
+/* Number inputs */
+[data-testid="stNumberInput"] input {
+    background: rgba(9, 24, 44, 0.9);
+    color: var(--text-main);
+    border-color: var(--border);
+    border-radius: 11px;
+}
 
-    [data-testid="stSidebar"] .block-container {
-        padding-top: 1.4rem;
+/* Selects and multiselects */
+div[data-baseweb="select"] > div {
+    background: rgba(9, 24, 44, 0.9);
+    border-color: var(--border);
+    border-radius: 11px;
+}
+
+/* Radio buttons */
+[data-testid="stRadio"] {
+    padding: 0.45rem 0;
+}
+
+/* Sliders */
+[data-testid="stSlider"] {
+    padding-top: 0.15rem;
+    padding-bottom: 0.55rem;
+}
+
+/* Tabs */
+button[data-baseweb="tab"] {
+    color: var(--text-secondary);
+    font-weight: 600;
+    border-radius: 10px 10px 0 0;
+}
+
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary-bright);
+}
+
+/* Plotly chart cards */
+[data-testid="stPlotlyChart"] {
+    width: 100%;
+    overflow: hidden;
+    padding: 1rem;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(13, 31, 55, 0.82),
+            rgba(7, 18, 35, 0.82)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+
+    box-sizing: border-box;
+}
+
+/* Force the embedded Plotly element to use the available width */
+[data-testid="stPlotlyChart"] > div {
+    width: 100% !important;
+}
+
+[data-testid="stPlotlyChart"] .js-plotly-plot,
+[data-testid="stPlotlyChart"] .plot-container,
+[data-testid="stPlotlyChart"] .svg-container {
+    width: 100% !important;
+}
+
+/* Dataframes */
+[data-testid="stDataFrame"] {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+/* Dividers */
+hr {
+    border-color: var(--border);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050b18;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1d3658;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #2e5181;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .block-container {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
-    [data-testid="stSidebar"] h1,
-    [data-testid="stSidebar"] h2,
-    [data-testid="stSidebar"] h3 {
-        color: var(--bb-white) !important;
-    }
-
-    [data-testid="stSidebar"] h1::after {
-        display: none;
-    }
-
-    /* Sidebar title only */
-    [data-testid="stSidebar"] h1 {
-        font-size: 2rem !important;
-        line-height: 1.1 !important;
-        letter-spacing: -0.03em !important;
-        font-weight: 750 !important;
-    
-        margin-top: 0 !important;
-        margin-bottom: 1.4rem !important;
-    
-        overflow-wrap: normal !important;
-        word-break: normal !important;
-        hyphens: none !important;
-    }
-    
-    /* Remove the decorative line below sidebar titles */
-    [data-testid="stSidebar"] h1::after {
-        display: none !important;
-    }
-
-    [data-testid="stSidebar"] p,
-    [data-testid="stSidebar"] label {
-        color: var(--bb-silver) !important;
-    }
-
-    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
-        color: var(--bb-light-blue) !important;
-
-        font-size: 0.91rem !important;
-        font-weight: 650 !important;
-    }
-
-
-    /* Automatic multipage navigation */
-
-    [data-testid="stSidebarNav"] a {
-        margin-bottom: 0.3rem;
-        padding: 0.65rem 0.75rem;
-
-        border: 1px solid transparent;
-        border-radius: 12px;
-
-        color: var(--bb-silver) !important;
-
-        transition:
-            background 160ms ease,
-            border-color 160ms ease,
-            transform 160ms ease;
-    }
-
-    [data-testid="stSidebarNav"] a:hover {
-        transform: translateX(3px);
-
-        border-color: rgba(179, 203, 228, 0.22);
-
-        background: rgba(93, 136, 187, 0.16);
-    }
-
-    [data-testid="stSidebarNav"] a[aria-current="page"] {
-        border-color: rgba(179, 203, 228, 0.40);
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(93, 136, 187, 0.45),
-                rgba(35, 69, 103, 0.60)
-            );
-
-        color: var(--bb-white) !important;
-
-        box-shadow:
-            inset 3px 0 0 var(--bb-light-blue),
-            0 8px 24px rgba(0, 0, 0, 0.17);
-    }
-
-
-    /* Fund-selection radio options */
-
-    [data-testid="stSidebar"] [data-baseweb="radio"] {
-        width: 100%;
-
-        margin-bottom: 0.34rem;
-        padding: 0.67rem 0.75rem;
-
-        border: 1px solid transparent;
-        border-radius: 12px;
-
-        background: rgba(20, 46, 71, 0.52);
-
-        transition:
-            background 160ms ease,
-            border-color 160ms ease,
-            transform 160ms ease;
-    }
-
-    [data-testid="stSidebar"] [data-baseweb="radio"]:hover {
-        transform: translateX(3px);
-
-        border-color: rgba(179, 203, 228, 0.22);
-
-        background: rgba(36, 69, 101, 0.70);
-    }
-
-    [data-testid="stSidebar"]
-    [data-baseweb="radio"]:has(input:checked) {
-        border-color: rgba(179, 203, 228, 0.50);
-
-        background:
-            linear-gradient(
-                135deg,
-                rgba(93, 136, 187, 0.58),
-                rgba(55, 91, 126, 0.72)
-            );
-
-        box-shadow:
-            inset 3px 0 0 var(--bb-light-blue),
-            0 9px 26px rgba(0, 0, 0, 0.20);
-    }
-
-    [data-testid="stSidebar"] [data-baseweb="radio"] p {
-        color: var(--bb-white) !important;
-        font-size: 0.91rem;
-        line-height: 1.3;
-    }
-
-
-    /* =========================================================
-       INPUTS, SELECTBOXES AND NUMBER INPUTS
-       ========================================================= */
-
-    [data-baseweb="select"] > div,
-    [data-testid="stNumberInput"] input,
-    [data-testid="stTextInput"] input {
-        min-height: 47px;
-
-        border: 1px solid rgba(179, 203, 228, 0.22) !important;
-        border-radius: 13px !important;
-
-        background: rgba(20, 46, 71, 0.82) !important;
-        color: var(--bb-white) !important;
-
-        box-shadow: none !important;
-    }
-
-    [data-baseweb="select"] > div:hover,
-    [data-testid="stNumberInput"] input:hover,
-    [data-testid="stTextInput"] input:hover {
-        border-color: rgba(179, 203, 228, 0.42) !important;
-    }
-
-    [data-baseweb="select"] > div:focus-within,
-    [data-testid="stNumberInput"] input:focus,
-    [data-testid="stTextInput"] input:focus {
-        border-color: var(--bb-blue) !important;
-
-        box-shadow:
-            0 0 0 3px rgba(93, 136, 187, 0.16) !important;
-    }
-
-    [data-baseweb="popover"],
-    [data-baseweb="menu"] {
-        background: #132c44 !important;
-        color: var(--bb-white) !important;
-    }
-
-    [role="option"] {
-        color: var(--bb-silver) !important;
-    }
-
-    [role="option"]:hover,
-    [aria-selected="true"] {
-        background: rgba(93, 136, 187, 0.25) !important;
-        color: var(--bb-white) !important;
-    }
-
-
-    /* =========================================================
-       SLIDERS
-       ========================================================= */
-
-    [data-testid="stSlider"] [data-baseweb="slider"] > div > div {
-        background: rgba(179, 203, 228, 0.23) !important;
-    }
-
-    [data-testid="stSlider"] [role="slider"] {
-        border: 2px solid var(--bb-white) !important;
-        background: var(--bb-blue) !important;
-
-        box-shadow: 0 4px 14px rgba(2, 10, 18, 0.30);
-    }
-
-
-    /* =========================================================
-       METRIC CARDS
-       ========================================================= */
-
-    [data-testid="stHorizontalBlock"] {
-        gap: 1rem;
-    }
-
     [data-testid="stMetric"] {
-        min-height: 132px;
-        padding: 1.3rem 1.4rem;
-
-        border: 1px solid var(--bb-border);
-        border-radius: 20px;
-
-        background: var(--bb-card);
-
-        box-shadow:
-            var(--bb-shadow),
-            inset 0 1px 0 rgba(255, 255, 255, 0.035);
-
-        transition:
-            transform 180ms ease,
-            border-color 180ms ease,
-            background 180ms ease;
+        min-height: 110px;
     }
-
-    [data-testid="stMetric"]:hover {
-        transform: translateY(-3px);
-
-        border-color: var(--bb-border-hover);
-        background: var(--bb-card-hover);
-    }
-
-    [data-testid="stMetricLabel"] p {
-        color: var(--bb-light-blue) !important;
-
-        font-size: 0.91rem !important;
-        font-weight: 550 !important;
-        line-height: 1.35 !important;
-    }
-
-    [data-testid="stMetricValue"] {
-        color: var(--bb-white) !important;
-
-        font-size: clamp(1.75rem, 3vw, 2.45rem) !important;
-        font-weight: 750 !important;
-        letter-spacing: -0.035em;
-    }
-
-    [data-testid="stMetricDelta"] {
-        color: var(--bb-silver) !important;
-    }
-
-
-    /* =========================================================
-       BUTTONS AND DOWNLOAD BUTTONS
-       ========================================================= */
-
-    .stButton > button,
-    [data-testid="stDownloadButton"] > button,
-    [data-testid="stFormSubmitButton"] > button {
-        width: 100%;
-        min-height: 50px;
-
-        border: 1px solid rgba(179, 203, 228, 0.40) !important;
-        border-radius: 15px !important;
-
-        background:
-            linear-gradient(
-                135deg,
-                #5d88bb,
-                #4a74a3
-            ) !important;
-
-        color: var(--bb-white) !important;
-
-        font-size: 0.96rem !important;
-        font-weight: 680 !important;
-
-        box-shadow:
-            0 14px 32px rgba(2, 10, 18, 0.30),
-            inset 0 1px 0 rgba(255, 255, 255, 0.16);
-
-        transition:
-            transform 170ms ease,
-            border-color 170ms ease,
-            background 170ms ease,
-            box-shadow 170ms ease;
-    }
-
-    .stButton > button:hover,
-    [data-testid="stDownloadButton"] > button:hover,
-    [data-testid="stFormSubmitButton"] > button:hover {
-        transform: translateY(-2px);
-
-        border-color: var(--bb-light-blue) !important;
-
-        background:
-            linear-gradient(
-                135deg,
-                #709ac8,
-                #5d88bb
-            ) !important;
-
-        color: var(--bb-white) !important;
-
-        box-shadow:
-            0 18px 38px rgba(2, 10, 18, 0.36),
-            inset 0 1px 0 rgba(255, 255, 255, 0.20);
-    }
-
-    .stButton > button:active,
-    [data-testid="stDownloadButton"] > button:active,
-    [data-testid="stFormSubmitButton"] > button:active {
-        transform: translateY(0);
-    }
-
-    .stButton > button:focus,
-    .stButton > button:focus-visible,
-    [data-testid="stDownloadButton"] > button:focus,
-    [data-testid="stDownloadButton"] > button:focus-visible {
-        outline: none !important;
-
-        box-shadow:
-            0 0 0 3px rgba(179, 203, 228, 0.18),
-            0 14px 32px rgba(2, 10, 18, 0.30) !important;
-    }
-
-    .stButton > button:disabled,
-    [data-testid="stDownloadButton"] > button:disabled {
-        border-color: rgba(161, 168, 178, 0.20) !important;
-        background: rgba(84, 102, 121, 0.34) !important;
-        color: rgba(214, 214, 214, 0.50) !important;
-
-        box-shadow: none !important;
-        transform: none !important;
-    }
-
-
-    /* =========================================================
-       PLOTLY CHART CARDS
-       ========================================================= */
-
-    [data-testid="stPlotlyChart"] {
-        margin: 1rem 0 1.6rem;
-        padding: 0.7rem;
-
-        overflow: hidden;
-
-        border: 1px solid var(--bb-border);
-        border-radius: 22px;
-
-        background:
-            linear-gradient(
-                145deg,
-                rgba(25, 52, 79, 0.94),
-                rgba(10, 27, 43, 0.94)
-            );
-
-        box-shadow:
-            0 24px 65px rgba(2, 10, 18, 0.30),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03);
-    }
-
-    [data-testid="stPlotlyChart"] .js-plotly-plot,
-    [data-testid="stPlotlyChart"] .plot-container,
-    [data-testid="stPlotlyChart"] .svg-container {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-
-    [data-testid="stPlotlyChart"] .main-svg {
-        background: transparent !important;
-    }
-
-    [data-testid="stPlotlyChart"] .main-svg .bg {
-        fill: rgba(8, 23, 37, 0.46) !important;
-    }
-
-    [data-testid="stPlotlyChart"] .gridlayer path {
-        stroke: rgba(179, 203, 228, 0.13) !important;
-    }
-
-    [data-testid="stPlotlyChart"] .zerolinelayer path {
-        stroke: rgba(179, 203, 228, 0.22) !important;
-    }
-
-    [data-testid="stPlotlyChart"] .xtick text,
-    [data-testid="stPlotlyChart"] .ytick text,
-    [data-testid="stPlotlyChart"] .xtitle,
-    [data-testid="stPlotlyChart"] .ytitle,
-    [data-testid="stPlotlyChart"] .gtitle,
-    [data-testid="stPlotlyChart"] .legendtext {
-        fill: var(--bb-silver) !important;
-    }
-
-
-    /* =========================================================
-       ALERTS
-       ========================================================= */
-
-    [data-testid="stAlert"] {
-        border: 1px solid rgba(179, 203, 228, 0.24);
-        border-radius: 14px;
-
-        background: rgba(25, 52, 79, 0.84);
-        color: var(--bb-white);
-
-        box-shadow: 0 12px 30px rgba(2, 10, 18, 0.20);
-    }
-
-    [data-testid="stAlert"] p {
-        color: var(--bb-silver) !important;
-    }
-
-
-    /* =========================================================
-       EXPANDERS
-       ========================================================= */
-
-    [data-testid="stExpander"] {
-        overflow: hidden;
-
-        border: 1px solid var(--bb-border) !important;
-        border-radius: 15px !important;
-
-        background: rgba(20, 46, 71, 0.64) !important;
-    }
-
-    [data-testid="stExpander"] summary {
-        color: var(--bb-white) !important;
-    }
-
-
-    /* =========================================================
-       DATAFRAMES AND TABLES
-       ========================================================= */
-
-    [data-testid="stDataFrame"] {
-        overflow: hidden;
-
-        border: 1px solid var(--bb-border);
-        border-radius: 16px;
-
-        background: rgba(16, 35, 54, 0.82);
-    }
-
-
-    /* =========================================================
-       MOBILE SIDEBAR CONTROL
-       ========================================================= */
-
-    [data-testid="stSidebarCollapsedControl"],
-    [data-testid="stExpandSidebarButton"] {
-        visibility: visible !important;
-        opacity: 1 !important;
-
-        z-index: 999999 !important;
-
-        border: 1px solid rgba(179, 203, 228, 0.34) !important;
-        border-radius: 12px !important;
-
-        background: rgba(16, 35, 54, 0.94) !important;
-        color: var(--bb-white) !important;
-
-        box-shadow: 0 8px 24px rgba(2, 10, 18, 0.28);
-    }
-
-    [data-testid="stSidebarCollapsedControl"] svg,
-    [data-testid="stExpandSidebarButton"] svg {
-        fill: var(--bb-white) !important;
-        color: var(--bb-white) !important;
-    }
-
-
-    /* =========================================================
-       MOBILE LAYOUT
-       ========================================================= */
-
-    @media (max-width: 768px) {
-
-        .block-container {
-            padding-top: 1.15rem;
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
-            padding-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 2.15rem !important;
-            line-height: 1.08 !important;
-            letter-spacing: -0.035em !important;
-        }
-
-        h1::after {
-            width: 55px;
-            height: 3px;
-        }
-
-        .fund-data-note {
-            width: 100%;
-
-            margin-bottom: 1.2rem;
-            padding: 0.7rem 0.8rem;
-
-            font-size: 0.81rem;
-        }
-
-        /*
-           Stack metric columns so they remain readable on phones.
-        */
-        [data-testid="stHorizontalBlock"] {
-            flex-direction: column !important;
-            gap: 0.7rem !important;
-        }
-
-        [data-testid="column"] {
-            width: 100% !important;
-            flex: 1 1 100% !important;
-        }
-
-        [data-testid="stMetric"] {
-            min-height: 104px;
-            padding: 1rem 1.05rem;
-
-            border-radius: 16px;
-        }
-
-        [data-testid="stMetricValue"] {
-            font-size: 1.8rem !important;
-        }
-
-        [data-testid="stMetricLabel"] p {
-            font-size: 0.82rem !important;
-        }
-
-        [data-testid="stPlotlyChart"] {
-            margin: 0.8rem 0 1.1rem;
-            padding: 0.15rem;
-
-            border-radius: 17px;
-        }
-
-        [data-testid="stSidebar"] {
-            width: min(88vw, 350px) !important;
-        }
-
-        [data-testid="stSidebar"] [data-baseweb="radio"] {
-            padding: 0.72rem 0.7rem;
-        }
-
-        .stButton > button,
-        [data-testid="stDownloadButton"] > button {
-            min-height: 48px;
-            border-radius: 14px !important;
-        }
-    }
-
-
-    @media (max-width: 420px) {
-
-        .block-container {
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
-
-        h1 {
-            font-size: 1.9rem !important;
-        }
-
-        [data-testid="stMetric"] {
-            min-height: 98px;
-        }
-
-        [data-testid="stPlotlyChart"] {
-            border-radius: 14px;
-        }
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+}
+</style>
+""")
 
 st.html(f"""
 <section class="mc-hero">
@@ -997,7 +529,7 @@ st.html(f"""
     margin: 0;
     color: #f5f8ff;
 
-    font-size: clamp(2.1rem, 5vw, 4.5rem);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 1.02;
     font-weight: 790;
     letter-spacing: -0.055em;

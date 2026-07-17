@@ -117,7 +117,9 @@ if fund == "KKP Plus":
         0.7628
     ]
     pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
-    st.plotly_chart(pie_fig, use_container_width = True)
+
+
+    st.plotly_chart(pie_fig, width = "stretch",config={"responsive":True,"displayModeBar":False})
     col1, col2, col3 = st.columns(3)
     col1.metric(label="Main Asset Class", value="Bonds/Treasury Bills")
     

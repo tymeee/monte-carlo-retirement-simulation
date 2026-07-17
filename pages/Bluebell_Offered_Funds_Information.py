@@ -99,6 +99,14 @@ st.markdown(
         visibility: hidden;
     }
 
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stExpandSidebarButton"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        z-index: 999999 !important;
+    }
+
 
     /* =========================================
        PAGE TITLES

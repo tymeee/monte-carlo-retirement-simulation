@@ -1701,10 +1701,6 @@ def run_index_model():
 
                       assets[5] -= withdrawal_amount
 
-                  elif assets[11] >= withdrawal_amount:
-
-                      assets[11] -= withdrawal_amount
-
                   elif assets[3] >= withdrawal_amount:
 
                       assets[3] -= withdrawal_amount

@@ -4186,7 +4186,7 @@ def run_company_model():
         "Median Portfolio Value at Retirement": f"THB{median_retirement_wealth:.0f}",
         "Portfolio failure rate": f"{failure_rate:.1f}%",
         "Inflation-adjusted median value":
-            f"THB {inflation_adjusted_median:,.0f}",
+            f"THB {median/((1+avg_inflation_rate)**(duration/252)):,.0f}",
         "Median maximum drawdown": f"{median_dd:.1%}",
         "Median-line annualized return":
             (

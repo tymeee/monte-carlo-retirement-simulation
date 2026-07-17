@@ -40,7 +40,7 @@ fund = st.sidebar.radio(
 
 if fund == "KKP Plus":
     st.title("KKP Plus")
-    col1, col2, col3 = st.columns(3)
+    c1, c2, c3 = st.columns(3)
 
     c1.metric( 
         label = "1 year return (2025)",

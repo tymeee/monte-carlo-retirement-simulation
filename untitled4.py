@@ -930,15 +930,31 @@ def chart_to_png_buffer(
         )
     )
 
+    report_figure.update_layout(
+        legend=dict(
+            font=dict(
+                size=18,
+                color="#20354F",
+                family="Arial"
+            ),
+        title=dict(
+            font=dict(
+                size=18,
+                color="#20354F"
+                )
+            )
+        )
+    )
+
     report_figure.update_xaxes(
-        gridcolor="#041224",
+        gridcolor="#DCE4EE",
         linecolor="#8CA0B8",
         tickfont=dict(color="#405670"),
         title_font=dict(color="#405670")
     )
 
     report_figure.update_yaxes(
-        gridcolor="#041224",
+        gridcolor="#DCE4EE",
         linecolor="#8CA0B8",
         tickfont=dict(color="#405670"),
         title_font=dict(color="#405670")

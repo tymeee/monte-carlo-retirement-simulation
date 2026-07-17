@@ -845,6 +845,60 @@ def style_line_chart(fig, title):
     )
 
     return fig
+def chart_to_png_buffer(
+    figure,
+    width: int = 1400,
+    height: int = 750
+) -> BytesIO:
+    """Convert a Plotly figure into a print-friendly PNG buffer."""
+
+    report_figure = deepcopy(figure)
+
+    report_figure.update_layout(
+        template="plotly_white",
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        font=dict(
+            color="#20354F",
+            size=14
+        ),
+        title_font=dict(
+            color="#102A4C",
+            size=22
+        ),
+        margin=dict(
+            l=90,
+            r=50,
+            t=90,
+            b=80
+        )
+    )
+
+    report_figure.update_xaxes(
+        gridcolor="#DCE4EE",
+        linecolor="#8CA0B8",
+        tickfont=dict(color="#405670"),
+        title_font=dict(color="#405670")
+    )
+
+    report_figure.update_yaxes(
+        gridcolor="#DCE4EE",
+        linecolor="#8CA0B8",
+        tickfont=dict(color="#405670"),
+        title_font=dict(color="#405670")
+    )
+
+    image_bytes = report_figure.to_image(
+        format="png",
+        width=width,
+        height=height,
+        scale=2
+    )
+
+    image_buffer = BytesIO(image_bytes)
+    image_buffer.seek(0)
+
+    return image_buffer
 with st.container(key="hero_actions"):
     run = st.button(
         "Run Simulation",

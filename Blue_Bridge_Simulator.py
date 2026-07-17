@@ -1918,7 +1918,7 @@ def run_index_model():
         retirement_day = int(acum_years * 252)
 
         accumulation_annualized_returns = []
-
+        retirement_wealth = []
 
         if retirement_day > 0:
             accumulation_contributions = np.where(
@@ -2027,7 +2027,15 @@ def run_index_model():
             hybrid_mutualfund_conservative_allocation,
             target
           )
-
+          retirement_index = min(
+            int(acum_years * 252),
+            len(portfolio_path) - 1
+          )
+        
+          moneybfrretire = float(
+            portfolio_path[retirement_index]
+          )
+          retirement_wealth.append(moneybfrretire)
           portfolio_simulations[:, sim] = portfolio_path
 
           trials_failed += failed
@@ -2103,6 +2111,7 @@ def run_index_model():
         )
       else:
         median_accumulation_return = np.nan
+      median_retirement_wealth = np.median(retirement_wealth)
 
 
       percentiles = np.percentile(
@@ -2656,7 +2665,7 @@ def run_index_model():
       )
 
       c2.metric(
-          "Median (Adjusted for Inflation)",
+          "Median Ending Portfolio Value(Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
       )
 
@@ -2665,7 +2674,7 @@ def run_index_model():
           num_simulations
       ) * 100
 
-      c1.metric(
+      c2.metric(
           "Portfolio Failure Rate",
           f"{failure_rate:.2f}%"
       )
@@ -2673,7 +2682,9 @@ def run_index_model():
       success_rate = np.mean(
       (goal_reached)/num_simulations
       ) * 100
-
+      c1.metric(
+          "Median Portfolio Value at Retirement",
+          f"฿{median_retirement_wealth:.0f}")
       probability = (goal_reached/num_simulations) * 100
       c1.metric(
       "Probabiltiy of reaching retirement goal",
@@ -2681,10 +2692,6 @@ def run_index_model():
       )
 
       c3.metric(
-        "Median Maximum Drawdown",
-        f"{median_dd:.1%}"
-        )
-      c2.metric(
         "Median-Line Annualized Return",
         (
         f"{median_line_annualized_return:.1%}"
@@ -2697,6 +2704,11 @@ def run_index_model():
         "Monthly contributions are removed from the calculation."
             )
       )
+
+      c3.metric(
+        "Median Maximum Drawdown",
+        f"{median_dd:.1%}"
+        )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 
       statistics = {
@@ -2704,6 +2716,7 @@ def run_index_model():
         "Monthly contribution": f"THB {monthly_contribution:,.0f}",
         "Retirement target": f"THB {target:,.0f}",
         "Goal achievement probability": f"{probability:.1f}%",
+        "Median Wealth at Retirement": f"THB{median_retirement_wealth}",
         "Portfolio failure rate": f"{failure_rate:.1f}%",
         "Inflation-adjusted median value":
             f"THB {inflation_adjusted_median:,.0f}",
@@ -2750,7 +2763,7 @@ def run_index_model():
       )
 
       if pdf_report is not None:
-        with c3:
+        with c1:
             st.download_button(
                 label="Download Portfolio Report",
                 data=pdf_report,
@@ -2809,7 +2822,6 @@ def run_company_model():
     "ESGTECH",
     "ESEAE",
     "KTPRECIOUS",
-    "Rostrum Wisdom Fund of Funds",
     "KKPGNPH",
     "KTHEALTHCAREA",
     "KFGPROPA",
@@ -3387,6 +3399,7 @@ def run_company_model():
                 0,
                 dtype=np.float64
             )
+      retirement_wealth = []
       for sim in range(num_simulations):
         kfa_amt = kfa_alloc * total_funds
         ugi_amt = ugi_alloc * total_funds
@@ -3430,7 +3443,6 @@ def run_company_model():
         healthcarea_truerate = all_assets_returns[:,10]
         propa_truerate = all_assets_returns[:,11]
         sp500a_truerate = all_assets_returns[:,12]
-
         portfolio_path,failed,success = sim_path(
             acum_years,
             kfa_truerate,
@@ -3482,6 +3494,15 @@ def run_company_model():
             gcore_alloc,
             target
         )
+        retirement_index = min(
+            int(acum_years * 252),
+            len(portfolio_path) - 1
+          )
+        
+        moneybfrretire = float(
+            portfolio_path[retirement_index]
+          )
+        retirement_wealth.append(moneybfrretire)
         portfolio_simulations[:,sim] = portfolio_path
         trials_failed += failed
         goal_reached +=success
@@ -3568,6 +3589,7 @@ def run_company_model():
         drawdowns.append(dd)
 
       median_dd = np.median(drawdowns)
+      median_retirement_wealth = np.median(retirement_wealth)
       if accumulation_annualized_returns:
         median_accumulation_return = np.mean(
         accumulation_annualized_returns
@@ -4119,7 +4141,8 @@ def run_company_model():
         ending_values,
         50
       )
-
+      c1.metric("Median Portfolio Value at Retirement",
+                f"฿{median_retirement_wealth}")
       c2.metric(
           "Median (Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
@@ -4130,7 +4153,7 @@ def run_company_model():
           num_simulations
       ) * 100
 
-      c1.metric(
+      c2.metric(
           "Portfolio Failure Rate",
           f"{failure_rate:.2f}%"
       )
@@ -4144,12 +4167,7 @@ def run_company_model():
       "Probabiltiy of reaching retirement goal",
       f"{probability:.1f}%"
       )
-
       c3.metric(
-        "Median Maximum Drawdown",
-        f"{median_dd:.1%}"
-        )
-      c2.metric(
         "Median-Line Annualized Return",
         (
         f"{median_line_annualized_return:.1%}"
@@ -4162,6 +4180,10 @@ def run_company_model():
         "Monthly contributions are removed from the calculation."
         )
       )
+      c3.metric(
+        "Median Maximum Drawdown",
+        f"{median_dd:.1%}"
+        )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 
       statistics = {
@@ -4169,6 +4191,7 @@ def run_company_model():
         "Monthly contribution": f"THB {monthly_contribution:,.0f}",
         "Retirement target": f"THB {target:,.0f}",
         "Goal achievement probability": f"{probability:.1f}%",
+        "Median Wealth at Retirement" : f"THB{median_retirement_wealth}",
         "Portfolio failure rate": f"{failure_rate:.1f}%",
         "Inflation-adjusted median value":
             f"THB {inflation_adjusted_median:,.0f}",
@@ -4215,7 +4238,7 @@ def run_company_model():
       )
 
       if pdf_report is not None:
-        with c3:
+        with c1:
             st.download_button(
                 label="Download Portfolio Report",
                 data=pdf_report,

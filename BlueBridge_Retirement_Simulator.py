@@ -2706,7 +2706,7 @@ def run_index_model():
       )
       c1.metric(
           "Median Portfolio Value at Retirement",
-          f"฿{median_retirement_amount:,.0f}"
+          f"฿{median_retirement_wealth:,.0f}"
       )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 

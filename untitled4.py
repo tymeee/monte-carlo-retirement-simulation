@@ -726,6 +726,7 @@ st.html("""
         0 15px 36px rgba(41, 105, 220, 0.42) !important;
 }
 
+
 /* Mobile layout */
 @media (max-width: 900px) {
     .st-key-hero_actions {
@@ -743,6 +744,65 @@ st.html("""
 
 </style>
 """)
+
+st.markdown("""
+<style>
+/* Download button container */
+[data-testid="stDownloadButton"] {
+    width: 100%;
+}
+
+/* Download button itself */
+[data-testid="stDownloadButton"] > button {
+    width: 100%;
+    min-height: 52px;
+    border-radius: 18px;
+    border: 1px solid rgba(96, 165, 250, 0.18) !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 66, 0.92),
+            rgba(8, 21, 40, 0.90)
+        ) !important;
+    color: #dbeafe !important;
+    font-size: 1rem;
+    font-weight: 650;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
+}
+
+/* Hover */
+[data-testid="stDownloadButton"] > button:hover {
+    transform: translateY(-2px);
+    border-color: rgba(96, 165, 250, 0.32) !important;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 45, 78, 0.96),
+            rgba(10, 25, 46, 0.94)
+        ) !important;
+    color: #f1f6ff !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* Click */
+[data-testid="stDownloadButton"] > button:active {
+    transform: translateY(0);
+}
+
+/* Remove the bright default focus glow */
+[data-testid="stDownloadButton"] > button:focus,
+[data-testid="stDownloadButton"] > button:focus-visible {
+    outline: none !important;
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.25),
+                0 20px 55px rgba(0, 0, 0, 0.28) !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 def style_line_chart(fig, title):
     fig.update_layout(

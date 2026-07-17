@@ -931,14 +931,14 @@ def chart_to_png_buffer(
     )
 
     report_figure.update_xaxes(
-        gridcolor="#DCE4EE",
+        gridcolor="#041224",
         linecolor="#8CA0B8",
         tickfont=dict(color="#405670"),
         title_font=dict(color="#405670")
     )
 
     report_figure.update_yaxes(
-        gridcolor="#DCE4EE",
+        gridcolor="#041224",
         linecolor="#8CA0B8",
         tickfont=dict(color="#405670"),
         title_font=dict(color="#405670")
@@ -1159,9 +1159,6 @@ def build_portfolio_pdf(
             body_style
         )
     )
-
-
-    story.append(PageBreak())
     story.append(
         Paragraph(
             "Distribution of final portfolio values",

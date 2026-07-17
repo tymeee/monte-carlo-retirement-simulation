@@ -11,7 +11,7 @@ st.set_page_config(
 st.title("Fund Information")
 
 def get_data():
-    master_doc = pd.read_csv('master_investment_data.csv')
+    master_doc = pd.read_csv("master_investment_data.csv")
     return master_doc
 
 available_fund =[ 

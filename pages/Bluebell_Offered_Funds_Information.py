@@ -116,7 +116,7 @@ if fund == "KKP Plus":
         0.0317,
         0.7628
     ]
-    pie_fig = px.pie(alloc_name,alloc_amt, title = "Fund Holdings")
+    pie_fig = px.pie(Holdings,alloc_amt, title = "Fund Holdings")
     st.plotly_chart(pie_fig, use_container_width = True)
                         
     

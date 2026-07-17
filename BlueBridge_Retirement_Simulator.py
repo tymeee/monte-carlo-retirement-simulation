@@ -71,6 +71,23 @@ st.html("""
     --negative: #ff6b81;
     --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
 }
+:root {
+    --bb-navy: #102336;
+    --bb-navy-deep: #081725;
+    --bb-navy-light: #19344f;
+
+    --bb-blue: #5d88bb;
+    --bb-blue-hover: #709ac8;
+    --bb-blue-dark: #456f9e;
+
+    --bb-light-blue: #b3cbe4;
+    --bb-white: #ffffff;
+    --bb-silver: #d6d6d6;
+    --bb-muted: #a1a8b2;
+
+    --bb-border: rgba(179, 203, 228, 0.20);
+    --bb-border-hover: rgba(179, 203, 228, 0.48);
+}
 
 /* Mobile chart is hidden on desktop */
 .st-key-projection_mobile {

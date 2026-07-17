@@ -2676,7 +2676,7 @@ def run_index_model():
         "portfolio_report_pdf"
       )
 
-    if pdf_report is not None:
+      if pdf_report is not None:
         st.download_button(
             label="Download Portfolio Report",
             data=pdf_report,

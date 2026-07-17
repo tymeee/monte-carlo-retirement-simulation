@@ -977,7 +977,7 @@ st.html(f"""
     margin: 0;
     color: #f5f8ff;
 
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.1rem, 5vw, 4.5rem);
     line-height: 1.02;
     font-weight: 790;
     letter-spacing: -0.055em;

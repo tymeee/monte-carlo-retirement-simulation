@@ -54,39 +54,30 @@ else:
 st.html("""
 <style>
 :root {
-    --bg-main: #050b18;
-    --bg-secondary: #081426;
-    --surface: rgba(14, 30, 52, 0.76);
-    --surface-strong: #0d1b31;
-    --surface-hover: #122642;
-    --border: rgba(140, 180, 235, 0.14);
-    --border-bright: rgba(96, 165, 250, 0.32);
-    --primary: #4f8cff;
-    --primary-bright: #79a8ff;
-    --cyan: #38bdf8;
-    --text-main: #f1f6ff;
-    --text-secondary: #a8bad4;
-    --text-muted: #7086a4;
-    --positive: #37d49b;
-    --negative: #ff6b81;
-    --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
-}
-:root {
-    --bb-navy: #102336;
-    --bb-navy-deep: #081725;
-    --bb-navy-light: #19344f;
+    /* Silver-blue palette */
+    --bg-main: #102336;
+    --bg-secondary: #0b1d2e;
 
-    --bb-blue: #5d88bb;
-    --bb-blue-hover: #709ac8;
-    --bb-blue-dark: #456f9e;
+    --surface: rgba(25, 52, 79, 0.78);
+    --surface-strong: #19344f;
+    --surface-hover: #254d73;
 
-    --bb-light-blue: #b3cbe4;
-    --bb-white: #ffffff;
-    --bb-silver: #d6d6d6;
-    --bb-muted: #a1a8b2;
+    --border: rgba(179, 203, 228, 0.20);
+    --border-bright: rgba(179, 203, 228, 0.48);
 
-    --bb-border: rgba(179, 203, 228, 0.20);
-    --bb-border-hover: rgba(179, 203, 228, 0.48);
+    --primary: #5d88bb;
+    --primary-bright: #b3cbe4;
+    --primary-dark: #456f9e;
+    --cyan: #7fa5ca;
+
+    --text-main: #ffffff;
+    --text-secondary: #d6d6d6;
+    --text-muted: #a1a8b2;
+
+    --positive: #78b59d;
+    --negative: #d98c96;
+
+    --shadow: 0 20px 55px rgba(2, 10, 18, 0.32);
 }
 
 /* Mobile chart is hidden on desktop */

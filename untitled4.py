@@ -2623,7 +2623,8 @@ def run_index_model():
         "Time-weighted annualized growth calculated from the "
         "50th-percentile portfolio-value line during accumulation. "
         "Monthly contributions are removed from the calculation."
-        )
+            )
+      )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 
       statistics = {

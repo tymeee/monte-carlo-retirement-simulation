@@ -118,5 +118,6 @@ if fund == "KKP Plus":
     ]
     pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Fund Holdings")
     st.plotly_chart(pie_fig, use_container_width = True)
+    c2.metric(label="Main Asset Class", value="Money Market Assets")
                         
     

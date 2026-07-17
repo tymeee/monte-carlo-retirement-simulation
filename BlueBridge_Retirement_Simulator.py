@@ -1859,8 +1859,8 @@ def run_index_model():
         trials_failed = 0
         goal_reached = 0
         saving_returns = 0.0175
-        drawdowns = [num_simulations]
-        retirement_amounts = [num_simulations]
+        drawdowns = []
+        retirement_amounts = []
         saving_daily_return = (1 + saving_returns) ** (1/252)
         withdrawal_percentage = withdrawal
         contribution_weights = np.array([

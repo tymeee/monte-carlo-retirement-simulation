@@ -54,30 +54,27 @@ else:
 st.html("""
 <style>
 :root {
-    /* Silver-blue palette */
-    --bg-main: #102336;
-    --bg-secondary: #0b1d2e;
+    --bb-background: #d6d6d6;
+    --bb-background-secondary: #eef1f4;
 
-    --surface: rgba(25, 52, 79, 0.78);
-    --surface-strong: #19344f;
-    --surface-hover: #254d73;
+    --bb-card: #ffffff;
+    --bb-card-hover: #f7f9fb;
 
-    --border: rgba(179, 203, 228, 0.20);
-    --border-bright: rgba(179, 203, 228, 0.48);
+    --bb-border: rgba(93, 136, 187, 0.25);
+    --bb-border-hover: rgba(93, 136, 187, 0.55);
 
-    --primary: #5d88bb;
-    --primary-bright: #b3cbe4;
-    --primary-dark: #456f9e;
-    --cyan: #7fa5ca;
+    --bb-primary: #5d88bb;
+    --bb-primary-hover: #7099c7;
+    --bb-primary-dark: #456f9e;
+    --bb-primary-soft: rgba(93, 136, 187, 0.14);
 
-    --text-main: #ffffff;
-    --text-secondary: #d6d6d6;
-    --text-muted: #a1a8b2;
+    --bb-light-blue: #b3cbe4;
 
-    --positive: #78b59d;
-    --negative: #d98c96;
+    --bb-text: #102336;
+    --bb-text-secondary: #526579;
+    --bb-text-muted: #7b8796;
 
-    --shadow: 0 20px 55px rgba(2, 10, 18, 0.32);
+    --bb-shadow: 0 18px 45px rgba(16, 35, 54, 0.12);
 }
 
 /* Mobile chart is hidden on desktop */
@@ -429,6 +426,287 @@ hr {
     [data-testid="stMetric"] {
         min-height: 110px;
     }
+}
+
+/* =========================================================
+   LIGHT SILVER + BLUE THEME OVERRIDES
+   ========================================================= */
+
+/* Main application background */
+html,
+body,
+.stApp,
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(179, 203, 228, 0.72),
+            transparent 32rem
+        ),
+        linear-gradient(
+            145deg,
+            #f2f4f6 0%,
+            #d6d6d6 58%,
+            #e4e7ea 100%
+        ) !important;
+
+    color: #102336 !important;
+}
+
+/* Main text */
+h1,
+h2,
+h3,
+h4 {
+    color: #102336 !important;
+}
+
+p,
+label,
+[data-testid="stWidgetLabel"],
+[data-testid="stMarkdownContainer"] p {
+    color: #526579 !important;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background:
+        linear-gradient(
+            180deg,
+            #c6d8ea,
+            #b3cbe4
+        ) !important;
+
+    border-right: 1px solid rgba(16, 35, 54, 0.18) !important;
+
+    box-shadow:
+        10px 0 30px rgba(16, 35, 54, 0.10) !important;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] label {
+    color: #102336 !important;
+}
+
+/* Multipage navigation */
+[data-testid="stSidebarNav"] a {
+    color: #102336 !important;
+}
+
+[data-testid="stSidebarNav"] a:hover {
+    background: rgba(255, 255, 255, 0.45) !important;
+}
+
+[data-testid="stSidebarNav"] a[aria-current="page"] {
+    background: rgba(255, 255, 255, 0.72) !important;
+    border-color: rgba(93, 136, 187, 0.45) !important;
+    color: #102336 !important;
+
+    box-shadow:
+        inset 4px 0 0 #5d88bb,
+        0 8px 20px rgba(16, 35, 54, 0.10) !important;
+}
+
+/* Fund radio options */
+[data-testid="stSidebar"] [data-baseweb="radio"] {
+    background: rgba(255, 255, 255, 0.28) !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="radio"]:hover {
+    background: rgba(255, 255, 255, 0.52) !important;
+    border-color: rgba(93, 136, 187, 0.32) !important;
+}
+
+[data-testid="stSidebar"]
+[data-baseweb="radio"]:has(input:checked) {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.86),
+            rgba(238, 244, 250, 0.80)
+        ) !important;
+
+    border-color: rgba(93, 136, 187, 0.55) !important;
+
+    box-shadow:
+        inset 4px 0 0 #5d88bb,
+        0 8px 22px rgba(16, 35, 54, 0.11) !important;
+}
+
+[data-testid="stSidebar"] [data-baseweb="radio"] p {
+    color: #102336 !important;
+}
+
+/* Metric cards */
+[data-testid="stMetric"] {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f5f7f9
+        ) !important;
+
+    border: 1px solid rgba(93, 136, 187, 0.24) !important;
+
+    box-shadow:
+        0 18px 42px rgba(16, 35, 54, 0.11),
+        inset 0 1px 0 rgba(255, 255, 255, 0.90) !important;
+}
+
+[data-testid="stMetric"]:hover {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #edf3f8
+        ) !important;
+
+    border-color: rgba(93, 136, 187, 0.52) !important;
+}
+
+[data-testid="stMetricLabel"],
+[data-testid="stMetricLabel"] p {
+    color: #5d7188 !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: #102336 !important;
+}
+
+/* Buttons */
+.stButton > button,
+[data-testid="stDownloadButton"] > button,
+[data-testid="stFormSubmitButton"] > button {
+    border: 1px solid #456f9e !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #527dab,
+            #5d88bb 55%,
+            #7099c7
+        ) !important;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 12px 28px rgba(69, 111, 158, 0.26),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+.stButton > button:hover,
+[data-testid="stDownloadButton"] > button:hover,
+[data-testid="stFormSubmitButton"] > button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #456f9e,
+            #5d88bb
+        ) !important;
+
+    border-color: #102336 !important;
+
+    box-shadow:
+        0 16px 34px rgba(69, 111, 158, 0.34) !important;
+}
+
+/* Inputs and selectors */
+[data-baseweb="select"] > div,
+[data-testid="stNumberInput"] input,
+[data-testid="stTextInput"] input {
+    background: #ffffff !important;
+    color: #102336 !important;
+
+    border-color: rgba(93, 136, 187, 0.34) !important;
+
+    box-shadow: 0 5px 15px rgba(16, 35, 54, 0.06) !important;
+}
+
+[data-baseweb="select"] > div:hover,
+[data-testid="stNumberInput"] input:hover,
+[data-testid="stTextInput"] input:hover {
+    border-color: #5d88bb !important;
+}
+
+/* Plotly chart containers */
+[data-testid="stPlotlyChart"] {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f5f7f9
+        ) !important;
+
+    border: 1px solid rgba(93, 136, 187, 0.25) !important;
+
+    box-shadow:
+        0 20px 48px rgba(16, 35, 54, 0.12) !important;
+}
+
+/* Plotly chart canvas */
+[data-testid="stPlotlyChart"] .main-svg {
+    background: transparent !important;
+}
+
+[data-testid="stPlotlyChart"] .main-svg .bg {
+    fill: #ffffff !important;
+}
+
+[data-testid="stPlotlyChart"] .gridlayer path {
+    stroke: rgba(93, 136, 187, 0.16) !important;
+}
+
+[data-testid="stPlotlyChart"] .zerolinelayer path {
+    stroke: rgba(93, 136, 187, 0.28) !important;
+}
+
+[data-testid="stPlotlyChart"] .xtick text,
+[data-testid="stPlotlyChart"] .ytick text,
+[data-testid="stPlotlyChart"] .xtitle,
+[data-testid="stPlotlyChart"] .ytitle,
+[data-testid="stPlotlyChart"] .gtitle,
+[data-testid="stPlotlyChart"] .legendtext {
+    fill: #102336 !important;
+}
+
+/* Disclaimer / information note */
+.fund-data-note {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(179, 203, 228, 0.58),
+            rgba(255, 255, 255, 0.68)
+        ) !important;
+
+    border-color: rgba(93, 136, 187, 0.32) !important;
+    color: #40556b !important;
+
+    box-shadow:
+        0 12px 28px rgba(16, 35, 54, 0.09) !important;
+}
+
+/* Alerts */
+[data-testid="stAlert"] {
+    background: rgba(255, 255, 255, 0.78) !important;
+    color: #102336 !important;
+
+    border-color: rgba(93, 136, 187, 0.30) !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-track {
+    background: #d6d6d6;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #a1a8b2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5d88bb;
 }
 </style>
 """)

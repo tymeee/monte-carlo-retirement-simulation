@@ -3502,7 +3502,7 @@ def run_company_model():
         moneybfrretire >= target
         )
         portfolio_simulations[:,sim] = portfolio_path
-        retirement_amounts.append(retirement_wealth)
+        retirement_amounts.append(moneybfrretire)
         trials_failed += failed
         goal_reached +=success
         accumulation_annualized_returns = []

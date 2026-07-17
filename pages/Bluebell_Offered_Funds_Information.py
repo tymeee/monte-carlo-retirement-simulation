@@ -372,7 +372,48 @@ st.markdown(
         fill: #c8d6e9 !important;
     }
 
+    /* Remove the visible top toolbar while preserving mobile sidebar access */
+    [data-testid="stHeader"] {
+        background: transparent !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Hide Share, edit, GitHub and other toolbar controls */
+    [data-testid="stToolbar"] {
+        display: none !important;
+    }
+    
+    /* Hide Streamlit's thin decorative header line */
+    [data-testid="stDecoration"] {
+        display: none !important;
+    }
+    
+    /* Hide status/busy widget from the header area */
+    [data-testid="stStatusWidget"] {
+        display: none !important;
+    }
+    .block-container {
+    padding-top: 0.8rem !important;
+    }
 
+    @media (max-width: 768px) {
+    [data-testid="stSidebarCollapsedControl"],
+    [data-testid="stExpandSidebarButton"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+
+        position: fixed !important;
+        top: 0.65rem !important;
+        left: 0.65rem !important;
+        z-index: 999999 !important;
+    }
+
+    .block-container {
+        padding-top: 3.7rem !important;
+    }
+    }
     /* =========================================
        MOBILE
        ========================================= */

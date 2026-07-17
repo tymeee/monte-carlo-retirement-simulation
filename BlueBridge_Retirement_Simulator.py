@@ -1785,14 +1785,6 @@ def run_index_model():
                     cur_amount * stock_allocations[7],
                     cur_amount * stock_allocations[8]
           ], dtype=np.float64)
-                  
-          if day == acum_years * 252:
-              cur_amount = pure_cash_amt + savings_account + assets.sum()
-              amountbfrretire = cur_amount
-              if cur_amount >= target:
-                  goal_count = 1
-              else:
-                  goal_count = 0
               
           portfolio_path[day] = (
               assets[0]
@@ -3297,15 +3289,8 @@ def run_company_model():
           portfolio_paths[day] = (
               kkpplus_amt + kkpcash_amt + kfa_amt + ugi_amt + gqg_amt + gtech_amt + eae_amt + ktp_amt + savings_amt + rostrum_amt +gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + gcore_amt
               )
-          if day == acum_years * 252:
-               curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
-               bfrretireamt = curnt_amt
-               if curnt_amt >= target:
-                   goal_count = 1
-               else: 
-                   goal_count = 0
 
-        return portfolio_paths,failed,goal_count, bfrretireamt
+        return portfolio_paths,failed
       days = (acum_years + retirement_years) * 252
       df = 10
 
@@ -3452,7 +3437,7 @@ def run_company_model():
         propa_truerate = all_assets_returns[:,11]
         sp500a_truerate = all_assets_returns[:,12]
 
-        portfolio_path,failed,success,retirement_wealth = sim_path(
+        portfolio_path,failed = sim_path(
             acum_years,
             kfa_truerate,
             ugi_truerate,
@@ -3502,6 +3487,18 @@ def run_company_model():
             sp500a_alloc,
             gcore_alloc,
             target
+        )
+        retirement_index = min(
+        int(acum_years * 252),
+        len(portfolio_path) - 1
+        )
+    
+        moneybfrretire = float(
+        portfolio_path[retirement_index]
+        )
+    
+        success = int(
+        moneybfrretire >= target
         )
         portfolio_simulations[:,sim] = portfolio_path
         retirement_amounts.append(retirement_wealth)

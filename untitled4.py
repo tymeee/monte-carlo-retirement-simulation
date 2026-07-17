@@ -630,10 +630,6 @@ st.html(f"""
 </style>
 """)
 
-# ---------------------------------------------------------
-# RUN SIMULATION BUTTON
-# Put this immediately after the hero st.html(...) block
-# ---------------------------------------------------------
 
 st.html("""
 <style>
@@ -899,6 +895,244 @@ def chart_to_png_buffer(
     image_buffer.seek(0)
 
     return image_buffer
+def build_portfolio_pdf(
+    projection_figure,
+    allocation_figure,
+    histogram_figure,
+    statistics: dict[str, str],
+    portfolio_name: str,
+    disclaimer: str
+) -> bytes:
+    """Create the complete portfolio report and return PDF bytes."""
+
+    pdf_buffer = BytesIO()
+
+    document = SimpleDocTemplate(
+        pdf_buffer,
+        pagesize=A4,
+        leftMargin=16 * mm,
+        rightMargin=16 * mm,
+        topMargin=15 * mm,
+        bottomMargin=15 * mm,
+        title="Portfolio Simulation Report",
+        author="Bluebell Portfolio Simulator"
+    )
+
+    styles = getSampleStyleSheet()
+
+    title_style = ParagraphStyle(
+        name="PortfolioReportTitle",
+        parent=styles["Title"],
+        fontName="Helvetica-Bold",
+        fontSize=23,
+        leading=28,
+        textColor=colors.HexColor("#102A4C"),
+        spaceAfter=5 * mm
+    )
+
+    heading_style = ParagraphStyle(
+        name="PortfolioReportHeading",
+        parent=styles["Heading2"],
+        fontName="Helvetica-Bold",
+        fontSize=15,
+        leading=19,
+        textColor=colors.HexColor("#17477F"),
+        spaceBefore=4 * mm,
+        spaceAfter=3 * mm
+    )
+
+    body_style = ParagraphStyle(
+        name="PortfolioReportBody",
+        parent=styles["BodyText"],
+        fontName="Helvetica",
+        fontSize=9,
+        leading=13,
+        textColor=colors.HexColor("#31465E")
+    )
+
+    disclaimer_style = ParagraphStyle(
+        name="PortfolioReportDisclaimer",
+        parent=body_style,
+        fontSize=7.5,
+        leading=10,
+        textColor=colors.HexColor("#687A8F")
+    )
+
+    story = []
+
+    # Keep the image buffers alive until document.build() finishes.
+    image_buffers = []
+
+    story.append(
+        Paragraph(
+            "Portfolio Simulation Report",
+            title_style
+        )
+    )
+
+    story.append(
+        Paragraph(
+            f"<b>Portfolio:</b> {portfolio_name}<br/>"
+            f"<b>Generated:</b> {datetime.now():%d %B %Y}",
+            body_style
+        )
+    )
+
+    story.append(Spacer(1, 6 * mm))
+    story.append(Paragraph("Simulation summary", heading_style))
+
+    statistic_rows = [
+        ["Statistic", "Result"]
+    ]
+
+    for statistic_name, statistic_value in statistics.items():
+        statistic_rows.append([
+            statistic_name,
+            statistic_value
+        ])
+
+    statistics_table = Table(
+        statistic_rows,
+        colWidths=[105 * mm, 65 * mm],
+        repeatRows=1
+    )
+
+    statistics_table.setStyle(
+        TableStyle([
+            (
+                "BACKGROUND",
+                (0, 0),
+                (-1, 0),
+                colors.HexColor("#17477F")
+            ),
+            (
+                "TEXTCOLOR",
+                (0, 0),
+                (-1, 0),
+                colors.white
+            ),
+            (
+                "FONTNAME",
+                (0, 0),
+                (-1, 0),
+                "Helvetica-Bold"
+            ),
+            (
+                "BACKGROUND",
+                (0, 1),
+                (-1, -1),
+                colors.HexColor("#F3F7FC")
+            ),
+            (
+                "TEXTCOLOR",
+                (0, 1),
+                (-1, -1),
+                colors.HexColor("#243A53")
+            ),
+            (
+                "GRID",
+                (0, 0),
+                (-1, -1),
+                0.5,
+                colors.HexColor("#C5D3E3")
+            ),
+            ("FONTSIZE", (0, 0), (-1, -1), 9),
+            ("ALIGN", (1, 1), (1, -1), "RIGHT"),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("TOPPADDING", (0, 0), (-1, -1), 6),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 6)
+        ])
+    )
+
+    story.append(statistics_table)
+    story.append(Spacer(1, 6 * mm))
+    story.append(Paragraph("Portfolio allocation", heading_style))
+
+    allocation_png = chart_to_png_buffer(
+        allocation_figure,
+        width=1100,
+        height=700
+    )
+
+    image_buffers.append(allocation_png)
+
+    story.append(
+        PDFImage(
+            allocation_png,
+            width=170 * mm,
+            height=108 * mm
+        )
+    )
+
+    story.append(PageBreak())
+    story.append(
+        Paragraph(
+            "Projected portfolio outcomes",
+            heading_style
+        )
+    )
+
+    projection_png = chart_to_png_buffer(
+        projection_figure,
+        width=1600,
+        height=850
+    )
+
+    image_buffers.append(projection_png)
+
+    story.append(
+        PDFImage(
+            projection_png,
+            width=178 * mm,
+            height=95 * mm
+        )
+    )
+
+    story.append(Spacer(1, 5 * mm))
+
+    story.append(
+        Paragraph(
+            "The percentile lines represent the range of simulated "
+            "portfolio outcomes. The median is the middle simulated "
+            "path, while the lower and upper percentiles represent "
+            "less favorable and more favorable outcomes.",
+            body_style
+        )
+    )
+
+
+    story.append(PageBreak())
+    story.append(
+        Paragraph(
+            "Distribution of final portfolio values",
+            heading_style
+        )
+    )
+
+    histogram_png = chart_to_png_buffer(
+        histogram_figure,
+        width=1600,
+        height=800
+    )
+
+    image_buffers.append(histogram_png)
+
+    story.append(
+        PDFImage(
+            histogram_png,
+            width=178 * mm,
+            height=89 * mm
+        )
+    )
+
+    story.append(Spacer(1, 7 * mm))
+    story.append(Paragraph("Important information", heading_style))
+    story.append(Paragraph(disclaimer, disclaimer_style))
+
+    document.build(story)
+
+    pdf_buffer.seek(0)
+    return pdf_buffer.getvalue()
 with st.container(key="hero_actions"):
     run = st.button(
         "Run Simulation",

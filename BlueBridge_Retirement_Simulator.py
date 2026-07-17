@@ -2703,6 +2703,7 @@ def run_index_model():
         "50th-percentile portfolio-value line during accumulation. "
         "Monthly contributions are removed from the calculation."
             )
+      )
       c1.metric(
           "Median Portfolio Value at Retirement",
           f"฿{median_retirement_amount:,.0f}"

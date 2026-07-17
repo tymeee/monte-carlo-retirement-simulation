@@ -2789,6 +2789,7 @@ def run_company_model():
       return pd.read_csv(
           "master_investment_data.csv"
       )
+  @st.cache_data
   def build_the_data():
     complete_data = grab_data()
     

@@ -10,6 +10,9 @@ st.set_page_config(
 
 st.title("Fund Information")
 
+if st.button("Portfolio Simulation"):
+    st.switch_page("untitled4.py") 
+
 fund_information = {
     "KKP PLUS": {
         "category": "Fixed Income",

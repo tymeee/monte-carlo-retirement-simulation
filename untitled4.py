@@ -754,7 +754,7 @@ st.markdown("""
 
 /* Download button itself */
 [data-testid="stDownloadButton"] > button {
-    width: 360px;
+    width: 375px;
     min-height: 135px;
     border-radius: 18px;
     border: 1px solid rgba(96, 165, 250, 0.18) !important;
@@ -765,8 +765,8 @@ st.markdown("""
             rgba(8, 21, 40, 0.90)
         ) !important;
     color: #dbeafe !important;
-    font-size: 1rem;
-    font-weight: 650;
+    font-size: 2rem;
+    font-weight: 720;
     box-shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
     transition:
         transform 180ms ease,

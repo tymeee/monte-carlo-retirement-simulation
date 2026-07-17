@@ -100,7 +100,7 @@ if fund == "KKP Plus":
         config={"displayModeBar": False}
     )
 
-    alloc_name = [
+    Holdings = [
         "Japan Treasury Disc Bill(JP1743701S35)",
         "พันธบัตรธนาคารแห่งประเทศไทย (CBF26O12A)",
         "พันธบัตรธนาคารแห่งประเทศไทย (CBF26817A)",
@@ -116,7 +116,7 @@ if fund == "KKP Plus":
         0.0317,
         0.7628
     ]
-    pie_fig = px.pie(alloc_name,alloc_amt,names = "Holdings", title = "Fund Holdings")
+    pie_fig = px.pie(alloc_name,alloc_amt, title = "Fund Holdings")
     st.plotly_chart(pie_fig, use_container_width = True)
                         
     

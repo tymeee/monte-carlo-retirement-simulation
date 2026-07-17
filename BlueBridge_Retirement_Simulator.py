@@ -1812,7 +1812,7 @@ def run_index_model():
               + pure_cash_amt
           )
               
-      return portfolio_path,failed,goal_count,amountbfrretire
+      return portfolio_path,failed
   us_gov_bond_weight = 0.0
   us_inv_bond_weight = 0.0
   us_spec_bond_weight = 0.0
@@ -1994,7 +1994,7 @@ def run_index_model():
           us_spec_bond_daily_return = (1+us_spec_bond_return)**(1/252)
 
 
-          portfolio_path, failed, success, moneybfrretire = run_path(
+          portfolio_path, failed = run_path(
             acum_years,
             bull_daily_stock_multipliers,
             bear_daily_stock_multipliers,
@@ -2032,7 +2032,18 @@ def run_index_model():
             hybrid_mutualfund_conservative_allocation,
             target
           )
-
+          retirement_index = min(
+            int(acum_years * 252),
+            len(portfolio_path) - 1
+          )
+        
+          moneybfrretire = float(
+            portfolio_path[retirement_index]
+          )
+        
+          success = int(
+            moneybfrretire >= target
+          )
           portfolio_simulations[:, sim] = portfolio_path
           retirement_amounts.append(moneybfrretire)
 

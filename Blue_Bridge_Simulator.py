@@ -2684,7 +2684,7 @@ def run_index_model():
       ) * 100
       c1.metric(
           "Median Portfolio Value at Retirement",
-          f"฿{median_retirement_wealth:.0f}")
+          f"฿{median_retirement_wealth:,.0f}")
       probability = (goal_reached/num_simulations) * 100
       c1.metric(
       "Probabiltiy of reaching retirement goal",
@@ -2716,7 +2716,7 @@ def run_index_model():
         "Monthly contribution": f"THB {monthly_contribution:,.0f}",
         "Retirement target": f"THB {target:,.0f}",
         "Goal achievement probability": f"{probability:.1f}%",
-        "Median Wealth at Retirement": f"THB{median_retirement_wealth}",
+        "Median Wealth at Retirement": f"THB{median_retirement_wealth:,.0f}",
         "Portfolio failure rate": f"{failure_rate:.1f}%",
         "Inflation-adjusted median value":
             f"THB {inflation_adjusted_median:,.0f}",
@@ -4142,7 +4142,7 @@ def run_company_model():
         50
       )
       c1.metric("Median Portfolio Value at Retirement",
-                f"฿{median_retirement_wealth}")
+                f"฿{median_retirement_wealth:,.0f}")
       c2.metric(
           "Median (Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
@@ -4191,7 +4191,7 @@ def run_company_model():
         "Monthly contribution": f"THB {monthly_contribution:,.0f}",
         "Retirement target": f"THB {target:,.0f}",
         "Goal achievement probability": f"{probability:.1f}%",
-        "Median Wealth at Retirement" : f"THB{median_retirement_wealth}",
+        "Median Wealth at Retirement" : f"THB{median_retirement_wealth:,.0f}",
         "Portfolio failure rate": f"{failure_rate:.1f}%",
         "Inflation-adjusted median value":
             f"THB {inflation_adjusted_median:,.0f}",

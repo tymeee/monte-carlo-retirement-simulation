@@ -2271,8 +2271,7 @@ def run_index_model():
 
       mobile_fig = copy.deepcopy(fig)
 
-# Remove the large Plotly title from inside the mobile chart.
-# We will display a cleaner title above the chart instead.
+
       mobile_fig.update_layout(
         title=dict(text="",x=0),
 
@@ -2714,7 +2713,8 @@ def run_index_model():
                 f"{median_line_annualized_return:.1%}"
                 if np.isfinite(median_line_annualized_return)
                 else "N/A"
-            )
+            ),
+        "Assumed Inflation Rate": f"{avg_inflation_rate * 100:,.1%}"
       } 
       report_disclaimer = (
         "This report is generated from a Monte Carlo simulation and is "

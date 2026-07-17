@@ -1788,10 +1788,12 @@ def run_index_model():
                   
           if day == acum_years * 252:
               cur_amount = pure_cash_amt + savings_account + assets.sum()
+              amountbfrretire = cur_amount
               if cur_amount >= target:
                   goal_count = 1
               else:
                   goal_count = 0
+              
           portfolio_path[day] = (
               assets[0]
               + assets[1]
@@ -1810,7 +1812,7 @@ def run_index_model():
               + pure_cash_amt
           )
               
-      return portfolio_path,failed,goal_count
+      return portfolio_path,failed,goal_count,amountbfrretire
   us_gov_bond_weight = 0.0
   us_inv_bond_weight = 0.0
   us_spec_bond_weight = 0.0
@@ -1866,6 +1868,7 @@ def run_index_model():
         goal_reached = 0
         saving_returns = 0.0175
         drawdowns = []
+        retirement_amounts = []
         saving_daily_return = (1 + saving_returns) ** (1/252)
         withdrawal_percentage = withdrawal
         contribution_weights = np.array([
@@ -1991,7 +1994,7 @@ def run_index_model():
           us_spec_bond_daily_return = (1+us_spec_bond_return)**(1/252)
 
 
-          portfolio_path, failed, success = run_path(
+          portfolio_path, failed, success, moneybfrretire = run_path(
             acum_years,
             bull_daily_stock_multipliers,
             bear_daily_stock_multipliers,
@@ -2031,6 +2034,7 @@ def run_index_model():
           )
 
           portfolio_simulations[:, sim] = portfolio_path
+          retirement_amounts[:,sim] = moneybfrretire
 
           trials_failed += failed
           goal_reached += success
@@ -2105,6 +2109,7 @@ def run_index_model():
         )
       else:
         median_accumulation_return = np.nan
+     median_retirement_wealth = np.median(retirement_amounts)
 
 
       percentiles = np.percentile(
@@ -2658,7 +2663,7 @@ def run_index_model():
       )
 
       c2.metric(
-          "Median (Adjusted for Inflation)",
+          "Median Ending Amount (Adjusted for Inflation)",
           f"฿{median/((1+avg_inflation_rate)**(duration/252)):,.0f}"
       )
 
@@ -2698,6 +2703,9 @@ def run_index_model():
         "50th-percentile portfolio-value line during accumulation. "
         "Monthly contributions are removed from the calculation."
             )
+      c1.metric(
+          "Median Portfolio Value at Retirement",
+          f"฿{median_retirement_amount:,.0f}
       )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 

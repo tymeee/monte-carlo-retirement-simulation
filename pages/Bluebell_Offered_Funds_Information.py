@@ -116,9 +116,248 @@ if fund == "KKP Plus":
         0.0317,
         0.7628
     ]
-    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Fund Holdings")
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
     st.plotly_chart(pie_fig, use_container_width = True)
     col1, col2, col3 = st.columns(3)
-    col2.metric(label="Main Asset Class", value="Money Market Assets")
-                        
+    col1.metric(label="Main Asset Class", value="Bonds/Treasury Bills")
+    
+if fund == "KKP Cash":
+    st.title("KKP Cash")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        label="1 year return (2025)",
+        value="1.29%"
+    )
+
+    c2.metric(
+        label="1 year Sharpe Ratio (2025)",
+        value="2.01"
+    )
+
+    c3.metric(
+        label="Risk Level",
+        value="Low"
+    )
+
+    st.write("Historical Price Data (Since End of 2024)")
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["cash"] = pd.to_numeric(
+        historicaldata["cash"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "cash"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="cash",
+        title="Historical Price",
+        labels={
+        "plus": "KKP Cash price",
+        "Date": "Date"
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
+
+    Holdings = [
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26907A)",
+        "JAPAN TREASURY DISC BILL (JP1743701S35)",
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26824A)",
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26817A)",
+        "JAPAN TREASURY DISC BILL (JP1743781S53)",
+        "Other"
+    ]
+    alloc_amt = [
+        0.0977,
+        0.0757,
+        0.054,
+        0.05,
+        0.0474,
+        0.6752
+    ]
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Main Asset Class", value="Money Market Assets")
+
+if fund == "KFAFIX":
+    st.title("KFAFIX-A")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        label="1 year return (2025)",
+        value="3.41%"
+    )
+
+    c2.metric(
+        label="1 year Sharpe Ratio (2025)",
+        value="-0.22"
+    )
+
+    c3.metric(
+        label="Risk Level",
+        value="Low"
+    )
+
+    st.write("Historical Price Data (Since End of 2024)")
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["kfa"] = pd.to_numeric(
+        historicaldata["kfa"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "kfa"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="kfa",
+        title="Historical Price",
+        labels={
+        "plus": "KFAFIX-A price",
+        "Date": "Date"
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
+
+    Holdings = [
+        "Doha Bank Deposit Account",
+        "Gulf Development Bond (ครั้งที่ 1/2568 ชุดที่ 2)",
+        "พันธบัตรธนาคารแห่งประเทศไทยงวดที่ 3/364/69",
+        "PIMCO GIS Income Fund",
+        "พันธบัตรรัฐบาลส่งเสริมความยั่งยืน ใน ปีงบประมาณ พ.ศ. 2568 ครั้งที่1",
+        "Other"
+    ]
+    alloc_amt = [
+        0.0833,
+        0.0577,
+        0.0471,
+        0.0452,
+        0.0389,
+        0.7278
+    ]
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Main Asset Class", value="Corporate Debt Instruments")
+
+if fund == "UGISFX":
+    st.title("UGISFX-N")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        label="1 year return (2025)",
+        value="1.26%"
+    )
+
+    c2.metric(
+        label="1 year Sharpe Ratio (2025)",
+        value="1.47"
+    )
+
+    c3.metric(
+        label="Risk Level",
+        value="Low"
+    )
+
+    st.write("Historical Price Data (Since End of 2024)")
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["ugi"] = pd.to_numeric(
+        historicaldata["ugi"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "ugi"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="ugi",
+        title="Historical Price",
+        labels={
+        "plus": "UGISFX-N price",
+        "Date": "Date"
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
+
+    Holdings = [
+        "PIMCO GIS Income Fund (Class I)",
+        "Other"
+    ]
+    alloc_amt = [
+        0.9654,
+        0.0346
+    ]
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Main Asset Class", value="Global Bonds")
+
+
     

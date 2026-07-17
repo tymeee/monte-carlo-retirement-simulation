@@ -39,7 +39,22 @@ fund = st.sidebar.radio(
     available_fund)
 
 if fund == "KKP Plus":
+    st.title("KKP Plus")
     col1, col2, col3 = st.columns(3)
+
+    c1.metric( 
+        label = "1 year return (2025)",
+        value = "1.49%"
+    )
+    c2.metric(
+        label ="1 year Sharpe Ratio (2025)",
+        value = "3.71"
+    )
+    c3.metric(
+        label = "Risk Level",
+        value = "Low"
+    )
+        
 
     st.write("Historical Price Data (Since End of 2024)")
     fig = px.line(historicaldata, x = "plus", y = "Date", title = "Historical Price")

@@ -1581,7 +1581,7 @@ def run_index_model():
   allocation_data = allocation_data[
         allocation_data["Allocation"] > 0
   ]
-  @njit(cache=True)
+  @njit(cache=True,fastmath=True)
   def run_path(
       acum_years,
       bull_mult,

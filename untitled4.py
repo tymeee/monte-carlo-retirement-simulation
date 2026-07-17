@@ -804,6 +804,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+if st.button("More Fund Information"):
+    st.switch_page("fund_info.py") 
+
 def style_line_chart(fig, title):
     fig.update_layout(
         title=dict(

@@ -54,27 +54,22 @@ else:
 st.html("""
 <style>
 :root {
-    --bb-background: #d6d6d6;
-    --bb-background-secondary: #eef1f4;
-
-    --bb-card: #ffffff;
-    --bb-card-hover: #f7f9fb;
-
-    --bb-border: rgba(93, 136, 187, 0.25);
-    --bb-border-hover: rgba(93, 136, 187, 0.55);
-
-    --bb-primary: #5d88bb;
-    --bb-primary-hover: #7099c7;
-    --bb-primary-dark: #456f9e;
-    --bb-primary-soft: rgba(93, 136, 187, 0.14);
-
-    --bb-light-blue: #b3cbe4;
-
-    --bb-text: #102336;
-    --bb-text-secondary: #526579;
-    --bb-text-muted: #7b8796;
-
-    --bb-shadow: 0 18px 45px rgba(16, 35, 54, 0.12);
+    --bg-main: #050b18;
+    --bg-secondary: #081426;
+    --surface: rgba(14, 30, 52, 0.76);
+    --surface-strong: #0d1b31;
+    --surface-hover: #122642;
+    --border: rgba(140, 180, 235, 0.14);
+    --border-bright: rgba(96, 165, 250, 0.32);
+    --primary: #4f8cff;
+    --primary-bright: #79a8ff;
+    --cyan: #38bdf8;
+    --text-main: #f1f6ff;
+    --text-secondary: #a8bad4;
+    --text-muted: #7086a4;
+    --positive: #37d49b;
+    --negative: #ff6b81;
+    --shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
 }
 
 /* Mobile chart is hidden on desktop */
@@ -136,19 +131,19 @@ body,
     background:
         radial-gradient(
             circle at 12% 0%,
-            rgba(93, 136, 187, 0.28),
+            rgba(38, 91, 168, 0.26),
             transparent 32%
         ),
         radial-gradient(
             circle at 88% 8%,
-            rgba(179, 203, 228, 0.10),
+            rgba(16, 125, 171, 0.15),
             transparent 30%
         ),
         linear-gradient(
             145deg,
-            #102336 0%,
-            #0b1d2e 48%,
-            #081725 100%
+            #040914 0%,
+            #071121 45%,
+            #050b18 100%
         );
     color: var(--text-main);
 }
@@ -191,10 +186,9 @@ footer {
     background:
         linear-gradient(
             180deg,
-            rgba(16, 35, 54, 0.99),
-            rgba(8, 23, 37, 0.99)
+            rgba(8, 19, 37, 0.98),
+            rgba(5, 13, 27, 0.98)
         );
-
     border-right: 1px solid var(--border);
     box-shadow: 12px 0 35px rgba(0, 0, 0, 0.22);
 }
@@ -245,11 +239,11 @@ label,
     min-height: 135px;
     padding: 1.35rem 1.4rem;
     background:
-    linear-gradient(
-        145deg,
-        rgba(32, 61, 91, 0.94),
-        rgba(16, 35, 54, 0.92)
-    );
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 66, 0.90),
+            rgba(8, 21, 40, 0.88)
+        );
     border: 1px solid var(--border);
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -282,25 +276,19 @@ label,
 .stButton > button {
     width: 100%;
     min-height: 48px;
-
-    border: 1px solid rgba(179, 203, 228, 0.40);
+    border: 1px solid rgba(133, 178, 255, 0.3);
     border-radius: 13px;
-
     background:
         linear-gradient(
             100deg,
-            #456f9e,
-            #5d88bb 55%,
-            #527eae
+            #316edc,
+            #4f8cff 55%,
+            #388fdf
         );
-
     color: white;
     font-size: 0.98rem;
     font-weight: 680;
-
-    box-shadow:
-        0 12px 30px rgba(19, 47, 76, 0.32);
-
+    box-shadow: 0 12px 30px rgba(49, 110, 220, 0.28);
     transition:
         transform 160ms ease,
         box-shadow 160ms ease,
@@ -427,287 +415,6 @@ hr {
         min-height: 110px;
     }
 }
-
-/* =========================================================
-   LIGHT SILVER + BLUE THEME OVERRIDES
-   ========================================================= */
-
-/* Main application background */
-html,
-body,
-.stApp,
-[data-testid="stAppViewContainer"] {
-    background:
-        radial-gradient(
-            circle at 12% 0%,
-            rgba(179, 203, 228, 0.72),
-            transparent 32rem
-        ),
-        linear-gradient(
-            145deg,
-            #f2f4f6 0%,
-            #d6d6d6 58%,
-            #e4e7ea 100%
-        ) !important;
-
-    color: #102336 !important;
-}
-
-/* Main text */
-h1,
-h2,
-h3,
-h4 {
-    color: #102336 !important;
-}
-
-p,
-label,
-[data-testid="stWidgetLabel"],
-[data-testid="stMarkdownContainer"] p {
-    color: #526579 !important;
-}
-
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background:
-        linear-gradient(
-            180deg,
-            #c6d8ea,
-            #b3cbe4
-        ) !important;
-
-    border-right: 1px solid rgba(16, 35, 54, 0.18) !important;
-
-    box-shadow:
-        10px 0 30px rgba(16, 35, 54, 0.10) !important;
-}
-
-[data-testid="stSidebar"] h1,
-[data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3,
-[data-testid="stSidebar"] p,
-[data-testid="stSidebar"] label {
-    color: #102336 !important;
-}
-
-/* Multipage navigation */
-[data-testid="stSidebarNav"] a {
-    color: #102336 !important;
-}
-
-[data-testid="stSidebarNav"] a:hover {
-    background: rgba(255, 255, 255, 0.45) !important;
-}
-
-[data-testid="stSidebarNav"] a[aria-current="page"] {
-    background: rgba(255, 255, 255, 0.72) !important;
-    border-color: rgba(93, 136, 187, 0.45) !important;
-    color: #102336 !important;
-
-    box-shadow:
-        inset 4px 0 0 #5d88bb,
-        0 8px 20px rgba(16, 35, 54, 0.10) !important;
-}
-
-/* Fund radio options */
-[data-testid="stSidebar"] [data-baseweb="radio"] {
-    background: rgba(255, 255, 255, 0.28) !important;
-}
-
-[data-testid="stSidebar"] [data-baseweb="radio"]:hover {
-    background: rgba(255, 255, 255, 0.52) !important;
-    border-color: rgba(93, 136, 187, 0.32) !important;
-}
-
-[data-testid="stSidebar"]
-[data-baseweb="radio"]:has(input:checked) {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.86),
-            rgba(238, 244, 250, 0.80)
-        ) !important;
-
-    border-color: rgba(93, 136, 187, 0.55) !important;
-
-    box-shadow:
-        inset 4px 0 0 #5d88bb,
-        0 8px 22px rgba(16, 35, 54, 0.11) !important;
-}
-
-[data-testid="stSidebar"] [data-baseweb="radio"] p {
-    color: #102336 !important;
-}
-
-/* Metric cards */
-[data-testid="stMetric"] {
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f5f7f9
-        ) !important;
-
-    border: 1px solid rgba(93, 136, 187, 0.24) !important;
-
-    box-shadow:
-        0 18px 42px rgba(16, 35, 54, 0.11),
-        inset 0 1px 0 rgba(255, 255, 255, 0.90) !important;
-}
-
-[data-testid="stMetric"]:hover {
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #edf3f8
-        ) !important;
-
-    border-color: rgba(93, 136, 187, 0.52) !important;
-}
-
-[data-testid="stMetricLabel"],
-[data-testid="stMetricLabel"] p {
-    color: #5d7188 !important;
-}
-
-[data-testid="stMetricValue"] {
-    color: #102336 !important;
-}
-
-/* Buttons */
-.stButton > button,
-[data-testid="stDownloadButton"] > button,
-[data-testid="stFormSubmitButton"] > button {
-    border: 1px solid #456f9e !important;
-
-    background:
-        linear-gradient(
-            135deg,
-            #527dab,
-            #5d88bb 55%,
-            #7099c7
-        ) !important;
-
-    color: #ffffff !important;
-
-    box-shadow:
-        0 12px 28px rgba(69, 111, 158, 0.26),
-        inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
-}
-
-.stButton > button:hover,
-[data-testid="stDownloadButton"] > button:hover,
-[data-testid="stFormSubmitButton"] > button:hover {
-    background:
-        linear-gradient(
-            135deg,
-            #456f9e,
-            #5d88bb
-        ) !important;
-
-    border-color: #102336 !important;
-
-    box-shadow:
-        0 16px 34px rgba(69, 111, 158, 0.34) !important;
-}
-
-/* Inputs and selectors */
-[data-baseweb="select"] > div,
-[data-testid="stNumberInput"] input,
-[data-testid="stTextInput"] input {
-    background: #ffffff !important;
-    color: #102336 !important;
-
-    border-color: rgba(93, 136, 187, 0.34) !important;
-
-    box-shadow: 0 5px 15px rgba(16, 35, 54, 0.06) !important;
-}
-
-[data-baseweb="select"] > div:hover,
-[data-testid="stNumberInput"] input:hover,
-[data-testid="stTextInput"] input:hover {
-    border-color: #5d88bb !important;
-}
-
-/* Plotly chart containers */
-[data-testid="stPlotlyChart"] {
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f5f7f9
-        ) !important;
-
-    border: 1px solid rgba(93, 136, 187, 0.25) !important;
-
-    box-shadow:
-        0 20px 48px rgba(16, 35, 54, 0.12) !important;
-}
-
-/* Plotly chart canvas */
-[data-testid="stPlotlyChart"] .main-svg {
-    background: transparent !important;
-}
-
-[data-testid="stPlotlyChart"] .main-svg .bg {
-    fill: #ffffff !important;
-}
-
-[data-testid="stPlotlyChart"] .gridlayer path {
-    stroke: rgba(93, 136, 187, 0.16) !important;
-}
-
-[data-testid="stPlotlyChart"] .zerolinelayer path {
-    stroke: rgba(93, 136, 187, 0.28) !important;
-}
-
-[data-testid="stPlotlyChart"] .xtick text,
-[data-testid="stPlotlyChart"] .ytick text,
-[data-testid="stPlotlyChart"] .xtitle,
-[data-testid="stPlotlyChart"] .ytitle,
-[data-testid="stPlotlyChart"] .gtitle,
-[data-testid="stPlotlyChart"] .legendtext {
-    fill: #102336 !important;
-}
-
-/* Disclaimer / information note */
-.fund-data-note {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(179, 203, 228, 0.58),
-            rgba(255, 255, 255, 0.68)
-        ) !important;
-
-    border-color: rgba(93, 136, 187, 0.32) !important;
-    color: #40556b !important;
-
-    box-shadow:
-        0 12px 28px rgba(16, 35, 54, 0.09) !important;
-}
-
-/* Alerts */
-[data-testid="stAlert"] {
-    background: rgba(255, 255, 255, 0.78) !important;
-    color: #102336 !important;
-
-    border-color: rgba(93, 136, 187, 0.30) !important;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar-track {
-    background: #d6d6d6;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #a1a8b2;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #5d88bb;
-}
 </style>
 """)
 
@@ -731,390 +438,193 @@ st.html(f"""
     </div>
 
     <div class="mc-logo-area">
-        <div class="mc-logo-panel">
-            <div class="mc-logo-glow"></div>
+        <div class="mc-logo-glow"></div>
 
-            <img
-                class="mc-bluebell-logo"
-                src="data:image/png;base64,{logo_base64}"
-                alt="Bluebell logo"
-            >
-        </div>
+        <img
+            class="mc-bluebell-logo"
+            src="data:image/png;base64,{logo_base64}"
+            alt="Bluebell logo"
+        >
     </div>
 </section>
 
 <style>
-/* =========================================================
-   LIGHT SILVER HERO
-   ========================================================= */
-
 .mc-hero {{
     position: relative;
-
     display: grid;
-    grid-template-columns:
-        minmax(0, 1.35fr)
-        minmax(240px, 0.65fr);
-
+    grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.65fr);
     align-items: center;
-    gap: clamp(2rem, 5vw, 5rem);
-
-    width: 100%;
-    min-height: 410px;
-
-    margin: 1rem 0 1.6rem;
-    padding: clamp(2.4rem, 5vw, 4.5rem);
-
+    gap: 3rem;
     overflow: hidden;
+    min-height: 330px;
+    margin-bottom: 1rem;
+    padding: 3.7rem 4rem;
 
-    border: 1px solid rgba(93, 136, 187, 0.27);
+    border: 1px solid rgba(118, 169, 239, 0.18);
     border-radius: 28px;
 
     background:
         radial-gradient(
-            circle at 88% 15%,
-            rgba(179, 203, 228, 0.64),
-            transparent 24rem
+            circle at 88% 25%,
+            rgba(56, 155, 235, 0.18),
+            transparent 35%
         ),
         linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.97),
-            rgba(232, 236, 240, 0.96)
+            130deg,
+            rgba(14, 35, 63, 0.96),
+            rgba(5, 16, 32, 0.94)
         );
 
-    box-shadow:
-        0 24px 55px rgba(16, 35, 54, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.95);
-
-    box-sizing: border-box;
+    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.40);
 }}
 
-
-/* Subtle grid texture */
 .mc-hero::before {{
     content: "";
-
     position: absolute;
     inset: 0;
-
-    opacity: 0.28;
-    pointer-events: none;
+    opacity: 0.22;
 
     background-image:
         linear-gradient(
-            rgba(93, 136, 187, 0.08) 1px,
+            rgba(100, 155, 225, 0.08) 1px,
             transparent 1px
         ),
         linear-gradient(
             90deg,
-            rgba(93, 136, 187, 0.08) 1px,
+            rgba(100, 155, 225, 0.08) 1px,
             transparent 1px
         );
 
-    background-size: 42px 42px;
+    background-size: 38px 38px;
 }}
-
-
-/* Blue accent line */
-.mc-hero::after {{
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: 5%;
-    right: 5%;
-
-    height: 4px;
-
-    border-radius: 0 0 999px 999px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #5d88bb 25%,
-            #b3cbe4 75%,
-            transparent
-        );
-}}
-
 
 .mc-hero-content,
 .mc-logo-area {{
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }}
-
 
 .mc-hero-content {{
-    max-width: 760px;
+    max-width: 850px;
 }}
 
-
-/* Small upper label */
 .mc-eyebrow {{
-    display: inline-flex !important;
-    align-items: center;
+    display: inline-flex;
+    margin-bottom: 1.2rem;
+    padding: 0.42rem 0.75rem;
 
-    width: fit-content !important;
-    max-width: 100%;
-
-    margin: 0 0 1.25rem !important;
-    padding: 0.52rem 0.9rem;
-
-    border: 1px solid rgba(93, 136, 187, 0.34);
+    border: 1px solid rgba(95, 156, 246, 0.30);
     border-radius: 999px;
 
-    background: rgba(179, 203, 228, 0.36);
+    background: rgba(57, 116, 208, 0.12);
+    color: #86b5ff;
 
-    color: #456f9e !important;
-
-    font-size: 0.76rem;
-    font-weight: 760;
-    line-height: 1;
-    letter-spacing: 0.12em;
-    white-space: nowrap;
+    font-size: 0.73rem;
+    font-weight: 750;
+    letter-spacing: 0.13em;
 }}
 
-
-/* Main title */
 .mc-hero-title {{
-    max-width: 760px;
+    max-width: 800px;
+    margin: 0;
+    color: #f5f8ff;
 
-    margin: 0 !important;
-
-    color: #102336 !important;
-
-    font-size: clamp(2.7rem, 5vw, 4.8rem) !important;
-    font-weight: 800 !important;
-    line-height: 1.02 !important;
-    letter-spacing: -0.058em !important;
-
-    text-wrap: balance;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.02;
+    font-weight: 790;
+    letter-spacing: -0.055em;
 }}
-
-
-/* Remove global h1 underline from hero title */
-.mc-hero-title::after {{
-    display: none !important;
-}}
-
 
 .mc-hero-title span {{
-    display: block;
-
-    margin-top: 0.16em;
-
-    color: #5d88bb !important;
+    color: #76a8ff;
 }}
 
-
-/* Description */
 .mc-hero-description {{
-    max-width: 670px;
+    max-width: 720px;
+    margin: 1.5rem 0 1.8rem;
 
-    margin: 1.45rem 0 0 !important;
-
-    color: #526579 !important;
-
-    font-size: clamp(1rem, 1.5vw, 1.13rem) !important;
-    font-weight: 450;
-    line-height: 1.75 !important;
+    color: #aebed5;
+    font-size: 1.05rem;
+    line-height: 1.72;
 }}
 
+.mc-badges {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}}
 
-/* =========================================================
-   LOGO AREA
-   ========================================================= */
+.mc-badges span {{
+    padding: 0.5rem 0.8rem;
 
+    border: 1px solid rgba(134, 177, 236, 0.14);
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: #c5d5e9;
+
+    font-size: 0.82rem;
+}}
+
+/* Right-side logo area */
 .mc-logo-area {{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 0;
-}}
-
-
-.mc-logo-panel {{
     position: relative;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    width: min(100%, 310px);
-    aspect-ratio: 1 / 1;
-
-    overflow: hidden;
-
-    border: 1px solid rgba(93, 136, 187, 0.28);
-    border-radius: 30px;
-
-    background:
-        radial-gradient(
-            circle at 35% 25%,
-            rgba(179, 203, 228, 0.42),
-            transparent 55%
-        ),
-        linear-gradient(
-            145deg,
-            #5d88bb,
-            #456f9e
-        );
-
-    box-shadow:
-        0 23px 48px rgba(69, 111, 158, 0.24),
-        inset 0 1px 0 rgba(255, 255, 255, 0.24);
+    min-height: 230px;
 }}
-
-
-.mc-logo-panel::before {{
-    content: "";
-
-    position: absolute;
-    inset: 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 22px;
-
-    pointer-events: none;
-}}
-
 
 .mc-bluebell-logo {{
     position: relative;
     z-index: 2;
-
     display: block;
 
-    width: 68%;
-    max-height: 190px;
-
+    width: min(100%, 280px);
+    max-height: 180px;
     object-fit: contain;
 
     filter:
-        drop-shadow(0 17px 28px rgba(16, 35, 54, 0.28));
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
 }}
-
 
 .mc-logo-glow {{
     position: absolute;
-
-    width: 85%;
-    height: 85%;
+    width: 260px;
+    height: 260px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
             circle,
-            rgba(255, 255, 255, 0.25),
-            rgba(179, 203, 228, 0.13) 45%,
-            transparent 72%
+            rgba(79, 140, 255, 0.23),
+            rgba(56, 189, 248, 0.08) 45%,
+            transparent 70%
         );
 
-    filter: blur(10px);
+    filter: blur(8px);
 }}
 
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 1000px) {{
+@media (max-width: 900px) {{
     .mc-hero {{
-        grid-template-columns:
-            minmax(0, 1.2fr)
-            minmax(210px, 0.55fr);
-
-        gap: 2rem;
-        min-height: 370px;
-        padding: 3rem 2.5rem;
-    }}
-
-    .mc-logo-panel {{
-        width: min(100%, 250px);
-        border-radius: 25px;
-    }}
-}}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 768px) {{
-    .mc-hero {{
-        display: flex;
-        flex-direction: column;
-
-        align-items: stretch;
-        gap: 2rem;
-
-        min-height: auto;
-
-        margin-top: 0.4rem;
-        padding: 2.2rem 1.35rem 1.6rem;
-
-        border-radius: 22px;
-    }}
-
-    .mc-eyebrow {{
-        margin-bottom: 1rem !important;
-        padding: 0.48rem 0.72rem;
-
-        font-size: 0.66rem;
-        letter-spacing: 0.1em;
-
-        white-space: normal;
-    }}
-
-    .mc-hero-title {{
-        font-size: clamp(2.35rem, 12vw, 3.35rem) !important;
-        line-height: 1.04 !important;
-        letter-spacing: -0.05em !important;
-    }}
-
-    .mc-hero-description {{
-        margin-top: 1.2rem !important;
-
-        font-size: 0.98rem !important;
-        line-height: 1.65 !important;
+        grid-template-columns: 1fr;
+        padding: 2.3rem 1.6rem;
     }}
 
     .mc-logo-area {{
-        justify-content: center;
-    }}
-
-    .mc-logo-panel {{
-        width: min(76vw, 245px);
-        border-radius: 24px;
+        min-height: 150px;
+        justify-content: flex-start;
     }}
 
     .mc-bluebell-logo {{
-        width: 68%;
-        max-height: 150px;
-    }}
-}}
-
-
-@media (max-width: 420px) {{
-    .mc-hero {{
-        padding:
-            1.85rem
-            1rem
-            1.3rem;
-
-        border-radius: 18px;
+        width: 190px;
+        max-height: 120px;
     }}
 
-    .mc-hero-title {{
-        font-size: 2.25rem !important;
-    }}
-
-    .mc-logo-panel {{
-        width: min(78vw, 220px);
+    .mc-logo-glow {{
+        width: 190px;
+        height: 190px;
     }}
 }}
 </style>
@@ -1293,6 +803,7 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True) 
+
 
 def style_line_chart(fig, title):
     fig.update_layout(

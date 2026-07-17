@@ -78,6 +78,7 @@ st.markdown(
        ========================================= */
 
     /* Header appears at the top initially but does not stay fixed while scrolling */
+    /* Header scrolls away with the page */
     [data-testid="stHeader"] {
         position: absolute !important;
         top: 0 !important;
@@ -87,24 +88,66 @@ st.markdown(
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
+        overflow: visible !important;
     }
     
-    /* Remove Streamlit's colored line beneath the header */
     [data-testid="stDecoration"] {
         display: none !important;
     }
-
-    #MainMenu,
-    footer {
-        visibility: hidden;
-    }
-
+    
+    
+    /* Desktop sidebar control */
     [data-testid="stSidebarCollapsedControl"],
     [data-testid="stExpandSidebarButton"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
         z-index: 999999 !important;
+    }
+    
+    
+    /* Keep only the sidebar-opening button visible on mobile */
+    @media (max-width: 768px) {
+    
+        [data-testid="stSidebarCollapsedControl"],
+        [data-testid="stExpandSidebarButton"] {
+            position: fixed !important;
+    
+            top: 0.7rem !important;
+            left: 0.7rem !important;
+            right: auto !important;
+    
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+    
+            align-items: center !important;
+            justify-content: center !important;
+    
+            width: 44px !important;
+            height: 44px !important;
+    
+            border: 1px solid rgba(179, 203, 228, 0.35) !important;
+            border-radius: 12px !important;
+    
+            background: rgba(16, 35, 54, 0.94) !important;
+            color: #ffffff !important;
+    
+            box-shadow: 0 8px 24px rgba(2, 10, 18, 0.30) !important;
+    
+            z-index: 9999999 !important;
+        }
+    
+        [data-testid="stSidebarCollapsedControl"] svg,
+        [data-testid="stExpandSidebarButton"] svg {
+            color: #ffffff !important;
+            fill: #ffffff !important;
+        }
+    
+        /* Prevent page content from sitting underneath the button */
+        .block-container {
+            padding-top: 3.7rem !important;
+        }
     }
 
 

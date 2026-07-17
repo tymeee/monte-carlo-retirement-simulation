@@ -2809,7 +2809,6 @@ def run_company_model():
     "ESGTECH",
     "ESEAE",
     "KTPRECIOUS",
-    "Rostrum Wisdom Fund of Funds",
     "KKPGNPH",
     "KTHEALTHCAREA",
     "KFGPROPA",

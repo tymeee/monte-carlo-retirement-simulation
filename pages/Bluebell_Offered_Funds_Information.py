@@ -359,5 +359,153 @@ if fund == "UGISFX":
     col1, col2, col3 = st.columns(3)
     col1.metric(label="Main Asset Class", value="Global Bonds")
 
+if fund == "ESGQG":
+    st.title("ES-GQG")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        label="1 year return (2025)",
+        value="12.33%"
+    )
+
+    c2.metric(
+        label="1 year Sharpe Ratio (2025)",
+        value="0.79"
+    )
+
+    c3.metric(
+        label="Risk Level",
+        value="High"
+    )
+
+    st.write("Historical Price Data (Since End of 2024)")
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["gqg"] = pd.to_numeric(
+        historicaldata["gqg"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "gqg"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="gqg",
+        title="Historical Price",
+        labels={
+        "plus": "ES-GQG price",
+        "Date": "Date"
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
+
+    Holdings = [
+        "Wellington Global Quality Growth Fund",
+        "Other"
+    ]
+    alloc_amt = [
+        0.9773,
+        0.0227
+    ]
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Main Asset Class", value="Global Equity")
+
+
+if fund == "ESGTECH":
+    st.title("ES-GTECH")
+
+    c1, c2, c3 = st.columns(3)
+
+    c1.metric(
+        label="1 year return (2025)",
+        value="44.53%"
+    )
+
+    c2.metric(
+        label="1 year Sharpe Ratio (2025)",
+        value="2.06"
+    )
+
+    c3.metric(
+        label="Risk Level",
+        value="High"
+    )
+
+    st.write("Historical Price Data (Since End of 2024)")
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["gtech"] = pd.to_numeric(
+        historicaldata["gtech"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "gtech"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="gtech",
+        title="Historical Price",
+        labels={
+        "plus": "ES-GTECH price",
+        "Date": "Date"
+        }
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
+
+    Holdings = [
+        "Polar Capital Global Technology Fund USD Class I Dist (POLGTIU)",
+        "Other"
+    ]
+    alloc_amt = [
+        0.9796,
+        0.0204
+    ]
+    pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
+    col1, col2, col3 = st.columns(3)
+    col1.metric(label="Main Asset Class", value="Global Technology Sector Equity")
 
     

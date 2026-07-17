@@ -42,7 +42,7 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-logo_path = Path("bluebridgeai.png")
+logo_path = Path("bluebridgeai1.png")
 
 if logo_path.exists():
     logo_base64 = base64.b64encode(

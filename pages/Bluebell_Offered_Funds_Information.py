@@ -40,25 +40,60 @@ fund = st.sidebar.radio(
 
 if fund == "KKP Plus":
     st.title("KKP Plus")
+
     c1, c2, c3 = st.columns(3)
 
-    c1.metric( 
-        label = "1 year return (2025)",
-        value = "1.49%"
+    c1.metric(
+        label="1 year return (2025)",
+        value="1.49%"
     )
+
     c2.metric(
-        label ="1 year Sharpe Ratio (2025)",
-        value = "3.71"
+        label="1 year Sharpe Ratio (2025)",
+        value="3.71"
     )
+
     c3.metric(
-        label = "Risk Level",
-        value = "Low"
+        label="Risk Level",
+        value="Low"
     )
-        
 
     st.write("Historical Price Data (Since End of 2024)")
-    fig = px.line(historicaldata, x = "plus", y = "Date", title = "Historical Price")
-    fig.show()
+
+    historicaldata["Date"] = pd.to_datetime(
+        historicaldata["Date"],
+        errors="coerce"
+    )
+
+    historicaldata["plus"] = pd.to_numeric(
+        historicaldata["plus"],
+        errors="coerce"
+    )
+
+    plot_data = (
+        historicaldata
+        .dropna(subset=["Date", "plus"])
+        .sort_values("Date")
+    )
+
+    fig = px.line(
+        plot_data,
+        x="Date",
+        y="plus",
+        title="Historical Price"
+    )
+
+    fig.update_layout(
+        xaxis_title="Date",
+        yaxis_title="Fund Price",
+        hovermode="x unified"
+    )
+
+    st.plotly_chart(
+        fig,
+        width="stretch",
+        config={"displayModeBar": False}
+    )
     
                         
     

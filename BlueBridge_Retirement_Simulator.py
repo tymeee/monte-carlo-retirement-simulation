@@ -139,19 +139,19 @@ body,
     background:
         radial-gradient(
             circle at 12% 0%,
-            rgba(38, 91, 168, 0.26),
+            rgba(93, 136, 187, 0.28),
             transparent 32%
         ),
         radial-gradient(
             circle at 88% 8%,
-            rgba(16, 125, 171, 0.15),
+            rgba(179, 203, 228, 0.10),
             transparent 30%
         ),
         linear-gradient(
             145deg,
-            #040914 0%,
-            #071121 45%,
-            #050b18 100%
+            #102336 0%,
+            #0b1d2e 48%,
+            #081725 100%
         );
     color: var(--text-main);
 }
@@ -194,9 +194,10 @@ footer {
     background:
         linear-gradient(
             180deg,
-            rgba(8, 19, 37, 0.98),
-            rgba(5, 13, 27, 0.98)
+            rgba(16, 35, 54, 0.99),
+            rgba(8, 23, 37, 0.99)
         );
+
     border-right: 1px solid var(--border);
     box-shadow: 12px 0 35px rgba(0, 0, 0, 0.22);
 }
@@ -247,11 +248,11 @@ label,
     min-height: 135px;
     padding: 1.35rem 1.4rem;
     background:
-        linear-gradient(
-            145deg,
-            rgba(17, 38, 66, 0.90),
-            rgba(8, 21, 40, 0.88)
-        );
+    linear-gradient(
+        145deg,
+        rgba(32, 61, 91, 0.94),
+        rgba(16, 35, 54, 0.92)
+    );
     border: 1px solid var(--border);
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -284,19 +285,25 @@ label,
 .stButton > button {
     width: 100%;
     min-height: 48px;
-    border: 1px solid rgba(133, 178, 255, 0.3);
+
+    border: 1px solid rgba(179, 203, 228, 0.40);
     border-radius: 13px;
+
     background:
         linear-gradient(
             100deg,
-            #316edc,
-            #4f8cff 55%,
-            #388fdf
+            #456f9e,
+            #5d88bb 55%,
+            #527eae
         );
+
     color: white;
     font-size: 0.98rem;
     font-weight: 680;
-    box-shadow: 0 12px 30px rgba(49, 110, 220, 0.28);
+
+    box-shadow:
+        0 12px 30px rgba(19, 47, 76, 0.32);
+
     transition:
         transform 160ms ease,
         box-shadow 160ms ease,

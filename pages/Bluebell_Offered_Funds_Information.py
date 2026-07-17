@@ -40,7 +40,7 @@ if fund == "KKP Plus":
     col1, col2, col3 = st.columns(3)
 
     st.write("Historical Price Data (Since End of 2024"))
-    fig = px.line(historicaldata, x = "KKPPlus", y = "date", title = "Historical Price")
+    fig = px.line(historicaldata, x = "plus", y = "Date", title = "Historical Price")
     fig.show()
     
                         

@@ -802,10 +802,7 @@ st.markdown("""
                 0 20px 55px rgba(0, 0, 0, 0.28) !important;
 }
 </style>
-""", unsafe_allow_html=True)
-
-if st.button("More Fund Information"):
-    st.switch_page("pages/fund_info.py") 
+""", unsafe_allow_html=True) 
 
 def style_line_chart(fig, title):
     fig.update_layout(

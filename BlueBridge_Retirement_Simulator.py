@@ -3288,7 +3288,7 @@ def run_company_model():
               )
           if day == acum_years * 252:
                curnt_amt = kkpplus_amt+kkpcash_amt + kfa_amt + ugi_amt+ gqg_amt + gtech_amt + eae_amt + ktp_amt + rostrum_amt + gnph_amt + healthcarea_amt + propa_amt + sp500a_amt + savings_amt +gcore_amt
-              bfrretireamt = curnt_amt
+               bfrretireamt = curnt_amt
                if curnt_amt >= target:
                    goal_count = 1
                else: 

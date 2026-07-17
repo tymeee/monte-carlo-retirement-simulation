@@ -3,7 +3,7 @@ numpy
 pandas
 matplotlib
 yfinance
-numba
+numba>=0.59,<0.64
 pyarrow
 scipy>=1.10.0
 plotly

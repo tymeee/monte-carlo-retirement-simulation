@@ -754,7 +754,7 @@ st.markdown("""
 
 /* Download button itself */
 [data-testid="stDownloadButton"] > button {
-    width: 100%;
+    width: 240px;
     min-height: 135px;
     border-radius: 18px;
     border: 1px solid rgba(96, 165, 250, 0.18) !important;

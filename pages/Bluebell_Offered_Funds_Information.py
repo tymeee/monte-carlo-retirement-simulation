@@ -12,6 +12,7 @@ st.set_page_config(
 )
 
 st.title("Fund Information")
+st.write("Disclaimer: Data was last updated on July 17 2026, future changes may not have been accounted for")
 
 def get_data():
     master_doc = pd.read_csv("master_investment_data.csv")
@@ -80,7 +81,11 @@ if fund == "KKP Plus":
         plot_data,
         x="Date",
         y="plus",
-        title="Historical Price"
+        title="Historical Price",
+        labels={
+        "plus": "KKP Plus price",
+        "Date": "Date"
+        }
     )
 
     fig.update_layout(
@@ -94,6 +99,24 @@ if fund == "KKP Plus":
         width="stretch",
         config={"displayModeBar": False}
     )
-    
+
+    alloc_name = [
+        "Japan Treasury Disc Bill(JP1743701S35)",
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26O12A)",
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26817A)",
+        "JAPAN TREASURY DISC BILL (JP1743801S59)",
+        "พันธบัตรธนาคารแห่งประเทศไทย (CBF26720A)",
+        "Other"
+    ]
+    alloc_amt = [
+        0.058,
+        0.055,
+        0.0454,
+        0.0417,
+        0.0317,
+        0.7628
+    ]
+    pie_fig = px.pie(alloc_name,alloc_amt,names = "Holdings", title = "Fund Holdings")
+    st.plotly_chart(pie_fig, use_container_width = True)
                         
     

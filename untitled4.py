@@ -18,6 +18,23 @@ from scipy.stats import t
 from numba import njit
 import base64
 from pathlib import Path
+from io import BytesIO
+from copy import deepcopy
+from datetime import datetime
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import mm
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Image as PDFImage,
+    Table,
+    TableStyle,
+    PageBreak,
+)
 
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",

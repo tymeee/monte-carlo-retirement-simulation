@@ -448,10 +448,6 @@ st.markdown(
         box-shadow: none !important;
     }
     
-    /* Hide Share, edit, GitHub and other toolbar controls */
-    [data-testid="stToolbar"] {
-        display: none !important;
-    }
     
     /* Hide Streamlit's thin decorative header line */
     [data-testid="stDecoration"] {

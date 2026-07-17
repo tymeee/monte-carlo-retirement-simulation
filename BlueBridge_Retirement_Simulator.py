@@ -2034,7 +2034,7 @@ def run_index_model():
           )
 
           portfolio_simulations[:, sim] = portfolio_path
-          retirement_amounts[sim] = moneybfrretire
+          retirement_amounts.append(moneybfrretire)
 
           trials_failed += failed
           goal_reached += success

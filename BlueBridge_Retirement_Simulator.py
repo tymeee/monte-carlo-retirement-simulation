@@ -2760,7 +2760,7 @@ def run_index_model():
       )
 
       if pdf_report is not None:
-        with c3:
+        with c1:
             st.download_button(
                 label="Download Portfolio Report",
                 data=pdf_report,
@@ -4230,7 +4230,7 @@ def run_company_model():
       )
 
       if pdf_report is not None:
-        with c3:
+        with c1:
             st.download_button(
                 label="Download Portfolio Report",
                 data=pdf_report,

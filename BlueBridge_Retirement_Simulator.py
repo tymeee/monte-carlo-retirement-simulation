@@ -576,16 +576,25 @@ st.html(f"""
 }}
 
 .mc-bluebell-logo {{
-    position: relative;
-    z-index: 2;
-    display: block;
-
-    width: min(100%, 280px);
-    max-height: 180px;
+    width: min(100%, 310px);
+    max-height: 205px;
     object-fit: contain;
 
+    mix-blend-mode: multiply;
     filter:
-        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
+        brightness(1.75)
+        contrast(1.12)
+        saturate(1.15);
+
+    opacity: 0.96;
+
+    border-radius: 14px;
+
+    filter:
+        brightness(1.75)
+        contrast(1.12)
+        saturate(1.15)
+        drop-shadow(0 18px 30px rgba(0, 0, 0, 0.22));
 }}
 
 .mc-logo-glow {{

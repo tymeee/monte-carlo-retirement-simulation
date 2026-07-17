@@ -2109,7 +2109,7 @@ def run_index_model():
         )
       else:
         median_accumulation_return = np.nan
-     median_retirement_wealth = np.median(retirement_amounts)
+      median_retirement_wealth = np.median(retirement_amounts)
 
 
       percentiles = np.percentile(

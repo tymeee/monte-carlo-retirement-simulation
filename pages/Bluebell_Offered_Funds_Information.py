@@ -11,6 +11,480 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
+st.markdown(
+    """
+    <style>
+    /* =========================================
+       BLUEBELL FUND INFORMATION PAGE
+       ========================================= */
+
+    :root {
+        --bb-background: #06101f;
+        --bb-background-secondary: #08182d;
+        --bb-card: rgba(13, 34, 61, 0.88);
+        --bb-card-hover: rgba(17, 43, 76, 0.94);
+        --bb-border: rgba(105, 162, 230, 0.20);
+        --bb-border-hover: rgba(105, 162, 230, 0.42);
+        --bb-primary: #6fa7ff;
+        --bb-primary-soft: rgba(89, 145, 230, 0.15);
+        --bb-text: #f3f7ff;
+        --bb-text-secondary: #aebed5;
+        --bb-text-muted: #8194af;
+    }
+
+
+    /* =========================================
+       OVERALL PAGE
+       ========================================= */
+
+    html,
+    body,
+    .stApp,
+    [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(
+                circle at 15% 0%,
+                rgba(32, 91, 159, 0.20),
+                transparent 31rem
+            ),
+            radial-gradient(
+                circle at 90% 20%,
+                rgba(28, 80, 146, 0.13),
+                transparent 28rem
+            ),
+            linear-gradient(
+                160deg,
+                var(--bb-background-secondary),
+                var(--bb-background) 55%,
+                #040b16
+            ) !important;
+
+        color: var(--bb-text);
+    }
+
+    [data-testid="stAppViewContainer"] {
+        min-height: 100vh;
+    }
+
+    .block-container {
+        max-width: 1180px;
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+
+
+    /* =========================================
+       STREAMLIT HEADER
+       ========================================= */
+
+    [data-testid="stHeader"] {
+        background: rgba(5, 14, 28, 0.78) !important;
+        border-bottom: 1px solid rgba(105, 162, 230, 0.12);
+        backdrop-filter: blur(15px);
+    }
+
+    #MainMenu,
+    footer {
+        visibility: hidden;
+    }
+
+
+    /* =========================================
+       PAGE TITLES
+       ========================================= */
+
+    h1 {
+        color: var(--bb-text) !important;
+        font-size: clamp(2.1rem, 4vw, 3.7rem) !important;
+        line-height: 1.05 !important;
+        font-weight: 780 !important;
+        letter-spacing: -0.045em !important;
+        margin-bottom: 0.7rem !important;
+    }
+
+    h1::after {
+        content: "";
+        display: block;
+        width: 72px;
+        height: 4px;
+        margin-top: 0.75rem;
+
+        border-radius: 999px;
+
+        background: linear-gradient(
+            90deg,
+            #75aaff,
+            rgba(117, 170, 255, 0.08)
+        );
+    }
+
+    h2,
+    h3 {
+        color: var(--bb-text) !important;
+        letter-spacing: -0.025em;
+    }
+
+    [data-testid="stMarkdownContainer"] p {
+        color: var(--bb-text-secondary);
+        line-height: 1.7;
+    }
+
+
+    /* =========================================
+       DISCLAIMER / DATA NOTE
+       ========================================= */
+
+    .fund-data-note {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+
+        width: fit-content;
+        max-width: 100%;
+
+        margin: 0.5rem 0 1.8rem;
+        padding: 0.75rem 1rem;
+
+        border: 1px solid rgba(108, 159, 226, 0.18);
+        border-radius: 13px;
+
+        background: rgba(14, 37, 66, 0.64);
+
+        color: var(--bb-text-secondary);
+        font-size: 0.88rem;
+        line-height: 1.5;
+
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    }
+
+    .fund-data-note::before {
+        content: "i";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+
+        width: 21px;
+        height: 21px;
+
+        border: 1px solid rgba(117, 170, 255, 0.45);
+        border-radius: 50%;
+
+        color: #a9caff;
+        font-size: 0.75rem;
+        font-weight: 750;
+    }
+
+
+    /* =========================================
+       SIDEBAR
+       ========================================= */
+
+    [data-testid="stSidebar"] {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(10, 28, 51, 0.98),
+                rgba(5, 16, 31, 0.99)
+            ) !important;
+
+        border-right: 1px solid rgba(105, 162, 230, 0.16);
+    }
+
+    [data-testid="stSidebar"] .block-container {
+        padding-top: 1.6rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {
+        color: var(--bb-text) !important;
+    }
+
+    [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+        color: #c5d3e7 !important;
+        font-size: 0.92rem !important;
+        font-weight: 650 !important;
+        letter-spacing: 0.01em;
+    }
+
+
+    /* Fund-selection radio cards */
+
+    [data-testid="stSidebar"] [data-baseweb="radio"] {
+        width: 100%;
+        margin-bottom: 0.34rem;
+        padding: 0.66rem 0.75rem;
+
+        border: 1px solid transparent;
+        border-radius: 12px;
+
+        background: rgba(12, 32, 58, 0.54);
+
+        transition:
+            background 160ms ease,
+            border-color 160ms ease,
+            transform 160ms ease;
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="radio"]:hover {
+        transform: translateX(3px);
+        border-color: rgba(107, 161, 229, 0.25);
+        background: rgba(18, 45, 78, 0.78);
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="radio"]:has(input:checked) {
+        border-color: rgba(112, 168, 241, 0.48);
+        background:
+            linear-gradient(
+                135deg,
+                rgba(39, 89, 154, 0.44),
+                rgba(20, 50, 88, 0.78)
+            );
+
+        box-shadow:
+            inset 3px 0 0 #71a8ff,
+            0 8px 25px rgba(0, 0, 0, 0.16);
+    }
+
+    [data-testid="stSidebar"] [data-baseweb="radio"] p {
+        color: #dce7f7 !important;
+        font-size: 0.91rem;
+        line-height: 1.3;
+    }
+
+
+    /* =========================================
+       METRIC CARDS
+       ========================================= */
+
+    [data-testid="stHorizontalBlock"] {
+        gap: 1rem;
+    }
+
+    [data-testid="stMetric"] {
+        min-height: 132px;
+        padding: 1.3rem 1.4rem;
+
+        border: 1px solid var(--bb-border);
+        border-radius: 20px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(17, 40, 70, 0.94),
+                rgba(8, 23, 43, 0.92)
+            );
+
+        box-shadow:
+            0 20px 50px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+        transition:
+            transform 180ms ease,
+            border-color 180ms ease,
+            background 180ms ease;
+    }
+
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-3px);
+        border-color: var(--bb-border-hover);
+        background:
+            linear-gradient(
+                145deg,
+                rgba(20, 47, 82, 0.98),
+                rgba(10, 27, 49, 0.95)
+            );
+    }
+
+    [data-testid="stMetricLabel"] p {
+        color: var(--bb-text-secondary) !important;
+        font-size: 0.91rem !important;
+        font-weight: 550 !important;
+        line-height: 1.35 !important;
+    }
+
+    [data-testid="stMetricValue"] {
+        color: #edf4ff !important;
+        font-size: clamp(1.75rem, 3vw, 2.45rem) !important;
+        font-weight: 750 !important;
+        letter-spacing: -0.035em;
+    }
+
+
+    /* =========================================
+       PLOTLY CHART CARDS
+       ========================================= */
+
+    [data-testid="stPlotlyChart"] {
+        margin: 1rem 0 1.6rem;
+        padding: 0.7rem;
+
+        overflow: hidden;
+
+        border: 1px solid var(--bb-border);
+        border-radius: 22px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(12, 31, 56, 0.92),
+                rgba(6, 19, 37, 0.90)
+            );
+
+        box-shadow:
+            0 24px 65px rgba(0, 0, 0, 0.26),
+            inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    }
+
+    [data-testid="stPlotlyChart"] .js-plotly-plot,
+    [data-testid="stPlotlyChart"] .plot-container,
+    [data-testid="stPlotlyChart"] .svg-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Make default Plotly line charts fit the dark page */
+
+    [data-testid="stPlotlyChart"] .main-svg {
+        background: transparent !important;
+    }
+
+    [data-testid="stPlotlyChart"] .main-svg .bg {
+        fill: rgba(5, 17, 33, 0.42) !important;
+    }
+
+    [data-testid="stPlotlyChart"] .gridlayer path {
+        stroke: rgba(136, 171, 214, 0.13) !important;
+    }
+
+    [data-testid="stPlotlyChart"] .zerolinelayer path {
+        stroke: rgba(136, 171, 214, 0.22) !important;
+    }
+
+    [data-testid="stPlotlyChart"] .xtick text,
+    [data-testid="stPlotlyChart"] .ytick text,
+    [data-testid="stPlotlyChart"] .xtitle,
+    [data-testid="stPlotlyChart"] .ytitle,
+    [data-testid="stPlotlyChart"] .gtitle {
+        fill: #c8d6e9 !important;
+    }
+
+
+    /* =========================================
+       MOBILE
+       ========================================= */
+
+    @media (max-width: 768px) {
+
+        .block-container {
+            width: 100%;
+            padding-top: 1.2rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            padding-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.15rem !important;
+            line-height: 1.08 !important;
+            letter-spacing: -0.035em !important;
+        }
+
+        h1::after {
+            width: 54px;
+            height: 3px;
+        }
+
+        .fund-data-note {
+            width: 100%;
+            margin-bottom: 1.25rem;
+            padding: 0.7rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /*
+           Stack all metric columns vertically.
+           This also prevents narrow metric cards.
+        */
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+            gap: 0.7rem !important;
+        }
+
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+        }
+
+        [data-testid="stMetric"] {
+            min-height: 105px;
+            padding: 1rem 1.05rem;
+            border-radius: 16px;
+        }
+
+        [data-testid="stMetricValue"] {
+            font-size: 1.8rem !important;
+        }
+
+        [data-testid="stMetricLabel"] p {
+            font-size: 0.82rem !important;
+        }
+
+        [data-testid="stPlotlyChart"] {
+            margin: 0.8rem 0 1.1rem;
+            padding: 0.15rem;
+            border-radius: 17px;
+        }
+
+        [data-testid="stSidebar"] {
+            width: min(88vw, 350px) !important;
+        }
+
+        [data-testid="stSidebar"] [data-baseweb="radio"] {
+            padding: 0.72rem 0.7rem;
+        }
+
+        [data-testid="stSidebarCollapsedControl"],
+        [data-testid="stExpandSidebarButton"] {
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 999999 !important;
+
+            border: 1px solid rgba(112, 168, 241, 0.30) !important;
+            border-radius: 12px !important;
+
+            background: rgba(8, 25, 47, 0.94) !important;
+        }
+    }
+
+
+    @media (max-width: 420px) {
+
+        .block-container {
+            padding-left: 0.55rem;
+            padding-right: 0.55rem;
+        }
+
+        h1 {
+            font-size: 1.9rem !important;
+        }
+
+        [data-testid="stMetric"] {
+            min-height: 98px;
+        }
+
+        [data-testid="stPlotlyChart"] {
+            border-radius: 14px;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("Fund Information")
 st.write("Disclaimer: Data was last updated on July 17 2026, future changes may not have been accounted for")
 
@@ -1755,7 +2229,7 @@ if fund == "SCBS&P500A":
 
     Holdings = [
         "ISHARES CORE S&P 500 ETF",
-        "JP MORGAN US RESEARCH ENHANCED INDEX EQUITY ACTIVE UCITS ETF"
+        "JP MORGAN US RESEARCH ENHANCED INDEX EQUITY ACTIVE UCITS ETF",
         "Other"
     ]
     alloc_amt = [

@@ -138,7 +138,7 @@ if fund == "KKP Plus":
       )
     pie_fig.update_layout(
         title=dict(
-            text="Portfolio Allocation",
+            text="Top 5 Fund Holdings",
             x=0.02,
             xanchor="left",
             font=dict(
@@ -176,21 +176,7 @@ if fund == "KKP Plus":
             r=25,
             t=75,
             b=100
-        ),
-
-        annotations=[
-            dict(
-                text="Portfolio<br>Allocation",
-                x=0.5,
-                y=0.5,
-                showarrow=False,
-                align="center",
-                font=dict(
-                    size=15,
-                    color="#A8BAD4"
-                )
-            )
-        ]
+        )
       )
 
 

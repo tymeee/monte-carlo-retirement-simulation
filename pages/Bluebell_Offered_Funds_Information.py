@@ -77,10 +77,21 @@ st.markdown(
        STREAMLIT HEADER
        ========================================= */
 
+    /* Header appears at the top initially but does not stay fixed while scrolling */
     [data-testid="stHeader"] {
-        background: rgba(5, 14, 28, 0.78) !important;
-        border-bottom: 1px solid rgba(105, 162, 230, 0.12);
-        backdrop-filter: blur(15px);
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+    
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Remove Streamlit's colored line beneath the header */
+    [data-testid="stDecoration"] {
+        display: none !important;
     }
 
     #MainMenu,
@@ -260,60 +271,67 @@ st.markdown(
        METRIC CARDS
        ========================================= */
 
-    [data-testid="stHorizontalBlock"] {
-        gap: 1rem;
-    }
-
     [data-testid="stMetric"] {
-        min-height: 132px;
-        padding: 1.3rem 1.4rem;
-
-        border: 1px solid var(--bb-border);
-        border-radius: 20px;
-
+        /* Normal consistent card size */
+        min-height: 135px;
+        height: auto;
+    
+        padding: 1.35rem 1.4rem;
+    
         background:
             linear-gradient(
                 145deg,
-                rgba(17, 40, 70, 0.94),
-                rgba(8, 23, 43, 0.92)
+                rgba(17, 38, 66, 0.90),
+                rgba(8, 21, 40, 0.88)
             );
-
-        box-shadow:
-            0 20px 50px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(255, 255, 255, 0.025);
-
+    
+        border: 1px solid var(--border);
+        border-radius: 20px;
+    
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+    
+        box-sizing: border-box;
+        overflow: visible;
+    
         transition:
             transform 180ms ease,
             border-color 180ms ease,
-            background 180ms ease;
+            box-shadow 180ms ease;
     }
-
-    [data-testid="stMetric"]:hover {
-        transform: translateY(-3px);
-        border-color: var(--bb-border-hover);
-        background:
-            linear-gradient(
-                145deg,
-                rgba(20, 47, 82, 0.98),
-                rgba(10, 27, 49, 0.95)
-            );
-    }
-
+    
+    /* Allow long labels to wrap and increase the card height */
+    [data-testid="stMetricLabel"],
     [data-testid="stMetricLabel"] p {
-        color: var(--bb-text-secondary) !important;
-        font-size: 0.91rem !important;
-        font-weight: 550 !important;
-        line-height: 1.35 !important;
+        color: var(--text-secondary) !important;
+        font-weight: 550;
+    
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    
+        line-height: 1.35;
     }
-
+    
+    /* Allow unusually long values to wrap rather than escape the card */
     [data-testid="stMetricValue"] {
-        color: #edf4ff !important;
-        font-size: clamp(1.75rem, 3vw, 2.45rem) !important;
-        font-weight: 750 !important;
+        color: var(--text-main) !important;
+    
+        font-size: 2rem;
+        font-weight: 720;
         letter-spacing: -0.035em;
+        line-height: 1.12;
+    
+        white-space: normal !important;
+        overflow-wrap: anywhere;
     }
 
-
+    @media (max-width: 900px) {
+    [data-testid="stMetric"] {
+        min-height: 110px;
+        height: auto;
+    }
+    }
     /* =========================================
        PLOTLY CHART CARDS
        ========================================= */

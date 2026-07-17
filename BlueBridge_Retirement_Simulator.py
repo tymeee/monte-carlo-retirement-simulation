@@ -742,7 +742,7 @@ st.html(f"""
 </section>
 
 <style>
-.mc-hero {
+.mc-hero{{
     border-color: rgba(69, 111, 158, 0.35);
 
     background:
@@ -759,22 +759,22 @@ st.html(f"""
 
     box-shadow:
         0 26px 60px rgba(16, 35, 54, 0.20);
-}
+}}
 
-.mc-eyebrow {
+.mc-eyebrow {{
     border-color: rgba(255, 255, 255, 0.42);
     background: rgba(255, 255, 255, 0.14);
     color: #ffffff;
-}
+}}
 
 .mc-hero-title,
-.mc-hero-title span {
+.mc-hero-title span {{
     color: #ffffff;
-}
+}}
 
-.mc-hero-description {
+.mc-hero-description {{
     color: #eef3f8;
-}
+}}
 
 .mc-logo-area {{
     position: relative;

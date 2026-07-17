@@ -310,6 +310,26 @@ st.markdown(
         display: none;
     }
 
+    /* Sidebar title only */
+    [data-testid="stSidebar"] h1 {
+        font-size: 2rem !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.03em !important;
+        font-weight: 750 !important;
+    
+        margin-top: 0 !important;
+        margin-bottom: 1.4rem !important;
+    
+        overflow-wrap: normal !important;
+        word-break: normal !important;
+        hyphens: none !important;
+    }
+    
+    /* Remove the decorative line below sidebar titles */
+    [data-testid="stSidebar"] h1::after {
+        display: none !important;
+    }
+
     [data-testid="stSidebar"] p,
     [data-testid="stSidebar"] label {
         color: var(--bb-silver) !important;

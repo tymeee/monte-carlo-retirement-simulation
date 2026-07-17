@@ -974,7 +974,7 @@ def run_index_model():
   available_fund = [
     "US Equity",
     "Thai Equity",
-    "Chinese Equity",
+    "China Equity",
     "Bond/Fixed Income Fund",
     "Aggressive Mutual Fund",
     "Moderate Mutual Fund",
@@ -1030,7 +1030,7 @@ def run_index_model():
       )
   else:
       bond_weight = 0
-  if "Aggresive Mutual Fund" in selection:
+  if "Aggressive Mutual Fund" in selection:
       agg_weight = st.sidebar.slider(
           "Aggressive Hybrid Fund",
           0.0,

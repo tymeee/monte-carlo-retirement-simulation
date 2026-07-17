@@ -117,6 +117,81 @@ if fund == "KKP Plus":
         0.7628
     ]
     pie_fig = px.pie(Holdings,values=alloc_amt,names = Holdings, title = "Top 5 Fund Holdings")
+    pie_fig.update_traces(
+        textposition="inside",
+        textinfo="percent",
+        textfont=dict(
+            size=13,
+            color="#F5F8FF"
+        ),
+        hovertemplate=(
+            "<b>%{label}</b><br>"
+            "Allocation: %{percent}"
+            "<extra></extra>"
+        ),
+        marker=dict(
+            line=dict(
+                color="#071121",
+                width=2
+            )
+        )
+      )
+    pie_fig.update_layout(
+        title=dict(
+            text="Portfolio Allocation",
+            x=0.02,
+            xanchor="left",
+            font=dict(
+                size=20,
+                color="#F1F6FF"
+            )
+        ),
+
+        height=520,
+
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+
+        font=dict(
+            family="Inter, Arial, sans-serif",
+            color="#D9E5F5"
+        ),
+
+    # Put legend below chart so it cannot get cut off
+        legend=dict(
+            orientation="h",
+            x=0.5,
+            xanchor="center",
+            y=-0.08,
+            yanchor="top",
+            font=dict(
+                size=12,
+                color="#D9E5F5"
+            ),
+            bgcolor="rgba(0,0,0,0)"
+        ),
+
+        margin=dict(
+            l=25,
+            r=25,
+            t=75,
+            b=100
+        ),
+
+        annotations=[
+            dict(
+                text="Portfolio<br>Allocation",
+                x=0.5,
+                y=0.5,
+                showarrow=False,
+                align="center",
+                font=dict(
+                    size=15,
+                    color="#A8BAD4"
+                )
+            )
+        ]
+      )
 
 
     st.plotly_chart(pie_fig, width = "stretch",config={"responsive":True,"displayModeBar":False})

@@ -2714,7 +2714,7 @@ def run_index_model():
                 if np.isfinite(median_line_annualized_return)
                 else "N/A"
             ),
-        "Assumed Inflation Rate": f"{avg_inflation_rate * 100:,.1%}"
+        "Assumed Inflation Rate": f"{avg_inflation_rate:,.1%}"
       } 
       report_disclaimer = (
         "This report is generated from a Monte Carlo simulation and is "
@@ -4162,6 +4162,71 @@ def run_company_model():
         "Monthly contributions are removed from the calculation."
         )
       )
+      inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
+
+      statistics = {
+        "Initial investment": f"THB {initial_amount:,.0f}",
+        "Monthly contribution": f"THB {monthly_contribution:,.0f}",
+        "Retirement target": f"THB {target:,.0f}",
+        "Goal achievement probability": f"{probability:.1f}%",
+        "Portfolio failure rate": f"{failure_rate:.1f}%",
+        "Inflation-adjusted median value":
+            f"THB {inflation_adjusted_median:,.0f}",
+        "Median maximum drawdown": f"{median_dd:.1%}",
+        "Median-line annualized return":
+            (
+                f"{median_line_annualized_return:.1%}"
+                if np.isfinite(median_line_annualized_return)
+                else "N/A"
+            ),
+        "Assumed Inflation Rate": f"{avg_inflation_rate:,.1%}"
+      } 
+      report_disclaimer = (
+        "This report is generated from a Monte Carlo simulation and is "
+        "intended for educational and scenario-planning purposes. The "
+        "simulation relies on historical data and model assumptions. "
+        "Actual investment returns, inflation, fees, taxes, withdrawals, "
+        "and market conditions may differ materially. The results are not "
+        "guaranteed and do not constitute individualized financial advice."
+      )
+
+      try:
+        st.session_state["portfolio_report_pdf"] = build_portfolio_pdf(
+            projection_figure=fig,
+            allocation_figure=pie_fig,
+            histogram_figure=fig_hist,
+            statistics=statistics,
+            portfolio_name=(
+                preset
+                if model_type == "Bluebell Offered Mutual Funds Model"
+                else "Custom Market Index Portfolio"
+            ),
+            disclaimer=report_disclaimer
+         )    
+
+      except Exception as error:
+        st.session_state["portfolio_report_pdf"] = None
+        st.warning(
+            "The simulation completed, but the PDF report could not "
+            f"be generated: {error}"
+        )
+      pdf_report = st.session_state.get(
+        "portfolio_report_pdf"
+      )
+
+      if pdf_report is not None:
+        with c3:
+            st.download_button(
+                label="Download Portfolio Report",
+                data=pdf_report,
+                file_name="bluebell_portfolio_report.pdf",
+                mime="application/pdf",
+                key="download_portfolio_report",
+                type="primary",
+                icon=":material/download:",
+                on_click="ignore",
+                width=280
+            )
 
 st.sidebar.title("Retirement Simulator")
 

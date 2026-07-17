@@ -1,6 +1,7 @@
 # pages/1_Fund_Information.py
 
 import streamlit as st
+import plotly.express as px
 
 st.set_page_config(
     page_title="Fund Information",
@@ -13,6 +14,7 @@ st.title("Fund Information")
 def get_data():
     master_doc = pd.read_csv("master_investment_data.csv")
     return master_doc
+historicaldata = get_data()
 
 available_fund =[ 
     "KKP Plus",
@@ -36,5 +38,10 @@ fund = st.sidebar.radio(
 
 if fund == "KKP Plus":
     col1, col2, col3 = st.columns(3)
+
+    st.write("Historical Price Data (Since End of 2024"))
+    fig = px.line(historicaldata, x = "KKPPlus", y = "date", title = "Historical Price")
+    fig.show()
+    
                         
     

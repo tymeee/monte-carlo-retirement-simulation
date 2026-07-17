@@ -742,56 +742,40 @@ st.html(f"""
 </section>
 
 <style>
-.mc-hero {{
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.65fr);
-    align-items: center;
-    gap: 3rem;
-    overflow: hidden;
-    min-height: 330px;
-    margin-bottom: 1rem;
-    padding: 3.7rem 4rem;
-
-    border: 1px solid rgba(118, 169, 239, 0.18);
-    border-radius: 28px;
+.mc-hero {
+    border-color: rgba(69, 111, 158, 0.35);
 
     background:
         radial-gradient(
             circle at 88% 25%,
-            rgba(56, 155, 235, 0.18),
+            rgba(179, 203, 228, 0.28),
             transparent 35%
         ),
         linear-gradient(
             130deg,
-            rgba(14, 35, 63, 0.96),
-            rgba(5, 16, 32, 0.94)
+            #5d88bb,
+            #456f9e
         );
 
-    box-shadow: 0 28px 75px rgba(0, 0, 0, 0.40);
-}}
+    box-shadow:
+        0 26px 60px rgba(16, 35, 54, 0.20);
+}
 
-.mc-hero::before {{
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.22;
+.mc-eyebrow {
+    border-color: rgba(255, 255, 255, 0.42);
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
 
-    background-image:
-        linear-gradient(
-            rgba(100, 155, 225, 0.08) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(100, 155, 225, 0.08) 1px,
-            transparent 1px
-        );
+.mc-hero-title,
+.mc-hero-title span {
+    color: #ffffff;
+}
 
-    background-size: 38px 38px;
-}}
+.mc-hero-description {
+    color: #eef3f8;
+}
 
-.mc-hero-content,
 .mc-logo-area {{
     position: relative;
     z-index: 1;
@@ -799,37 +783,6 @@ st.html(f"""
 
 .mc-hero-content {{
     max-width: 850px;
-}}
-
-.mc-eyebrow {{
-    display: inline-flex;
-    margin-bottom: 1.2rem;
-    padding: 0.42rem 0.75rem;
-
-    border: 1px solid rgba(95, 156, 246, 0.30);
-    border-radius: 999px;
-
-    background: rgba(57, 116, 208, 0.12);
-    color: #86b5ff;
-
-    font-size: 0.73rem;
-    font-weight: 750;
-    letter-spacing: 0.13em;
-}}
-
-.mc-hero-title {{
-    max-width: 800px;
-    margin: 0;
-    color: #f5f8ff;
-
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 1.02;
-    font-weight: 790;
-    letter-spacing: -0.055em;
-}}
-
-.mc-hero-title span {{
-    color: #76a8ff;
 }}
 
 .mc-hero-description {{

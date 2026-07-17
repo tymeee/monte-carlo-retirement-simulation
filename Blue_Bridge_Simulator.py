@@ -422,12 +422,12 @@ st.html(f"""
 <section class="mc-hero">
     <div class="mc-hero-content">
         <div class="mc-eyebrow">
-            BLUEBELL PORTFOLIO SIMULATOR
+            BLUEBRIDGE PORTFOLIO SIMULATOR
         </div>
 
         <h1 class="mc-hero-title">
             Plan your retirement with
-            <span>BLUEBELL</span>
+            <span>BLUEBRIDGE</span>
         </h1>
 
         <p class="mc-hero-description">

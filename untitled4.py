@@ -2677,17 +2677,18 @@ def run_index_model():
       )
 
       if pdf_report is not None:
-        st.download_button(
-            label="Download Portfolio Report",
-            data=pdf_report,
-            file_name="bluebell_portfolio_report.pdf",
-            mime="application/pdf",
-            key="download_portfolio_report",
-            type="primary",
-            icon=":material/download:",
-            on_click="ignore",
-            width=280
-        )
+        with c3:
+            st.download_button(
+                label="Download Portfolio Report",
+                data=pdf_report,
+                file_name="bluebell_portfolio_report.pdf",
+                mime="application/pdf",
+                key="download_portfolio_report",
+                type="primary",
+                icon=":material/download:",
+                on_click="ignore",
+                width=280
+            )
       
 def run_company_model():
   @st.cache_data

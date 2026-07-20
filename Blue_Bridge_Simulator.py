@@ -1195,7 +1195,7 @@ def build_portfolio_pdf(
             "less favorable and more favorable outcomes.",
             body_style
         )
-    )
+    story.append(PageBreak())
     story.append(
         Paragraph(
             "Distribution of final portfolio values",

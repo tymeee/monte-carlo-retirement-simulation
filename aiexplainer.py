@@ -49,7 +49,7 @@ def explain_results(api_key,model,input_data,allocation_data,results_data):
     " If we are talking about mutual funds (the allocation is specific fund names), the listed funds for the investors to choose from are as follows: KKP Cash, KKP Plus, KFAFIX-A, UGISFX-N, ES-GCORE, ES-GQG, ES-GTECH, KT-HEALTHCARE-A, SCBS&P500A, ES-EAE, KT-PRECIOUS, KKP-GNP-H, KFG-PROP-A"
     "Remember again to try to base it off their simulation results as much as possible and explain with understandable financial logic. Don't add recommendations of financial advice as this is not the point of this."
     "Also, don't forget to take everything into consideration together, metrics are not standalone. A 0% failure rate may seem like the strategy is amazing, bu it actually may not be that wonderful if the withdrawals are only 10k a year." 
-    "Focus too on withdrawal strategies and retirement outlooks, and take everything together, never seperate metrics out as that may lead to skewed interpretations."
+    "Focus too on withdrawal strategies and retirement outlooks, and take everything together, never seperate metrics out as that may lead to skewed interpretations. Analyze withdrawals a lot on effectiveness, if the withdrawals are low, this does not always equate to a good strategy, evaluate withdrawals with scrutiny as living costs are very high, point out withdrawals that are obviosuly low."
     """ Lastly,
         Write the financial analysis in clean Markdown.
         

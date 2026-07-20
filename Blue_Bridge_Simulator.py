@@ -1301,7 +1301,7 @@ age_years = st.sidebar.number_input(
     1
 )
 
-input_data = pd.dataframe{
+input_data = {
     "Initial Capital" : initial_amount,
     "DCA amount (amount added per month)" : monthly_contribution,
     "Annual Withdrawal" : withdrawal,

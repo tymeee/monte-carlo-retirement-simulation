@@ -2906,7 +2906,7 @@ def run_index_model():
       st.session_state["index_ai_payload"] = {
         "input_data": input_data,
         "allocation_data": allocation_data,
-        "results_data": results_data,
+        "results_data": statistics,
       }
 
       st.session_state.pop(

@@ -37,7 +37,8 @@ from reportlab.platypus import (
 )
 
 from aiexplainer import explain_results
-
+api_key = st.secrets['api']
+model = "gemini-3.1-flash-lite"
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide",
@@ -2832,7 +2833,10 @@ def run_index_model():
                 on_click="ignore",
                 width=280
             )
-      
+
+      if st.button("Explain My Results"):
+          reason = explain_results(api_key,model,input_data,allocation_data,statistics)
+          st.markdown(reason)
 def run_company_model():
   @st.cache_data
   def get_data():

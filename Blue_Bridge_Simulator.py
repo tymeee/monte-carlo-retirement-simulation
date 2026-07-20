@@ -1143,12 +1143,13 @@ def build_portfolio_pdf(
 
     story.append(statistics_table)
     story.append(Spacer(1, 6 * mm))
+    story.append(PageBreak())
     story.append(Paragraph("Portfolio allocation", heading_style))
 
     allocation_png = chart_to_png_buffer(
         allocation_figure,
-        width=550,
-        height=350
+        width=1100,
+        height=700
     )
 
     image_buffers.append(allocation_png)

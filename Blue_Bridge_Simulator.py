@@ -2725,6 +2725,33 @@ def run_index_model():
         "Median Maximum Drawdown",
         f"{median_dd:.1%}"
         )
+
+            pdf_pie_fig = px.pie(
+        allocation_data,
+        names="Asset",
+        values="Allocation",
+        title="Portfolio Allocation"
+      )
+    
+      pdf_pie_fig.update_traces(
+        textinfo="percent",      # keeps % on slices
+        textposition="inside",
+        sort=False
+      )
+    
+      pdf_pie_fig.update_layout(
+        showlegend=True,
+        legend=dict(
+            orientation="v",     # vertical legend
+            yanchor="middle",
+            y=0.5,
+            xanchor="left",
+            x=1.02               # puts it to the right
+        ),
+        margin=dict(l=40, r=220, t=70, b=40),  # extra space on right for legend
+        width=1100,
+        height=650
+      )
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 
       statistics = {
@@ -2757,7 +2784,7 @@ def run_index_model():
       try:
         st.session_state["portfolio_report_pdf"] = build_portfolio_pdf(
             projection_figure=fig,
-            allocation_figure=pie_fig,
+            allocation_figure=pdf_pie_fig,
             histogram_figure=fig_hist,
             statistics=statistics,
             portfolio_name=(
@@ -4200,6 +4227,33 @@ def run_company_model():
         "Median Maximum Drawdown",
         f"{median_dd:.1%}"
         )
+
+      pdf_pie_fig = px.pie(
+        allocation_data,
+        names="Asset",
+        values="Allocation",
+        title="Portfolio Allocation"
+      )
+    
+      pdf_pie_fig.update_traces(
+        textinfo="percent",      # keeps % on slices
+        textposition="inside",
+        sort=False
+      )
+    
+      pdf_pie_fig.update_layout(
+        showlegend=True,
+        legend=dict(
+            orientation="v",     # vertical legend
+            yanchor="middle",
+            y=0.5,
+            xanchor="left",
+            x=1.02               # puts it to the right
+        ),
+        margin=dict(l=40, r=220, t=70, b=40),  # extra space on right for legend
+        width=1100,
+        height=650
+      )  
       inflation_adjusted_median = (median/ ((1 + avg_inflation_rate) ** (duration / 252)))
 
       statistics = {
@@ -4232,7 +4286,7 @@ def run_company_model():
       try:
         st.session_state["portfolio_report_pdf"] = build_portfolio_pdf(
             projection_figure=fig,
-            allocation_figure=pie_fig,
+            allocation_figure=pdf_pie_fig,
             histogram_figure=fig_hist,
             statistics=statistics,
             portfolio_name=(

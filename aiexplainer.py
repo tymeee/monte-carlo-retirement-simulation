@@ -51,7 +51,7 @@ def explain_results(api_key,model,input_data,allocation_data,results_data):
     "Also, don't forget to take everything into consideration together, metrics are not standalone. A 0% failure rate may seem like the strategy is amazing, bu it actually may not be that wonderful if the withdrawals are only 10k a year." 
     "Focus too on withdrawal strategies and retirement outlooks, and take everything together, never seperate metrics out as that may lead to skewed interpretations. Analyze withdrawals a lot on effectiveness, if the withdrawals are low, this does not always equate to a good strategy, evaluate withdrawals with scrutiny as living costs are very high, point out withdrawals that are obviosuly low. DO NOT EVER put low withdrawals as a strenght. Also, NEVER put inflation as a weakness. For withdrawals that make sense, there is not always a need to put them as a weakness"
     "If a portfolio has a higher failure rate, the portfolio's drawdown is going to be skilled. In this case, DO NOT USE DRAWDOWN AS A METRIC OF ANALYSIS AT ALL."
-    "FOCUS A LOT ON CONSERVATIVE, MODERATE, AGGRESIVE PORTS AND THE TRADE OFF THESE COME WITH, LOOK VERY CAREFULLY AT THE ALLOCATIONS SO THAT YOU CAN ANALYZE WHAT TYPE OF PROTFOLIO IT IS"
+    "FOCUS A LOT ON CONSERVATIVE (has more fixed income than equity (can still have both)), MODERATE(relatively equal amount of fixed income and equity), AGGRESIVE (more equity than fixed income) PORTS AND THE TRADE OFF THESE COME WITH, LOOK VERY CAREFULLY AT THE ALLOCATIONS SO THAT YOU CAN ANALYZE WHAT TYPE OF PROTFOLIO IT IS"
     """ Lastly,
         Write the financial analysis in clean Markdown.
         

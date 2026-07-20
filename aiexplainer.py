@@ -3,7 +3,7 @@ from google import genai
 from google.genai import types
 import numpy as np
 import pandas as pd
-from typing import any
+from typing import Any
 
 def make_json_safe(value: Any) -> Any:
     """Convert pandas and NumPy objects into JSON-compatible values."""

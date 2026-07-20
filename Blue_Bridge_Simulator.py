@@ -828,7 +828,7 @@ def render_ai_results_section(
 
     st.divider()
     st.subheader("Understand Your Simulation Results")
-
+    st.subheader("AI Analysis may be wrong, do not blindly trust what you see.")
     explanation = st.session_state.get(explanation_key)
 
     # Only show the generation button when no explanation exists.

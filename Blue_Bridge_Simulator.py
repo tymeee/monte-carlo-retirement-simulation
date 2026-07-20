@@ -910,6 +910,27 @@ def chart_to_png_buffer(
 
     report_figure = deepcopy(figure)
 
+    for annotation in report_figure.layout.annotations or ():
+        if annotation.text == "Retirement":
+            retirement_x = annotation.x
+    
+            annotation.update(
+                font=dict(color="#000000")
+            )
+    
+            for shape in report_figure.layout.shapes or ():
+                if (
+                    shape.x0 == retirement_x
+                    and shape.x1 == retirement_x
+                ):
+                    shape.update(
+                        line=dict(
+                            color="#000000",
+                            width=2,
+                            dash="dash"
+                        )
+                    )
+
     report_figure.update_layout(
         template="plotly_white",
         paper_bgcolor="white",

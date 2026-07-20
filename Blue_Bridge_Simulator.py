@@ -36,9 +36,6 @@ from reportlab.platypus import (
     PageBreak,
 )
 
-from aiexplainer import explain_results
-api_key = st.secrets['api']
-model = "gemini-3.1-flash-lite"
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide",
@@ -807,76 +804,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True) 
 @st.fragment
-def render_ai_results_section(
-    api_key: str,
-    model: str,
-    payload_key: str,
-    explanation_key: str,
-    button_key: str,
-) -> None:
-    """
-    Render the AI explanation section without rerunning
-    the rest of the Streamlit app.
-    """
-
-    payload = st.session_state.get(payload_key)
-
-    # The section cannot appear unless a simulation
-    # has created a valid payload.
-    if payload is None:
-        return
-
-    st.divider()
-    st.subheader("Understand Your Simulation Results")
-    st.subheader("AI Analysis may be wrong, do not blindly trust what you see.")
-    explanation = st.session_state.get(explanation_key)
-
-    # Only show the generation button when no explanation exists.
-    if explanation is None:
-        st.caption(
-            "Generate a beginner-friendly explanation of your "
-            "portfolio strategy and simulation results."
-        )
-
-        if st.button(
-            "Explain My Results",
-            key=button_key,
-            type="primary",
-        ):
-            try:
-                with st.spinner(
-                    "Analyzing your simulation results..."
-                ):
-                    explanation = explain_results(
-                        api_key=api_key,
-                        model=model,
-                        input_data=payload["input_data"],
-                        allocation_data=payload[
-                            "allocation_data"
-                        ],
-                        results_data=payload[
-                            "results_data"
-                        ],
-                    )
-
-                st.session_state[
-                    explanation_key
-                ] = explanation
-
-                # Rerun only this fragment so the button disappears
-                # and the completed explanation is displayed.
-                st.rerun(scope="fragment")
-
-            except Exception as error:
-                st.error(
-                    "The explanation could not be generated. "
-                    f"Error: {error}"
-                )
-
-    else:
-        st.markdown(
-            explanation.replace("$", r"\$")
-        )
 def style_line_chart(fig, title):
     fig.update_layout(
         title=dict(
@@ -2903,25 +2830,6 @@ def run_index_model():
                 on_click="ignore",
                 width=280
             )
-      st.session_state["index_ai_payload"] = {
-        "input_data": input_data,
-        "allocation_data": allocation_data,
-        "results_data": statistics,
-      }
-
-      st.session_state.pop(
-        "index_ai_explanation",
-        None,
-      )
-
-    # This appears exactly here: after all results.
-      render_ai_results_section(
-        api_key=api_key,
-        model=model,
-        payload_key="index_ai_payload",
-        explanation_key="index_ai_explanation",
-        button_key="index_explain_results_button",
-      )
 def run_company_model():
   @st.cache_data
   def get_data():
@@ -4424,26 +4332,6 @@ def run_company_model():
                 width=280
             )
 
-                  
-      st.session_state["index_ai_payload"] = {
-        "input_data": input_data,
-        "allocation_data": allocation_data,
-        "results_data": statistics,
-      }
-
-      st.session_state.pop(
-        "index_ai_explanation",
-        None,
-      )
-
-    # This appears exactly here: after all results.
-      render_ai_results_section(
-        api_key=api_key,
-        model=model,
-        payload_key="index_ai_payload",
-        explanation_key="index_ai_explanation",
-        button_key="index_explain_results_button",
-      )
 
 st.sidebar.title("Retirement Simulator")
 

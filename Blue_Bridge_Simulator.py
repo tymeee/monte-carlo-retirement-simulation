@@ -2838,7 +2838,7 @@ def run_index_model():
       st.session_state["ai_payload"] = {
         "input_data": input_data,
         "allocation_data": allocation_data,
-        "results_data": results_data,
+        "results_data": statistics,
       }
 if st.session_state.get("simulation_results_ready", False):
 

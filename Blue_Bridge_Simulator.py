@@ -2726,7 +2726,7 @@ def run_index_model():
         f"{median_dd:.1%}"
         )
 
-            pdf_pie_fig = px.pie(
+      pdf_pie_fig = px.pie(
         allocation_data,
         names="Asset",
         values="Allocation",

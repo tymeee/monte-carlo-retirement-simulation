@@ -1301,7 +1301,7 @@ age_years = st.sidebar.number_input(
     1
 )
 
-input_data = pd.dataframe{[
+input_data = pd.dataframe{
     "Initial Capital" : initial_amount,
     "DCA amount (amount added per month)" : monthly_contribution,
     "Annual Withdrawal" : withdrawal,
@@ -1309,7 +1309,7 @@ input_data = pd.dataframe{[
     "Target Wealth at Retirement" : target,
     "Current age" : age_years,
     "Years until retirement" : acum_years,
-    "Inflation rate" : avg_inflation_rate]}
+    "Inflation rate" : avg_inflation_rate}
 def run_index_model():
   @st.cache_data
   def load_market_data():

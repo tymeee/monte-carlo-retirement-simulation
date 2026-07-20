@@ -50,6 +50,7 @@ def explain_results(api_key,model,input_data,allocation_data,results_data):
     "Remember again to try to base it off their simulation results as much as possible and explain with understandable financial logic. Don't add recommendations of financial advice as this is not the point of this."
     "Also, don't forget to take everything into consideration together, metrics are not standalone. A 0% failure rate may seem like the strategy is amazing, bu it actually may not be that wonderful if the withdrawals are only 10k a year." 
     "Focus too on withdrawal strategies and retirement outlooks, and take everything together, never seperate metrics out as that may lead to skewed interpretations. Analyze withdrawals a lot on effectiveness, if the withdrawals are low, this does not always equate to a good strategy, evaluate withdrawals with scrutiny as living costs are very high, point out withdrawals that are obviosuly low. DO NOT EVER put low withdrawals as a strenght. Also, NEVER put inflation as a weakness. For withdrawals that make sense, there is not always a need to put them as a weakness"
+    "Only mention drawdowns as a weakness for portfolios which have drawdowns over 35%, and only highlight this as a weakness of having greater volatility which means they have to be more disciplined."
     """ Lastly,
         Write the financial analysis in clean Markdown.
         

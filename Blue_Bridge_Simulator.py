@@ -2833,33 +2833,9 @@ def run_index_model():
                 on_click="ignore",
                 width=280
             )
-      st.session_state["simulation_results_ready"] = True
-
-      st.session_state["ai_payload"] = {
-        "input_data": input_data,
-        "allocation_data": allocation_data,
-        "results_data": statistics,
-      }
-if st.session_state.get("simulation_results_ready", False):
-
-    if st.button("Explain My Results"):
-        payload = st.session_state["ai_payload"]
-
-        st.session_state["ai_explanation"] = explain_results(
-            api_key=api_key,
-            model=model,
-            input_data=payload["input_data"],
-            allocation_data=payload["allocation_data"],
-            results_data=payload["results_data"],
-        )
-
-if "ai_explanation" in st.session_state:
-    st.markdown(
-        st.session_state["ai_explanation"].replace(
-            "$",
-            r"\$",
-        )
-    )
+      if st.button("Explain My Results):
+            results = explain_resutls(api_key,model,input_data,allocation_data,statistics)
+            st.markdown(results)
 def run_company_model():
   @st.cache_data
   def get_data():

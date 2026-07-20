@@ -1148,7 +1148,7 @@ def build_portfolio_pdf(
     allocation_png = chart_to_png_buffer(
         allocation_figure,
         width=1100,
-        height=700
+        height=500
     )
 
     image_buffers.append(allocation_png)

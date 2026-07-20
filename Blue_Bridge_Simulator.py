@@ -4424,6 +4424,27 @@ def run_company_model():
                 width=280
             )
 
+                  
+      st.session_state["index_ai_payload"] = {
+        "input_data": input_data,
+        "allocation_data": allocation_data,
+        "results_data": statistics,
+      }
+
+      st.session_state.pop(
+        "index_ai_explanation",
+        None,
+      )
+
+    # This appears exactly here: after all results.
+      render_ai_results_section(
+        api_key=api_key,
+        model=model,
+        payload_key="index_ai_payload",
+        explanation_key="index_ai_explanation",
+        button_key="index_explain_results_button",
+      )
+
 st.sidebar.title("Retirement Simulator")
 
 model_type = st.sidebar.radio(

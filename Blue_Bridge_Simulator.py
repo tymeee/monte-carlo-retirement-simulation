@@ -2833,7 +2833,7 @@ def run_index_model():
                 on_click="ignore",
                 width=280
             )
-      if st.button("Explain My Results):
+      if st.button("Explain My Results"):
             results = explain_resutls(api_key,model,input_data,allocation_data,statistics)
             st.markdown(results)
 def run_company_model():

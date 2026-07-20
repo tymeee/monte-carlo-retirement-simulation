@@ -10,3 +10,4 @@ plotly
 pathlib
 reportlab
 kaleido
+google-genai>=1.0

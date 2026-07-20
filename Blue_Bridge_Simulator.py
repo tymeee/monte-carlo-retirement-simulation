@@ -1140,7 +1140,6 @@ def build_portfolio_pdf(
         )
     )
 
-    story.append(PageBreak())
     story.append(
         Paragraph(
             "Projected portfolio outcomes",

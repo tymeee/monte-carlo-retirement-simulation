@@ -36,6 +36,8 @@ from reportlab.platypus import (
     PageBreak,
 )
 
+from aiexplainer import explain_results
+
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide",

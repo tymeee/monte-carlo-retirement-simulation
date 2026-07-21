@@ -1310,7 +1310,7 @@ input_data = {
 def run_index_model():
   @st.cache_data
   def load_market_data():
-    df = pd.read_parquet("updated.parquet")
+    df = pd.read_parquet("market_index.parquet")
 
     expected_columns = [
         "^GSPC",

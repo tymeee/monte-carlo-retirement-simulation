@@ -33,5 +33,3 @@ textColor = "#FFFFFF"
 primaryColor = "#5D88BB"
 borderColor = "#405A73
 
-[client]
-toolbarMode = "minimal"

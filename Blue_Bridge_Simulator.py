@@ -86,38 +86,6 @@ st.html(
     """
 )
 
-clean_interface_css = """
-    <style>
-    /* 1. Hides the GitHub repository icons & deployment badges */
-    .stAppDeployButton, 
-    button[title="View GitHub repository"], 
-    .viewerBadge_container__166id {
-        display: none !important;
-    }
-    
-    /* 2. Hides the right-hand main hamburger menu button */
-    #MainMenu {
-        display: none !important;
-    }
-    
-    /* 3. Hides the bottom footer ("Made with Streamlit") */
-    footer, div[data-testid="stFooter"] {
-        display: none !important;
-    }
-
-    /* 4. Ensures the top header bar itself stays active so the sidebar arrow remains clickable */
-    header[data-testid="stHeader"] {
-        background-color: transparent !important;
-    }
-
-    /* 5. Forces the specific sidebar control container to stay visible if hidden by other rules */
-    div[data-testid="collapsedControl"] {
-        visibility: visible !important;
-        display: flex !important;
-    }
-    </style>
-    """
-st.markdown(clean_interface_css, unsafe_allow_html=True)
 
 @st.fragment
 def style_line_chart(fig, title):

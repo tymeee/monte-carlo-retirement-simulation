@@ -411,10 +411,10 @@ hr {
 }
 
 .mc-hero-content,
-.mc-logo-area {{
+.mc-logo-area {
     position: relative;
     z-index: 1;
-}}
+}
 
 .mc-hero-content {
     max-width: 850px;
@@ -519,7 +519,7 @@ hr {
 }
 
 @media (max-width: 900px) {
-    .mc-hero {{
+    .mc-hero {
         grid-template-columns: 1fr;
         padding: 2.3rem 1.6rem;
     }

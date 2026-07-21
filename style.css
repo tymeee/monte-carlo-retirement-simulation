@@ -704,6 +704,17 @@ hr {
                 0 20px 55px rgba(0, 0, 0, 0.28) !important;
 }
 
-[data-testid="stToolbar"] {
+[data-testid="stToolbar"] a[href*="github.com"],
+[data-testid="stToolbar"] [title*="GitHub"],
+[data-testid="stToolbar"] [aria-label*="GitHub"] {
     display: none !important;
+}
+
+/* Keep the sidebar-open control visible */
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stExpandSidebarButton"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
 }

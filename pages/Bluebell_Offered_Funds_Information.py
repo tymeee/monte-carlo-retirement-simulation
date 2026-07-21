@@ -595,7 +595,7 @@ st.title("Fund Information")
 st.write("Disclaimer: Data was last updated on July 17 2026, future changes may not have been accounted for")
 
 def get_data():
-    master_doc = pd.read_csv("master_investment_data.csv")
+    master_doc = pd.read_csv("mutualfunds_data.csv")
     return master_doc
 historicaldata = get_data()
 

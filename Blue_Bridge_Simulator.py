@@ -51,7 +51,7 @@ if logo_path.exists():
 else:
     logo_base64 = ""
 
-st.html("style.css", unsafe_allow_html=True) 
+st.html("style.css") 
 @st.fragment
 def style_line_chart(fig, title):
     fig.update_layout(

@@ -1,19 +1,6 @@
 [theme]
 base = "dark"
-
-primaryColor = "#5D88BB"
-backgroundColor = "#102336"
-secondaryBackgroundColor = "#182F48"
-textColor = "#FFFFFF"
-borderColor = "#52677E"
-showWidgetBorder = true
 showSidebarBorder = true
-
-baseRadius = "large"
-buttonRadius = "large"
-
-font = "sans-serif"
-headingFont = "sans-serif"
 
 chartCategoricalColors = [
     "#5D88BB",
@@ -25,39 +12,36 @@ chartCategoricalColors = [
     "#E5EEF7"
 ]
 
-[theme.sidebar]
-backgroundColor = "#0D1E2F"
-secondaryBackgroundColor = "#19344F"
-textColor = "#FFFFFF"
-primaryColor = "#5D88BB"
-borderColor = "#405A73
-
-[theme]
-base = "dark"
-
 [theme.dark]
-primaryColor = "#4f8cff"
-backgroundColor = "#050b18"
-secondaryBackgroundColor = "#081426"
-textColor = "#f1f6ff"
+primaryColor = "#4F8CFF"
+backgroundColor = "#050B18"
+secondaryBackgroundColor = "#10233D"
+textColor = "#F1F6FF"
+borderColor = "#405A73"
+showWidgetBorder = true
+baseRadius = "large"
+buttonRadius = "large"
 
 [theme.light]
-primaryColor = "#4f8cff"
-backgroundColor = "#050b18"
-secondaryBackgroundColor = "#081426"
-textColor = "#f1f6ff"
+primaryColor = "#4F8CFF"
+backgroundColor = "#050B18"
+secondaryBackgroundColor = "#10233D"
+textColor = "#F1F6FF"
+borderColor = "#405A73"
+showWidgetBorder = true
+baseRadius = "large"
+buttonRadius = "large"
 
 [theme.dark.sidebar]
-primaryColor = "#4f8cff"
+primaryColor = "#4F8CFF"
 backgroundColor = "#071426"
-secondaryBackgroundColor = "#10233d"
-textColor = "#f1f6ff"
+secondaryBackgroundColor = "#10233D"
+textColor = "#F1F6FF"
+borderColor = "#405A73"
 
 [theme.light.sidebar]
-primaryColor = "#4f8cff"
+primaryColor = "#4F8CFF"
 backgroundColor = "#071426"
-secondaryBackgroundColor = "#10233d"
-textColor = "#f1f6ff"
-
-[client]
-toolbarMode = "viewer"
+secondaryBackgroundColor = "#10233D"
+textColor = "#F1F6FF"
+borderColor = "#405A73"

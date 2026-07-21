@@ -32,3 +32,32 @@ textColor = "#FFFFFF"
 primaryColor = "#5D88BB"
 borderColor = "#405A73
 
+[theme]
+base = "dark"
+
+[theme.dark]
+primaryColor = "#4f8cff"
+backgroundColor = "#050b18"
+secondaryBackgroundColor = "#081426"
+textColor = "#f1f6ff"
+
+[theme.light]
+primaryColor = "#4f8cff"
+backgroundColor = "#050b18"
+secondaryBackgroundColor = "#081426"
+textColor = "#f1f6ff"
+
+[theme.dark.sidebar]
+primaryColor = "#4f8cff"
+backgroundColor = "#071426"
+secondaryBackgroundColor = "#10233d"
+textColor = "#f1f6ff"
+
+[theme.light.sidebar]
+primaryColor = "#4f8cff"
+backgroundColor = "#071426"
+secondaryBackgroundColor = "#10233d"
+textColor = "#f1f6ff"
+
+[client]
+toolbarMode = "viewer"

@@ -2837,7 +2837,7 @@ def run_company_model():
   def get_data():
           import pandas as pd
           return pd.read_parquet(
-          "3.parquet"
+          "market_proxies.parquet"
       )
   @st.cache_data
   def grab_data():

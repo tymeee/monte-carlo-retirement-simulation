@@ -2843,7 +2843,7 @@ def run_company_model():
   def grab_data():
       import pandas as pd
       return pd.read_csv(
-          "master_investment_data.csv"
+          "mutualfunds_data.csv"
       )
   def build_the_data():
     complete_data = grab_data()

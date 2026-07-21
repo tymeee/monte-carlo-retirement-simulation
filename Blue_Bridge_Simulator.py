@@ -1572,7 +1572,7 @@ def run_index_model():
       st.stop()
   import pandas as pd
   import plotly.express as px
-
+  pure_cash = 1 - total_weight
   allocation_data = pd.DataFrame({
     "Asset": [
         "US Equity",
@@ -1588,7 +1588,8 @@ def run_index_model():
         "Property and Real Estate Index",
         "Emerging Markets Index",
         "Commodity Index",
-        "Savings Account"
+        "Savings Account",
+        "Pure Cash"
     ],
     "Allocation": [
         us_weight,
@@ -1605,6 +1606,7 @@ def run_index_model():
         emerging_weight,
         commodity_weight,
         savings_weight,
+        pure_cash
         ]
     })
 

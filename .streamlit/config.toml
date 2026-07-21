@@ -31,4 +31,7 @@ backgroundColor = "#0D1E2F"
 secondaryBackgroundColor = "#19344F"
 textColor = "#FFFFFF"
 primaryColor = "#5D88BB"
-borderColor = "#405A73"
+borderColor = "#405A73
+
+[client]
+toolbarMode = "minimal"

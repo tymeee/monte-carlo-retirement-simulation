@@ -360,41 +360,8 @@ hr {
         min-height: 110px;
     }
 }
-</style>
-""")
 
-st.html(f"""
-<section class="mc-hero">
-    <div class="mc-hero-content">
-        <div class="mc-eyebrow">
-            BLUEBRIDGE PORTFOLIO SIMULATOR
-        </div>
-
-        <h1 class="mc-hero-title">
-            Plan your retirement with
-            <span>BLUEBRIDGE</span>
-        </h1>
-
-        <p class="mc-hero-description">
-            Explore potential portfolio outcomes, compare investment
-            strategies, and understand how contributions, withdrawals,
-            and market uncertainty may affect your financial plan.
-        </p>
-    </div>
-
-    <div class="mc-logo-area">
-        <div class="mc-logo-glow"></div>
-
-        <img
-            class="mc-bluebell-logo"
-            src="data:image/png;base64,{logo_base64}"
-            alt="Bluebell logo"
-        >
-    </div>
-</section>
-
-<style>
-.mc-hero {{
+.mc-hero {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(250px, 0.65fr);
@@ -421,9 +388,9 @@ st.html(f"""
         );
 
     box-shadow: 0 28px 75px rgba(0, 0, 0, 0.40);
-}}
+}
 
-.mc-hero::before {{
+.mc-hero::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -441,7 +408,7 @@ st.html(f"""
         );
 
     background-size: 38px 38px;
-}}
+}
 
 .mc-hero-content,
 .mc-logo-area {{
@@ -449,11 +416,11 @@ st.html(f"""
     z-index: 1;
 }}
 
-.mc-hero-content {{
+.mc-hero-content {
     max-width: 850px;
-}}
+}
 
-.mc-eyebrow {{
+.mc-eyebrow {
     display: inline-flex;
     margin-bottom: 1.2rem;
     padding: 0.42rem 0.75rem;
@@ -467,9 +434,9 @@ st.html(f"""
     font-size: 0.73rem;
     font-weight: 750;
     letter-spacing: 0.13em;
-}}
+}
 
-.mc-hero-title {{
+.mc-hero-title {
     max-width: 800px;
     margin: 0;
     color: #f5f8ff;
@@ -478,28 +445,28 @@ st.html(f"""
     line-height: 1.02;
     font-weight: 790;
     letter-spacing: -0.055em;
-}}
+}
 
-.mc-hero-title span {{
+.mc-hero-title span {
     color: #76a8ff;
-}}
+}
 
-.mc-hero-description {{
+.mc-hero-description {
     max-width: 720px;
     margin: 1.5rem 0 1.8rem;
 
     color: #aebed5;
     font-size: 1.05rem;
     line-height: 1.72;
-}}
+}
 
-.mc-badges {{
+.mc-badges {
     display: flex;
     flex-wrap: wrap;
     gap: 0.65rem;
-}}
+}
 
-.mc-badges span {{
+.mc-badges span {
     padding: 0.5rem 0.8rem;
 
     border: 1px solid rgba(134, 177, 236, 0.14);
@@ -509,18 +476,18 @@ st.html(f"""
     color: #c5d5e9;
 
     font-size: 0.82rem;
-}}
+}
 
 /* Right-side logo area */
-.mc-logo-area {{
+.mc-logo-area {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 230px;
-}}
+}
 
-.mc-bluebell-logo {{
+.mc-bluebell-logo {
     position: relative;
     z-index: 2;
     display: block;
@@ -531,9 +498,9 @@ st.html(f"""
 
     filter:
         drop-shadow(0 18px 30px rgba(0, 0, 0, 0.35));
-}}
+}
 
-.mc-logo-glow {{
+.mc-logo-glow {
     position: absolute;
     width: 260px;
     height: 260px;
@@ -549,35 +516,29 @@ st.html(f"""
         );
 
     filter: blur(8px);
-}}
+}
 
-@media (max-width: 900px) {{
+@media (max-width: 900px) {
     .mc-hero {{
         grid-template-columns: 1fr;
         padding: 2.3rem 1.6rem;
-    }}
+    }
 
-    .mc-logo-area {{
+    .mc-logo-area {
         min-height: 150px;
         justify-content: flex-start;
-    }}
+    }
 
-    .mc-bluebell-logo {{
+    .mc-bluebell-logo {
         width: 190px;
         max-height: 120px;
-    }}
+    }
 
-    .mc-logo-glow {{
+    .mc-logo-glow {
         width: 190px;
         height: 190px;
-    }}
-}}
-</style>
-""")
-
-
-st.html("""
-<style>
+    }
+}
 
 /* Position the button under the hero and align it with hero text */
 .st-key-hero_actions {
@@ -687,11 +648,7 @@ st.html("""
     }
 }
 
-</style>
-""")
 
-st.markdown("""
-<style>
 /* Download button container */
 [data-testid="stDownloadButton"] {
     width: 100%;

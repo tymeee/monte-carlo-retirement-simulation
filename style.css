@@ -1,4 +1,3 @@
-<style>
 :root {
     --bg-main: #050b18;
     --bg-secondary: #081426;
@@ -747,4 +746,3 @@ st.markdown("""
     box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.25),
                 0 20px 55px rgba(0, 0, 0, 0.28) !important;
 }
-</style>

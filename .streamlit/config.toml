@@ -1,7 +1,10 @@
 [theme]
 base = "dark"
 
-
+primaryColor = "#5D88BB"
+backgroundColor = "#102336"
+secondaryBackgroundColor = "#182F48"
+textColor = "#FFFFFF"
 borderColor = "#52677E"
 showWidgetBorder = true
 showSidebarBorder = true

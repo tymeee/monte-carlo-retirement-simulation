@@ -52,6 +52,39 @@ else:
     logo_base64 = ""
 
 st.html("style.css") 
+
+st.html(
+    f"""
+    <section class="mc-hero">
+        <div class="mc-hero-content">
+            <div class="mc-eyebrow">
+                BLUEBRIDGE PORTFOLIO SIMULATOR
+            </div>
+
+            <h1 class="mc-hero-title">
+                Plan your retirement with
+                <span>BLUEBRIDGE</span>
+            </h1>
+
+            <p class="mc-hero-description">
+                Explore potential portfolio outcomes, compare investment
+                strategies, and understand how contributions, withdrawals,
+                and market uncertainty may affect your financial plan.
+            </p>
+        </div>
+
+        <div class="mc-logo-area">
+            <div class="mc-logo-glow"></div>
+
+            <img
+                class="mc-bluebell-logo"
+                src="data:image/png;base64,{logo_base64}"
+                alt="Bluebell logo"
+            >
+        </div>
+    </section>
+    """
+)
 @st.fragment
 def style_line_chart(fig, title):
     fig.update_layout(

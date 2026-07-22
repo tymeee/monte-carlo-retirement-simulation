@@ -16,9 +16,6 @@ st.set_page_config(
 )
 
 
-# =========================================================
-# PAGE STYLING
-# =========================================================
 
 st.html(
     """
@@ -188,7 +185,7 @@ st.html(
     </style>
     """
 )
-
+st.title("Retirement Funds Calculator")
 col1, col2, col3 = st.columns(3)
 st.write("ประเมินค่าใช้จ่ายแต่ละประเภทต่อเดือน")
 with col1:

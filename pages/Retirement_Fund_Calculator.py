@@ -342,7 +342,7 @@ def thb_number_input(
                 if label_visibility == "hidden"
                 else ""
             )    
-       st.markdown(
+    st.markdown(
                 f"""
                 <div class="thb-input-header">
                     <span class="thb-input-label{hidden_class}">

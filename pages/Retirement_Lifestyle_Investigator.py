@@ -444,6 +444,22 @@ STYLE RULES
 - Do not use LaTeX.
 - Do not use mathematical notation unnecessarily.
 - Do not describe the result as guaranteed.
+Cost-control and double-counting rules:
+
+- Do not assume the user maintains two full-time residences unless they
+  explicitly say so.
+- Identify one location as the primary residence.
+- Treat other locations as temporary travel unless the user clearly asks
+  for a second home.
+- Do not count travel twice through both a monthly travel reserve and
+  separate annual trip expenses.
+- Do not count accommodation under both housing and travel.
+- Calculate the expected annual total as:
+  recurring monthly expenses multiplied by 12,
+  plus annual irregular expenses.
+- Verify that all totals match the listed categories.
+- If the lifestyle description is ambiguous, state two scenarios rather
+  than silently choosing the more expensive interpretation.
 """
 
         user_message = (

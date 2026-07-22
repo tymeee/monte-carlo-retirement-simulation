@@ -18,7 +18,7 @@ st.title("Retirement Funds Calculator")
 col1, col2, col3 = st.columns(3)
 st.write("ประเมินค่าใช้จ่ายแต่ละประเภทต่อเดือน")
 with col1:
-    household = st.umber_input("ค่าใช้จ่ายเกี่ยวกับบ้าน", min_value = 0)
+    household = st.number_input("ค่าใช้จ่ายเกี่ยวกับบ้าน", min_value = 0)
     bills = st.number_input ("ค่าสาธารณูปโภค (ค่าไฟฟ้า, ค่าน้ำประปา, อื่น ๆ)" , min_value = 0)
     leisure = st.number_input ("ค่าท่องเที่ยว/สันทนาการ", min_value = 0 )
     other = st.number_input("ค่าใช้จ่ายอื่น ๆ", min_value = 0)

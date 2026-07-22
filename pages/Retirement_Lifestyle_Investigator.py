@@ -17,7 +17,7 @@ response = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are to gauge how much money would it cost (monthly and annually), to live 20, 40, and 60 years from now in Thai Baht. Living expenses and assumptions should be based on the lifestyle inputted by the user, the lifestyle is as follows" + prompt + "If any part of the inputted message is in Thai, respond in Thai.",
+            "content": "You are to gauge how much money would it cost (monthly and annually), to live 20, 40, and 60 years from now in Thai Baht. When breaking down expenses, make it extremely detailed (eg. instead of saying120k per year, also say where these things actually go and what you have to pay for) Living expenses and assumptions should be based on the lifestyle inputted by the user, the lifestyle is as follows." + prompt + "If any part of the inputted message is in Thai, respond in Thai.",
         }
     ],
     model="llama-3.3-70b-versatile",

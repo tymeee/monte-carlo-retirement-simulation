@@ -22,5 +22,5 @@ response = client.chat.completions.create(
     ],
     model="llama-3.3-70b-versatile",
 )
-
+result = response.choices[0].message.content
 st.write(response)

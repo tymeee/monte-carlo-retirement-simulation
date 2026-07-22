@@ -190,7 +190,7 @@ st.html(
 )
 
 col1, col2, col3 = st.columns(3)
-st.write("Estimate the amount of money each of these things would need per month.")
+st.write("ประเมินค่าใช้จ่ายแต่ละประเภทต่อเดือน")
 with col1:
     household = st.number_input("ค่าใช้จ่ายเกี่ยวกับบ้าน", min_value = 1000)
     bills = st.number_input ("ค่าสาธารณูปโภค (ค่าไฟฟ้า, ค่าน้ำประปา, อื่น ๆ)" , min_value = 1000)

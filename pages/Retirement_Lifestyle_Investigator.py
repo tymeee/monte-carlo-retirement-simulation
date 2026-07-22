@@ -460,6 +460,26 @@ Cost-control and double-counting rules:
 - Verify that all totals match the listed categories.
 - If the lifestyle description is ambiguous, state two scenarios rather
   than silently choosing the more expensive interpretation.
+  Do not automatically classify Bangkok retirement as premium.
+
+Begin with an ordinary realistic interpretation unless the user explicitly
+requests luxury.
+
+Do not assume central-city rent, private international healthcare, a car,
+domestic staff, or frequent international travel unless stated.
+
+Separate:
+1. Core living expenses
+2. Optional lifestyle expenses
+3. Contingency allowance
+
+Do not include a contingency allowance greater than 10 percent unless
+explained.
+
+Do not double-count travel, housing, healthcare, or miscellaneous expenses.
+
+Return essential, comfortable, and premium estimates rather than one
+definitive figure.
 """
 
         user_message = (

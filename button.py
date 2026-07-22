@@ -6,252 +6,314 @@ from typing import Any
 def load_thb_input_styles() -> None:
     st.markdown(
         """
-        <style>
-        /* Entire custom input */
-        [class*="st-key-thb_input_"] {
-            margin-bottom: 1rem;
-        }
-
-        /* Label row */
-        [class*="st-key-thb_input_"] .thb-input-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.75rem;
-
-            margin-bottom: 0.42rem;
-        }
-
-        [class*="st-key-thb_input_"] .thb-input-label {
-            color: #f4f8ff;
-
-            font-size: 0.96rem;
-            font-weight: 650;
-            line-height: 1.35;
-        }
-
-        [class*="st-key-thb_input_"] .thb-input-label-hidden {
-            visibility: hidden;
-        }
-
-        [class*="st-key-thb_input_"] .thb-input-badge {
-            padding: 0.15rem 0.48rem;
-
-            border: 1px solid rgba(111, 171, 255, 0.20);
-            border-radius: 999px;
-
-            background: rgba(61, 132, 237, 0.10);
-            color: #8ebcff;
-
-            font-size: 0.67rem;
-            font-weight: 750;
-            letter-spacing: 0.08em;
-        }
-
-        /* Align input and buttons */
-        [class*="st-key-thb_input_"] [data-testid="stHorizontalBlock"] {
-            align-items: center;
-            gap: 0.42rem;
-        }
-
-        /* Remove extra widget spacing */
-        [class*="st-key-thb_input_"] [data-testid="stVerticalBlock"] {
-            gap: 0;
-        }
-
-        [class*="st-key-thb_input_"] .stButton {
-            margin: 0;
-        }
-
-        /* ======================================================
-   MINUS AND PLUS BUTTONS
+<style>
+/* ======================================================
+   THB NUMBER INPUT
+   Load this after every other CSS block
    ====================================================== */
-        
-        [class*="st-key-thb_input_"] .stButton {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        
-        [class*="st-key-thb_input_"] .stButton > button {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        
-            width: 100% !important;
-            min-width: 0 !important;
-            height: 48px !important;
-            min-height: 48px !important;
-        
-            margin: 0 !important;
-            padding: 0 !important;
-        
-            border: 1px solid rgba(113, 163, 220, 0.32) !important;
-            border-radius: 12px !important;
-        
-            /* Original darker color */
-            background: #10233b !important;
-            background-image: none !important;
-            color: #8ebcff !important;
-        
-            box-shadow:
-                0 5px 14px rgba(0, 0, 0, 0.16),
-                inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
-        
-            font-size: 1.05rem !important;
-            font-weight: 500 !important;
-            line-height: 1 !important;
-        
-            transition:
-                background 140ms ease,
-                border-color 140ms ease,
-                color 140ms ease,
-                transform 100ms ease !important;
-        }
-        
-        /* Streamlit puts the symbol inside nested div and p elements */
-        [class*="st-key-thb_input_"] .stButton > button > div,
-        [class*="st-key-thb_input_"] .stButton > button p,
-        [class*="st-key-thb_input_"] .stButton > button span,
-        [class*="st-key-thb_input_"]
-        .stButton
-        [data-testid="stMarkdownContainer"] {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        
-            width: 100% !important;
-            height: 100% !important;
-        
-            margin: 0 !important;
-            padding: 0 !important;
-        
-            line-height: 1 !important;
-            color: inherit !important;
-        }
-        
-        /* Hover */
-        [class*="st-key-thb_input_"] .stButton > button:hover {
-            border-color: rgba(91, 157, 255, 0.72) !important;
-            background: #173253 !important;
-            background-image: none !important;
-            color: #ffffff !important;
-        }
-        
-        /* Click */
-        [class*="st-key-thb_input_"] .stButton > button:active {
-            transform: scale(0.96) !important;
-        }
-        
-        /* Disabled */
-        [class*="st-key-thb_input_"] .stButton > button:disabled {
-            border-color: rgba(113, 163, 220, 0.12) !important;
-            background: rgba(16, 35, 59, 0.55) !important;
-            background-image: none !important;
-            color: rgba(142, 188, 255, 0.35) !important;
-            opacity: 1 !important;
-        }
 
-        [class*="st-key-thb_input_"] .stButton > button:hover {
-            border-color: rgba(91, 157, 255, 0.72);
-            background: #173253;
-            color: #ffffff;
-        }
+div[class*="st-key-thb_input_"] {
+    margin-bottom: 1rem;
+}
 
-        [class*="st-key-thb_input_"] .stButton > button:active {
-            transform: scale(0.96);
-        }
+/* Header */
+div[class*="st-key-thb_input_"] .thb-input-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.65rem;
 
-        [class*="st-key-thb_input_"] .stButton > button:disabled {
-            border-color: rgba(113, 163, 220, 0.10);
-            background: rgba(16, 35, 59, 0.45);
-            color: rgba(142, 188, 255, 0.30);
-            opacity: 1;
-        }
+    margin-bottom: 0.45rem;
+}
 
-        /* Input field */
-        [class*="st-key-thb_input_"] [data-testid="stTextInput"] {
-            margin: 0;
-        }
+div[class*="st-key-thb_input_"] .thb-input-label {
+    color: #f1f6ff;
 
-        [class*="st-key-thb_input_"] [data-testid="stTextInput"] > div {
-            margin: 0;
-        }
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
 
-        [class*="st-key-thb_input_"] [data-testid="stTextInput"] input {
-            height: 48px;
-            padding: 0 1rem;
+div[class*="st-key-thb_input_"] .thb-input-label-hidden {
+    visibility: hidden;
+}
 
-            border: 1px solid rgba(113, 163, 220, 0.34);
-            border-radius: 12px;
+div[class*="st-key-thb_input_"] .thb-input-badge {
+    flex-shrink: 0;
 
-            background: #10233b;
-            color: #f5f8ff;
+    padding: 0.12rem 0.42rem;
 
-            box-shadow:
-                inset 0 1px 1px rgba(0, 0, 0, 0.18),
-                0 5px 14px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(125, 165, 210, 0.20);
+    border-radius: 999px;
 
-            font-size: 0.98rem;
-            font-weight: 600;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0.01em;
+    background: rgba(78, 125, 180, 0.10);
+    color: #91b8e7;
 
-            transition:
-                border-color 140ms ease,
-                box-shadow 140ms ease,
-                background 140ms ease;
-        }
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
 
-        [class*="st-key-thb_input_"]
-        [data-testid="stTextInput"]
-        input:hover {
-            border-color: rgba(113, 174, 255, 0.55);
-        }
+/* Control row */
+div[class*="st-key-thb_input_"]
+[data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+    gap: 0.45rem !important;
+}
 
-        [class*="st-key-thb_input_"]
-        [data-testid="stTextInput"]
-        input:focus {
-            border-color: #4f91f7;
-            background: #122842;
+div[class*="st-key-thb_input_"]
+[data-testid="stVerticalBlock"] {
+    gap: 0 !important;
+}
 
-            box-shadow:
-                0 0 0 3px rgba(79, 145, 247, 0.14),
-                inset 0 1px 1px rgba(0, 0, 0, 0.14);
+/* Remove default button spacing */
+div[class*="st-key-thb_input_"] .stButton {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-            outline: none;
-        }
+    width: 100% !important;
 
-        [class*="st-key-thb_input_"]
-        [data-testid="stTextInput"]
-        input:disabled {
-            color: rgba(245, 248, 255, 0.45);
-            background: rgba(16, 35, 59, 0.55);
-        }
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
-        /* Help text */
-        [class*="st-key-thb_input_"] .thb-input-help {
-            margin: 0.38rem 0 0;
+/* Directly target the keyed minus and plus buttons */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button,
 
-            color: #8194ad;
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 
-            font-size: 0.76rem;
-            line-height: 1.4;
-        }
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
 
-        @media (max-width: 650px) {
-            [class*="st-key-thb_input_"]
-            .stButton > button {
-                height: 45px;
-                min-height: 45px;
-            }
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
 
-            [class*="st-key-thb_input_"]
-            [data-testid="stTextInput"]
-            input {
-                height: 45px;
-            }
-        }
-        </style>
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    border: 1px solid #31516f !important;
+    border-radius: 11px !important;
+
+    background: #10243a !important;
+    background-color: #10243a !important;
+    background-image: none !important;
+
+    color: #95bce9 !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035),
+        0 4px 10px rgba(0, 0, 0, 0.14) !important;
+
+    font-family: Arial, sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+
+    transition:
+        background-color 120ms ease,
+        border-color 120ms ease,
+        color 120ms ease,
+        transform 80ms ease !important;
+}
+
+/* Center every Streamlit wrapper around the symbol */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button > div,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button > div,
+
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button [data-testid="stMarkdownContainer"],
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button [data-testid="stMarkdownContainer"],
+
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button p,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button p {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: inherit !important;
+    font: inherit !important;
+    line-height: 1 !important;
+}
+
+/* Slight optical correction for font baseline */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button p,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button p {
+    transform: translateY(-1px);
+}
+
+/* Hover */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button:hover,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button:hover {
+    border-color: #527da8 !important;
+
+    background: #17304b !important;
+    background-color: #17304b !important;
+    background-image: none !important;
+
+    color: #ffffff !important;
+}
+
+/* Click */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button:active,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button:active {
+    transform: scale(0.95) !important;
+}
+
+/* Disabled */
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button:disabled,
+
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button:disabled {
+    border-color: rgba(49, 81, 111, 0.55) !important;
+
+    background: rgba(16, 36, 58, 0.65) !important;
+    background-color: rgba(16, 36, 58, 0.65) !important;
+    background-image: none !important;
+
+    color: rgba(149, 188, 233, 0.38) !important;
+
+    opacity: 1 !important;
+}
+
+/* Input field */
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] {
+    margin: 0 !important;
+}
+
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] > div {
+    margin: 0 !important;
+}
+
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input {
+    height: 44px !important;
+    min-height: 44px !important;
+
+    padding: 0 0.95rem !important;
+
+    border: 1px solid #31516f !important;
+    border-radius: 11px !important;
+
+    background: #10243a !important;
+    background-color: #10243a !important;
+    background-image: none !important;
+
+    color: #f3f7fc !important;
+
+    box-shadow:
+        inset 0 1px 1px rgba(0, 0, 0, 0.17),
+        0 4px 10px rgba(0, 0, 0, 0.10) !important;
+
+    font-size: 0.94rem !important;
+    font-weight: 550 !important;
+    font-variant-numeric: tabular-nums !important;
+
+    outline: none !important;
+}
+
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input:hover {
+    border-color: #456b91 !important;
+}
+
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input:focus {
+    border-color: #6394c6 !important;
+
+    background: #122a44 !important;
+    background-color: #122a44 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(99, 148, 198, 0.12),
+        inset 0 1px 1px rgba(0, 0, 0, 0.13) !important;
+}
+
+/* Help */
+div[class*="st-key-thb_input_"] .thb-input-help {
+    margin: 0.4rem 0 0;
+
+    color: #8194ad;
+
+    font-size: 0.73rem;
+    line-height: 1.4;
+}
+
+/* Slightly tighter sidebar version */
+[data-testid="stSidebar"]
+div[class*="st-key-thb_input_"]
+div[class*="__minus"]
+button,
+
+[data-testid="stSidebar"]
+div[class*="st-key-thb_input_"]
+div[class*="__plus"]
+button {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+
+    height: 42px !important;
+    min-height: 42px !important;
+    max-height: 42px !important;
+}
+
+[data-testid="stSidebar"]
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input {
+    height: 42px !important;
+    min-height: 42px !important;
+}
+</style>
         """,
         unsafe_allow_html=True,
     )

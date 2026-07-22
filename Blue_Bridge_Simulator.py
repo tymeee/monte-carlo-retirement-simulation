@@ -521,7 +521,6 @@ with st.container(key="hero_actions"):
         icon_position="right",
         width=240
     )
-
 initial_amount = st.sidebar.number_input(
     "Initial Amount",
     0,
@@ -560,30 +559,30 @@ avg_inflation_rate = st.sidebar.slider(
     0.02,
     0.01
 )
+with st.sidebar:
+    target = thb_number_input(
+        label = "Target Retirement Wealth",
+        min_value = 0,
+        max_value = 100000000,
+        value = 5000000,
+        key = "target"
+    )
 
-target = thb_number_input(
-    label = "Target Retirement Wealth",
-    min_value = 0,
-    max_value = 100000000,
-    value = 5000000,
-    key = "target"
-)
+    acum_years = thb_number_input(
+        label = "Years Until Retirement",
+        min_value = 0,
+        max_value = 100,
+        value = 1,
+        key = "acum_years"
+    )
 
-acum_years = thb_number_input(
-    label = "Years Until Retirement",
-    min_value = 0,
-    max_value = 100,
-    value = 1,
-    key = "acum_years"
-)
-
-age_years = thb_number_input(
-    label = "Your Age",
-    min_value = 0,
-    max_value = 100,
-    value = 1,
-    key = "age_years"
-)
+    age_years = thb_number_input(
+        label = "Your Age",
+        min_value = 0,
+        max_value = 100,
+        value = 1,
+        key = "age_years"
+    )
 
 input_data = {
     "Initial Capital" : initial_amount,

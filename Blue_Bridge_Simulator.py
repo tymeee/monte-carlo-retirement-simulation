@@ -35,7 +35,6 @@ from reportlab.platypus import (
     TableStyle,
     PageBreak,
 )
-from button import thb_number_input
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide",
@@ -52,7 +51,7 @@ else:
     logo_base64 = ""
 
 st.html("style.css") 
-
+from button import thb_number_input
 st.html(
     f"""
     <section class="mc-hero">

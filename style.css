@@ -701,3 +701,148 @@ hr {
     box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.25),
                 0 20px 55px rgba(0, 0, 0, 0.28) !important;
 }
+
+/* Control row */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+[data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+    gap: 0.5rem !important;
+}
+
+/* Remove spacing around Streamlit's button wrapper */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Plus/minus buttons */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 1px solid #294967 !important;
+    border-radius: 11px !important;
+
+    background: #10233b !important;
+    background-image: none !important;
+    color: #8ebcff !important;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+
+    transition:
+        background 130ms ease,
+        border-color 130ms ease,
+        color 130ms ease,
+        transform 90ms ease !important;
+}
+
+/* Center Streamlit's nested text elements */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button > div,
+
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button p,
+
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button span {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    line-height: 1 !important;
+    color: inherit !important;
+}
+
+/* Hover state */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button:hover {
+    border-color: #4f79a7 !important;
+    background: #162e4a !important;
+    background-image: none !important;
+    color: #d5e5ff !important;
+}
+
+/* Click state */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button:active {
+    transform: scale(0.96) !important;
+}
+
+/* Disabled state */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+.stButton > button:disabled {
+    border-color: rgba(41, 73, 103, 0.45) !important;
+    background: rgba(16, 35, 59, 0.55) !important;
+    background-image: none !important;
+    color: rgba(142, 188, 255, 0.35) !important;
+    opacity: 1 !important;
+}
+
+/* Text input */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input {
+    height: 48px !important;
+    min-height: 48px !important;
+
+    padding: 0 1rem !important;
+
+    border: 1px solid #315675 !important;
+    border-radius: 13px !important;
+
+    background: #10253e !important;
+    color: #f1f6ff !important;
+
+    box-shadow:
+        inset 0 1px 2px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.10) !important;
+
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums !important;
+}
+
+/* Input focus */
+[data-testid="stSidebar"]
+[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input:focus {
+    border-color: #588dc2 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(88, 141, 194, 0.14),
+        inset 0 1px 2px rgba(0, 0, 0, 0.12) !important;
+
+    outline: none !important;
+}

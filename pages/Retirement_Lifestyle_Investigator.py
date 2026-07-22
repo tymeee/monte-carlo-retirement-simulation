@@ -213,12 +213,12 @@ inf_rate = st.slider(
     0.02)
 years = st.slider(
     "Years Until Retirement",
-    0.0,
-    100.0,
-    15.0)
+    0,
+    100,
+    15)
 sum = (household + bills + leisure +other + Food_and_dining + clothes + travel + donate + hospital + rent + child) * 12
 inf_sum = sum * ((1+inf_rate) **years)
 c1,c2 = st.columns(2)
-c1.metric("ค่าใช้จ่ายต่อปี (Nominal)", value = sum)
+c1.metric("ค่าใช้จ่ายต่อปี (Nominal)", value = f"THB{sum:,}")
 
-c2.metric("ค่าใช้จ่ายต่อปี(Inflation Adjusted)", value = inf_sum) 
+c2.metric("ค่าใช้จ่ายต่อปี(Inflation Adjusted)", value = =f"THB{inf_sum:,}") 

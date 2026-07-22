@@ -321,8 +321,6 @@ div[class*="st-key-thb_input_"]
         unsafe_allow_html=True,
     )
 
-
-load_thb_input_styles()
 def thb_number_input(
     label: str,
     *,

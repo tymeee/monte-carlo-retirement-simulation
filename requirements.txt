@@ -1,4 +1,5 @@
 streamlit
+streamlit-number-input
 numpy
 pandas
 matplotlib
@@ -10,5 +11,3 @@ plotly
 pathlib
 reportlab
 kaleido
-google-genai>=1.0
-groq

@@ -84,7 +84,8 @@ st.html(
     """
 )
 
-from button import thb_number_input
+from button import thb_number_input, load_thb_input_styles
+load_thb_input_styles()
 @st.fragment
 def style_line_chart(fig, title):
     fig.update_layout(

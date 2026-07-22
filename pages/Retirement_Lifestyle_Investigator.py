@@ -214,8 +214,8 @@ inf_rate = st.slider(
 years = st.slider(
     "Years Until Retirement",
     0.0,
-    100,
-    15)
+    100.0,
+    15.0)
 sum = household + bills + leisure +other + Food_and_dining + clothes + travel + donate + hospital + rent + child
 inf_sum = sum * ((1+inf_rate) **years)
 c1.metric(f"Monthly Expenses (Nominal): {sum:.0f} THB")

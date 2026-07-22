@@ -527,16 +527,14 @@ initial_amount = st.sidebar.number_input(
     0,
     100000000,
     1000000,
-    1000000,
-    format = "%,d"
+    1000000
 )
 
 monthly_contribution = st.sidebar.number_input(
     "Monthly Contribution",
     0,
     300000,
-    10000,
-    format = "%,d"
+    10000
 )
 
 num_simulations = st.sidebar.slider(
@@ -551,8 +549,7 @@ withdrawal = st.sidebar.number_input(
     "Annual Withdrawal",
     0,
     3000000,
-    10000,
-    format = "%,d"
+    10000
 
 )
 
@@ -568,8 +565,7 @@ target = st.sidebar.number_input(
     "Target Retirement Wealth",
     0,
     100000000,
-    5000000,
-    format = "%,d"
+    5000000
 )
 
 acum_years = st.sidebar.number_input(

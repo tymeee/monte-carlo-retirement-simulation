@@ -567,8 +567,8 @@ avg_inflation_rate = st.sidebar.slider(
 target = st.sidebar.number_input(
     "Target Retirement Wealth",
     0,
-    100_000_000,
-    5_000_000,
+    100000000,
+    5000000,
     format = "%,d"
 )
 

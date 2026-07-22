@@ -24,7 +24,8 @@ from typing import Any
 import streamlit as st
 
 st.html("style.css")
-from button import thb_number_input
+from button import thb_number_input, load_thb_input_styles
+load_thb_input_styles()
 st.title("Retirement Funds Calculator")
 col1, col2, col3 = st.columns(3)
 st.write("ประเมินค่าใช้จ่ายแต่ละประเภทต่อเดือน")

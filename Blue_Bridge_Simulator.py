@@ -562,26 +562,26 @@ avg_inflation_rate = st.sidebar.slider(
 )
 
 target = thb_number_input(
-    "Target Retirement Wealth",
-    0,
-    100000000,
-    5000000,
+    label = "Target Retirement Wealth",
+    min_value = 0,
+    max_value = 100000000,
+    value = 5000000,
     key = "target"
 )
 
 acum_years = thb_number_input(
-    "Years Until Retirement",
-    0,
-    100,
-    1,
+    label = "Years Until Retirement",
+    min_value = 0,
+    max_value = 100,
+    value = 1,
     key = "acum_years"
 )
 
 age_years = thb_number_input(
-    "Your Age",
-    0,
-    100,
-    1,
+    label = "Your Age",
+    min_value = 0,
+    max_value = 100,
+    value = 1,
     key = "age_years"
 )
 

@@ -11,3 +11,4 @@ pathlib
 reportlab
 kaleido
 google-genai>=1.0
+groq

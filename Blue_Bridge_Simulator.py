@@ -51,7 +51,6 @@ else:
     logo_base64 = ""
 
 st.html("style.css") 
-from button import thb_number_input
 st.html(
     f"""
     <section class="mc-hero">
@@ -85,7 +84,7 @@ st.html(
     """
 )
 
-
+from buttom import thb_number_input
 @st.fragment
 def style_line_chart(fig, title):
     fig.update_layout(

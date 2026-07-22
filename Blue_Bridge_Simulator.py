@@ -35,7 +35,7 @@ from reportlab.platypus import (
     TableStyle,
     PageBreak,
 )
-
+from button import thb_number_input
 st.set_page_config(
     page_title="Monte Carlo Retirement Simulator",
     layout="wide",
@@ -561,25 +561,28 @@ avg_inflation_rate = st.sidebar.slider(
     0.01
 )
 
-target = st.sidebar.number_input(
+target = thb_number_input(
     "Target Retirement Wealth",
     0,
     100000000,
-    5000000
+    5000000,
+    key = "target"
 )
 
-acum_years = st.sidebar.number_input(
+acum_years = thb_number_input(
     "Years Until Retirement",
     0,
     100,
-    1
+    1,
+    key = "acum_years"
 )
 
-age_years = st.sidebar.number_input(
+age_years = thb_number_input(
     "Your Age",
     0,
     100,
-    1
+    1,
+    key = "age_years"
 )
 
 input_data = {

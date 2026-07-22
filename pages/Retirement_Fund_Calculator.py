@@ -343,19 +343,14 @@ def thb_number_input(
                 else ""
                 )    
         st.markdown(
-                f"""
-                <div class="thb-input-header">
-                    <span class="thb-input-label{hidden_class}">
-                        {safe_label}
-                    </span>
-
-                    <span class="thb-input-badge">
-                        THB
-                    </span>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            f"""
+            <div class="thb-input-header">
+            <span class="thb-input-label{hidden_class}">{safe_label}</span>
+            <span class="thb-input-badge">THB</span>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 
         minus_column, input_column, plus_column = st.columns(
@@ -408,11 +403,13 @@ def thb_number_input(
 
         if help:
             st.markdown(
-                f"""
-                <p class="thb-input-help">
-                    {html.escape(help)}
-                </p>
-                """,
+                dedent(
+                    f"""
+                    <p class="thb-input-help">
+                        {html.escape(help)}
+                    </p>
+                    """
+                    ),
                 unsafe_allow_html=True,
             )
 

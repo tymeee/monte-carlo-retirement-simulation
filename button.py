@@ -78,27 +78,61 @@ div[class*="st-key-thb_input_"] .stButton {
     padding: 0 !important;
 }
 
-/* Directly target the keyed minus and plus buttons */
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button,
+/* Custom THB component wrapper */
+div[class*="st-key-thb_input_"] {
+    margin-bottom: 1rem;
+}
 
+/* Header */
+div[class*="st-key-thb_input_"] .thb-input-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.45rem;
+}
+
+div[class*="st-key-thb_input_"] .thb-input-label {
+    color: #f1f6ff;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+div[class*="st-key-thb_input_"] .thb-input-badge {
+    padding: 0.13rem 0.43rem;
+    border: 1px solid rgba(113, 163, 220, 0.25);
+    border-radius: 999px;
+    background: rgba(79, 140, 255, 0.09);
+    color: #91b8e7;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+/* Three-control row */
 div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button {
+[data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+    gap: 0.45rem !important;
+}
+
+/* Style every button inside this component.
+   There are only the minus and plus buttons here. */
+div[class*="st-key-thb_input_"] .stButton {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+div[class*="st-key-thb_input_"] .stButton > button {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
 
-    width: 44px !important;
-    min-width: 44px !important;
-    max-width: 44px !important;
-
+    width: 100% !important;
     height: 44px !important;
     min-height: 44px !important;
-    max-height: 44px !important;
 
-    margin: 0 auto !important;
+    margin: 0 !important;
     padding: 0 !important;
 
     border: 1px solid #31516f !important;
@@ -108,48 +142,27 @@ button {
     background-color: #10243a !important;
     background-image: none !important;
 
-    color: #95bce9 !important;
+    color: #91b8e7 !important;
 
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.035),
-        0 4px 10px rgba(0, 0, 0, 0.14) !important;
+        0 4px 10px rgba(0, 0, 0, 0.12) !important;
 
-    font-family: Arial, sans-serif !important;
+    filter: none !important;
+    transform: none !important;
+
     font-size: 1rem !important;
     font-weight: 500 !important;
     line-height: 1 !important;
-
-    transition:
-        background-color 120ms ease,
-        border-color 120ms ease,
-        color 120ms ease,
-        transform 80ms ease !important;
 }
 
-/* Center every Streamlit wrapper around the symbol */
+/* Streamlit wraps the button text in several elements */
+div[class*="st-key-thb_input_"] .stButton > button > div,
+div[class*="st-key-thb_input_"] .stButton > button p,
+div[class*="st-key-thb_input_"] .stButton > button span,
 div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button > div,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button > div,
-
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button [data-testid="stMarkdownContainer"],
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button [data-testid="stMarkdownContainer"],
-
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button p,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button p {
+.stButton
+[data-testid="stMarkdownContainer"] {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -161,66 +174,56 @@ button p {
     padding: 0 !important;
 
     color: inherit !important;
-    font: inherit !important;
     line-height: 1 !important;
 }
 
-/* Slight optical correction for font baseline */
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button p,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button p {
+div[class*="st-key-thb_input_"] .stButton > button p {
     transform: translateY(-1px);
 }
 
-/* Hover */
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button:hover,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button:hover {
+div[class*="st-key-thb_input_"] .stButton > button:hover {
     border-color: #527da8 !important;
-
     background: #17304b !important;
     background-color: #17304b !important;
     background-image: none !important;
-
     color: #ffffff !important;
+    filter: none !important;
+    transform: none !important;
 }
 
-/* Click */
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button:active,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button:active {
-    transform: scale(0.95) !important;
+div[class*="st-key-thb_input_"] .stButton > button:active {
+    transform: scale(0.96) !important;
 }
 
-/* Disabled */
-div[class*="st-key-thb_input_"]
-div[class*="__minus"]
-button:disabled,
-
-div[class*="st-key-thb_input_"]
-div[class*="__plus"]
-button:disabled {
-    border-color: rgba(49, 81, 111, 0.55) !important;
-
-    background: rgba(16, 36, 58, 0.65) !important;
-    background-color: rgba(16, 36, 58, 0.65) !important;
+div[class*="st-key-thb_input_"] .stButton > button:disabled {
+    border-color: rgba(49, 81, 111, 0.5) !important;
+    background: rgba(16, 36, 58, 0.62) !important;
     background-image: none !important;
-
-    color: rgba(149, 188, 233, 0.38) !important;
-
+    color: rgba(145, 184, 231, 0.38) !important;
     opacity: 1 !important;
+}
+
+/* Text input */
+div[class*="st-key-thb_input_"]
+[data-testid="stTextInput"] input {
+    height: 44px !important;
+    min-height: 44px !important;
+
+    padding: 0 0.95rem !important;
+
+    border: 1px solid #31516f !important;
+    border-radius: 11px !important;
+
+    background: #10243a !important;
+    color: #f3f7fc !important;
+
+    font-size: 0.94rem !important;
+    font-weight: 550 !important;
+    font-variant-numeric: tabular-nums !important;
+
+    box-shadow:
+        inset 0 1px 1px rgba(0, 0, 0, 0.17),
+        0 4px 10px rgba(0, 0, 0, 0.10) !important;
 }
 
 /* Input field */

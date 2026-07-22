@@ -475,7 +475,7 @@ Separate:
 
 Do not include a contingency allowance greater than 10 percent unless
 explained.
-VERY IMPORTANT: dont give conservative amounts, be quite generous in the calculation
+VERY IMPORTANT:be more conservative and do not overestimate amounts, never assume luxury
 Do not double-count travel, housing, healthcare, or miscellaneous expenses.
 
 Return essential, comfortable, and premium estimates rather than one

@@ -1,3 +1,6 @@
+import streamlit as st
+
+
 def load_thb_input_styles() -> None:
     st.markdown(
         """

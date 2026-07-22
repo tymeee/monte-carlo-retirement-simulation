@@ -1,6 +1,5 @@
 from datetime import date
-
-from groq import Groq
+from streamlit_number_input import streamlit_number_input
 import streamlit as st
 
 
@@ -20,19 +19,19 @@ st.title("Retirement Funds Calculator")
 col1, col2, col3 = st.columns(3)
 st.write("ประเมินค่าใช้จ่ายแต่ละประเภทต่อเดือน")
 with col1:
-    household = st.number_input("ค่าใช้จ่ายเกี่ยวกับบ้าน", min_value = 0)
-    bills = st.number_input ("ค่าสาธารณูปโภค (ค่าไฟฟ้า, ค่าน้ำประปา, อื่น ๆ)" , min_value = 0)
-    leisure = st.number_input ("ค่าท่องเที่ยว/สันทนาการ", min_value = 0 )
-    other = st.number_input("ค่าใช้จ่ายอื่น ๆ", min_value = 0)
+    household = streamlit_umber_input("ค่าใช้จ่ายเกี่ยวกับบ้าน", min_value = 0)
+    bills = streamlit_number_input ("ค่าสาธารณูปโภค (ค่าไฟฟ้า, ค่าน้ำประปา, อื่น ๆ)" , min_value = 0)
+    leisure = streamlit_number_input ("ค่าท่องเที่ยว/สันทนาการ", min_value = 0 )
+    other = streamlit_number_input("ค่าใช้จ่ายอื่น ๆ", min_value = 0)
 with col2:
-    Food_and_dining = st.number_input ("ค่าใช้จ่ายเกี่ยวกับอาหาร", min_value = 0 )
-    clothes = st.number_input ("ค่าเสื้อผ้า เครื่องแต่งกาย", min_value = 0 )
-    travel = st.number_input ("ค่าเดินทาง", min_value = 0 )
-    donate = st.number_input("ค่าบริจาค/ทำบูญ", min_value = 0 )
+    Food_and_dining = streamlit_number_input ("ค่าใช้จ่ายเกี่ยวกับอาหาร", min_value = 0 )
+    clothes = streamlit_number_input ("ค่าเสื้อผ้า เครื่องแต่งกาย", min_value = 0 )
+    travel = streamlit_number_input ("ค่าเดินทาง", min_value = 0 )
+    donate = streamlit_number_input("ค่าบริจาค/ทำบูญ", min_value = 0 )
 with col3:
-    hospital = st.number_input ("ค่าใช้จ่ายเกี่ยวกับสุขภาพ",min_value = 0 )
-    rent = st.number_input ("ค่าผ่อนบ้าน/ผ่อนรถ", min_value = 0)
-    child = st.number_input("ค่าเลี้ยงลูกหลาน", min_value =0 )
+    hospital = streamlit_number_input ("ค่าใช้จ่ายเกี่ยวกับสุขภาพ",min_value = 0 )
+    rent = streamlit_number_input ("ค่าผ่อนบ้าน/ผ่อนรถ", min_value = 0)
+    child = streamlit_number_input("ค่าเลี้ยงลูกหลาน", min_value =0 )
 
 inf_rate = st.slider(
     "Inflation Rate",

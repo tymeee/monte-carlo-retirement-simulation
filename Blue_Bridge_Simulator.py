@@ -521,35 +521,36 @@ with st.container(key="hero_actions"):
         icon_position="right",
         width=240
     )
-initial_amount = st.sidebar.number_input(
-    "Initial Amount",
-    0,
-    100000000,
-    1000000,
-    1000000
-)
+with st.sidebar:
+    initial_amount = thb_number_input(
+        label = "Initial Amount",
+        min_value = 0,
+        max_value = 100000000,
+        value = 1000000,
+        step = 1000000,
+        key = "initial_amount"
+    )
 
-monthly_contribution = st.sidebar.number_input(
-    "Monthly Contribution",
-    0,
-    300000,
-    10000
-)
-
+    monthly_contribution = thb_number_input(
+        label = "Monthly Contribution",
+        min_value = 0,
+        max_value = 300000,
+        value = 10000,
+        key = "monthly_contribution"
+    )
+    withdrawal = thb_number_input(
+        label = "Annual Withdrawal",
+        min_value = 0,
+        max_value = 3000000,
+        value = 10000,
+        key = "withdrawal"
+    )
 num_simulations = st.sidebar.slider(
     "Simulations",
     100,
     1000,
     250,
     10
-)
-
-withdrawal = st.sidebar.number_input(
-    "Annual Withdrawal",
-    0,
-    3000000,
-    10000
-
 )
 
 avg_inflation_rate = st.sidebar.slider(

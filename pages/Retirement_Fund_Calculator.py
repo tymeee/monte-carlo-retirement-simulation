@@ -341,7 +341,22 @@ def thb_number_input(
                 " thb-input-label-hidden"
                 if label_visibility == "hidden"
                 else ""
+            )    
+       st.markdown(
+                f"""
+                <div class="thb-input-header">
+                    <span class="thb-input-label{hidden_class}">
+                        {safe_label}
+                    </span>
+
+                    <span class="thb-input-badge">
+                        THB
+                    </span>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
+
 
         minus_column, input_column, plus_column = st.columns(
             [0.72, 5.8, 0.72],
